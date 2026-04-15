@@ -5,6 +5,8 @@ data/models/checkpoints
 nas/datasets
 nas/dnn-output/trial_artifacts
 data/models/lightning_logs/
+# nas/dnn-output/best_configs/nas_trials_20260415T001238_47186_15d6f3_sepang_ckpt/_resume_checkpoints
+# nas/dnn-output/best_configs/nas_trials_20260415T001238_47186_15d6f3_sepang_ckpt/20260415T001238_47186_15d6f3_trial00113
 
 ## https://github.com/github/gitignore/blob/main/Global/macOS.gitignore
 # General
