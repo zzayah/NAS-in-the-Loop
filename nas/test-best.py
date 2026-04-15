@@ -10,6 +10,8 @@ import sys
 from pathlib import Path
 from typing import Iterable
 
+import yaml
+
 BASE_DIR = Path(__file__).resolve().parent
 REPO_ROOT = BASE_DIR.parent
 if str(REPO_ROOT) not in sys.path:
@@ -25,13 +27,19 @@ LEGACY_MODEL_DIRS = [
 ]
 
 # Configuration (edit as needed)
-TRIALS_FILE = "nas/dnn-output/nas_trials_20260415T001852_385995_b175ea.jsonl" # e.g. "nas/dnn-output/nas_trials_20260411T184604.jsonl"
+TRIALS_FILE = "nas/dnn-output/nas_trials_20260415T004852_2653078_cc188b.jsonl" # e.g. "nas/dnn-output/nas_trials_20260411T184604.jsonl"
 DATASET_PATH = "nas/datasets/combined_all.npz"
 OUTPUT_DIR: str | None = None
 MODE = "train"  # "train" or "test"
 MAX_EPOCHS = 700
 EARLY_STOPPING = 60
 SKIP_EVAL = False
+# LEFT_WALL_RESUME_CKPT: str | None = "nas/20260415T001238_47186_15d6f3_trial00113/left_wall_dist/checkpoints/left_wall_dist_arch8/best-epoch=19.ckpt"
+# TRACK_WIDTH_RESUME_CKPT: str | None = "nas/20260415T001238_47186_15d6f3_trial00113/track_width/checkpoints/track_width_arch8/best-epoch=27.ckpt"
+# HEADING_ERROR_RESUME_CKPT: str | None = "nas/20260415T001238_47186_15d6f3_trial00113/heading_error/checkpoints/heading_error_arch8/best-epoch=29.ckpt"
+LEFT_WALL_RESUME_CKPT: str | None = None
+TRACK_WIDTH_RESUME_CKPT: str | None = None
+HEADING_ERROR_RESUME_CKPT: str | None = None
 
 
 def _resolve_trials_file(arg: str | None) -> str | None:
@@ -48,6 +56,71 @@ def _resolve_trials_file(arg: str | None) -> str | None:
 def _target_name(config_path: Path) -> str:
     stem = config_path.stem
     return stem if "_arch" not in stem else stem.rsplit("_arch", 1)[0]
+
+
+def _resolve_optional_path(path_str: str | None) -> Path | None:
+    if not path_str:
+        return None
+    path = Path(path_str).expanduser()
+    if not path.is_absolute():
+        path = (REPO_ROOT / path).resolve()
+    if not path.exists():
+        raise FileNotFoundError(f"Checkpoint file {path} does not exist.")
+    return path
+
+
+def _load_yaml(path: Path) -> dict:
+    with path.open("r", encoding="utf-8") as fh:
+        return yaml.safe_load(fh)
+
+
+def _write_yaml(path: Path, payload: dict) -> None:
+    with path.open("w", encoding="utf-8") as fh:
+        yaml.safe_dump(payload, fh, sort_keys=False)
+
+
+def _resume_checkpoint_overrides() -> dict[str, Path]:
+    overrides: dict[str, Path] = {}
+    left = _resolve_optional_path(LEFT_WALL_RESUME_CKPT)
+    track = _resolve_optional_path(TRACK_WIDTH_RESUME_CKPT)
+    heading = _resolve_optional_path(HEADING_ERROR_RESUME_CKPT)
+    if left is not None:
+        overrides["left_wall_dist"] = left
+    if track is not None:
+        overrides["track_width"] = track
+    if heading is not None:
+        overrides["heading_error"] = heading
+    return overrides
+
+
+def _apply_resume_checkpoint_overrides(config_paths: list[Path]) -> None:
+    overrides = _resume_checkpoint_overrides()
+    if not overrides:
+        return
+
+    staged_root = config_paths[0].parent / "_resume_checkpoints"
+    staged_root.mkdir(parents=True, exist_ok=True)
+
+    for cfg_path in config_paths:
+        cfg = _load_yaml(cfg_path)
+        target_col = cfg["data"]["target_col"]
+        ckpt_src = overrides.get(target_col)
+        if ckpt_src is None:
+            continue
+
+        arch_id = int(cfg["model"]["arch_id"])
+        model_name = f"{target_col}_arch{arch_id}"
+        ckpt_dest_dir = staged_root / model_name
+        ckpt_dest_dir.mkdir(parents=True, exist_ok=True)
+        ckpt_dest = ckpt_dest_dir / "last.ckpt"
+        shutil.copy2(ckpt_src, ckpt_dest)
+
+        cfg.setdefault("training", {})
+        cfg["training"]["resume"] = True
+        cfg.setdefault("artifacts", {})
+        cfg["artifacts"]["checkpoint_dir"] = str(staged_root)
+        _write_yaml(cfg_path, cfg)
+        print(f"[resume] {target_col}: {ckpt_src} -> {ckpt_dest}")
 
 
 def _stage_model(src: Path, dest: Path) -> Path:
@@ -149,6 +222,7 @@ def main() -> None:
     )
 
     config_paths = [Path(cfg) for cfg in config_paths]
+    _apply_resume_checkpoint_overrides(config_paths)
     if MODE == "train":
         print("[mode] retraining configs...")
         trained = train_from_configs(config_paths)

@@ -25,15 +25,15 @@ from f110_scripts.sim import reactive_planners as sim  # noqa: E402
 # ----------
 
 # Input filepaths to .pt files
-ARCH_8_LEFT_WALL_DIST_PT = "nas/dnn-output/best_configs/nas_trials_20260412T173157_3695507_679b1e/left_wall_dist_arch8_trial99.pt"
-ARCH_8_HEADING_ERROR_PT = "nas/dnn-output/best_configs/nas_trials_20260412T173157_3695507_679b1e/heading_error_arch8_trial99.pt"
-ARCH_8_TRACK_WIDTH_PT = "nas/dnn-output/best_configs/nas_trials_20260412T173157_3695507_679b1e/track_width_arch8_trial99.pt"
+ARCH_8_LEFT_WALL_DIST_PT = "nas/dnn-output/best_configs/nas_trials_20260415T001238_47186_15d6f3/left_wall_dist_arch8_trial113.pt"
+ARCH_8_HEADING_ERROR_PT = "nas/dnn-output/best_configs/nas_trials_20260415T001238_47186_15d6f3/heading_error_arch8_trial113.pt"
+ARCH_8_TRACK_WIDTH_PT = "nas/dnn-output/best_configs/nas_trials_20260415T001238_47186_15d6f3/track_width_arch8_trial113.pt"
 
 
 
-DEFAULT_MAP = "data/maps/F1/Nuerburgring/Nuerburgring_map"
+DEFAULT_MAP = None # "data/maps/F1/Nuerburgring/Nuerburgring_map"
 DEFAULT_MAP_EXT = ".png"
-DEFAULT_WAYPOINTS = "data/maps/F1/Nuerburgring/Nuerburgring_centerline.tsv"
+DEFAULT_WAYPOINTS = None # "data/maps/F1/Nuerburgring/Nuerburgring_centerline.tsv"
 DEFAULT_RUNS = [
     (
         "arch1",
@@ -90,7 +90,6 @@ DEFAULT_RUN_ID = None
 DEFAULT_ALL_MAPS = True
 # Only run comparisons on this curated set when all_maps is True.
 SELECTED_TRACKS = {
-    "melbourne",
     "shanghai",
     "silverstone",
     "sochi",
@@ -98,6 +97,7 @@ SELECTED_TRACKS = {
     "nuerburgring",
     "monza",
     "mexicocity",
+    "melbourne"
 }
 
 
