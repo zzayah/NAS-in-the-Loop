@@ -25,9 +25,9 @@ from f110_scripts.sim import reactive_planners as sim  # noqa: E402
 # ----------
 
 # Input filepaths to .pt files
-ARCH_8_LEFT_WALL_DIST_PT = "nas/dnn-output/best_configs/nas_trials_20260415T004852_2653078_cc188b/left_wall_dist_arch8_trial63.pt"
-ARCH_8_HEADING_ERROR_PT = "nas/dnn-output/best_configs/nas_trials_20260415T004852_2653078_cc188b/heading_error_arch8_trial63.pt"
-ARCH_8_TRACK_WIDTH_PT = "nas/dnn-output/best_configs/nas_trials_20260415T004852_2653078_cc188b/track_width_arch8_trial63.pt"
+ARCH_8_LEFT_WALL_DIST_PT = "nas/dnn-output/best_configs/nas_trials_20260415T002958_3289850_20e0d6/left_wall_dist_arch8_trial22.pt"
+ARCH_8_HEADING_ERROR_PT = "nas/dnn-output/best_configs/nas_trials_20260415T002958_3289850_20e0d6/heading_error_arch8_trial22.pt"
+ARCH_8_TRACK_WIDTH_PT = "nas/dnn-output/best_configs/nas_trials_20260415T002958_3289850_20e0d6/track_width_arch8_trial22.pt"
 
 DEFAULT_MAP = None # "data/maps/F1/Nuerburgring/Nuerburgring_map"
 DEFAULT_MAP_EXT = ".png"
@@ -94,8 +94,7 @@ SELECTED_TRACKS = {
     "spa",
     "nuerburgring",
     "monza",
-    "mexicocity",
-    "melbourne"
+    "mexicocity"
 }
 
 
@@ -120,7 +119,7 @@ class CompareArgs:
     map: str = DEFAULT_MAP
     map_ext: str = DEFAULT_MAP_EXT
     waypoints: str = DEFAULT_WAYPOINTS
-    laps: int = 2
+    laps: int = 1
     render_mode: str = "None"
     lookahead: float = 1.5
     lateral_gain: float = 1.0

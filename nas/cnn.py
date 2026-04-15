@@ -49,6 +49,30 @@ class EvaluationTrack(Enum):
         "data/maps/F1/Melbourne/Melbourne_map",
         "data/maps/F1/Melbourne/Melbourne_centerline.tsv",
     )
+    CATALUNYA = (
+        "data/maps/F1/Catalunya/Catalunya_map",
+        "data/maps/F1/Catalunya/Catalunya_centerline.tsv",
+    )
+    HOCKENHEIM = (
+        "data/maps/F1/Hockenheim/Hockenheim_map",
+        "data/maps/F1/Hockenheim/Hockenheim_centerline.tsv",
+    )
+    BUDAPEST = (
+        "data/maps/F1/Budapest/Budapest_map",
+        "data/maps/F1/Budapest/Budapest_centerline.tsv",
+    )
+    MONTREAL = (
+        "data/maps/F1/Montreal/Montreal_map",
+        "data/maps/F1/Montreal/Montreal_centerline.tsv",
+    )
+    SPIELBERG = (
+        "data/maps/F1/Spielberg/Spielberg_map",
+        "data/maps/F1/Spielberg/Spielberg_centerline.tsv",
+    )
+    ZANDVOORT = (
+        "data/maps/F1/Zandvoort/Zandvoort_map",
+        "data/maps/F1/Zandvoort/Zandvoort_centerline.tsv",
+    )
 
     @property
     def map_path(self) -> str:
