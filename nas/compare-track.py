@@ -25,9 +25,9 @@ from f110_scripts.sim import reactive_planners as sim  # noqa: E402
 # ----------
 
 # Input filepaths to .pt files
-ARCH_8_LEFT_WALL_DIST_PT = "nas/dnn-output/best_configs/nas_trials_20260415T004944_2456115_6fd96b/left_wall_dist_arch8_trial26.pt"
-ARCH_8_HEADING_ERROR_PT = "nas/dnn-output/best_configs/nas_trials_20260415T004944_2456115_6fd96b/heading_error_arch8_trial26.pt"
-ARCH_8_TRACK_WIDTH_PT = "nas/dnn-output/best_configs/nas_trials_20260415T004944_2456115_6fd96b/track_width_arch8_trial26.pt"
+ARCH_8_LEFT_WALL_DIST_PT = "nas/dnn-output/best_configs/nas_trials_20260415T234908_3561018_508402_budapest/left_wall_dist_arch8_trial70.pt"
+ARCH_8_HEADING_ERROR_PT = "nas/dnn-output/best_configs/nas_trials_20260415T234908_3561018_508402_budapest/heading_error_arch8_trial70.pt"
+ARCH_8_TRACK_WIDTH_PT = "nas/dnn-output/best_configs/nas_trials_20260415T234908_3561018_508402_budapest/track_width_arch8_trial70.pt"
 
 DEFAULT_MAP = None # "data/maps/F1/Nuerburgring/Nuerburgring_map"
 DEFAULT_MAP_EXT = ".png"
@@ -94,7 +94,8 @@ SELECTED_TRACKS = {
     "spa",
     "nuerburgring",
     "monza",
-    "mexicocity"
+    "mexicocity",
+    "budapest"
 }
 
 
