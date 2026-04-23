@@ -120,8 +120,18 @@ class DynamicCNN:
         def _key(name: str) -> str:
             return f"{prefix}_{name}" if prefix else name
 
-        self.num_layers = trial.suggest_int(_key("num_layers"), 2, 5)
+        def _conv1d_output_length(length: int, kernel: int, stride_value: int, pad: int) -> int:
+            return max(1, (length + 2 * pad - kernel) // stride_value + 1)
+
+        def _pool1d_output_length(length: int, pool: int) -> int:
+            if pool <= 1:
+                return length
+            return max(1, (length - pool) // pool + 1)
+
+        self.num_layers = trial.suggest_int(_key("num_layers"), 1, 5)
         self.activation = trial.suggest_categorical(_key("activation"), ["elu", "relu"])
+        max_flattened = trial.suggest_categorical(_key("max_flattened"), [1072, 2144, 4288])
+        fc_hidden = trial.suggest_categorical(_key("fc_hidden"), [32, 64, 128])
         self.conv_layers: list[dict[str, int]] = []
 
         in_channels = 1  # ensures 1×1080 LiDAR input is accepted
@@ -132,13 +142,24 @@ class DynamicCNN:
         padding = 0  # intentionally set
 
         for idx in range(self.num_layers):
-            out_key = _key(f"out_channels_l{idx}")
+            # Only let Optuna sample pool sizes that fit the current feature length.
             pool_key = _key(f"pool_size_l{idx}")
-            out_channels = trial.suggest_int(out_key, 32, 256, log=True)
-            pool_size = trial.suggest_categorical(pool_key, [2, 4, 8])
-            # clamp pool_size to 1 (skip) when feature length is less than the selected pool size
-            if feature_length < pool_size:
-                pool_size = 1
+            valid_pool_sizes = [pool for pool in (2, 4, 8) if pool <= feature_length]
+            if not valid_pool_sizes:
+                self.num_layers = len(self.conv_layers)
+                break
+            pool_size = trial.suggest_categorical(pool_key, valid_pool_sizes)
+            next_feature_length = _conv1d_output_length(
+                feature_length, kernel_size, stride, padding
+            )
+            next_feature_length = _pool1d_output_length(next_feature_length, pool_size)
+            max_out_channels = min(256, max_flattened // next_feature_length)
+            if max_out_channels < 8:
+                self.num_layers = len(self.conv_layers)
+                break
+
+            out_key = _key(f"out_channels_l{idx}")
+            out_channels = trial.suggest_int(out_key, 8, max_out_channels, log=True)
 
             self.conv_layers.append(
                 {
@@ -149,28 +170,13 @@ class DynamicCNN:
                     "pool_size": pool_size,
                 }
             )
-            feature_length = max(
-                1,
-                (feature_length + 2 * padding - kernel_size) // stride + 1,
-            )
-            if pool_size and pool_size > 1:
-                feature_length = max(1, feature_length // pool_size)
-            # Guards against pooling sizes that are large than the feature length/kernal size (3)
+
+            # Simple check to ensure that feature_length is not less than the Kernal size
+            feature_length = next_feature_length
             if feature_length < 3:
                 self.num_layers = len(self.conv_layers)
                 break
             curr_channels = out_channels
-
-        flattened = max(1, feature_length * max(curr_channels, 1))
-        min_hidden = max(32, flattened // 64)
-        max_hidden = min(128, max(32, flattened // 4))
-        if min_hidden > max_hidden:
-            min_hidden = max_hidden
-
-        if min_hidden == max_hidden:
-            fc_hidden = min_hidden
-        else:
-            fc_hidden = trial.suggest_int(_key("fc_hidden"), min_hidden, max_hidden, log=True)
 
         self.model_block = {
             "arch_id": 8,
