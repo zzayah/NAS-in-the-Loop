@@ -142,13 +142,11 @@ class DynamicCNN:
         padding = 0  # intentionally set
 
         for idx in range(self.num_layers):
-            # Only let Optuna sample pool sizes that fit the current feature length.
             pool_key = _key(f"pool_size_l{idx}")
-            valid_pool_sizes = [pool for pool in (2, 4, 8) if pool <= feature_length]
-            if not valid_pool_sizes:
+            pool_size = trial.suggest_categorical(pool_key, [2, 4, 8])
+            if pool_size > feature_length:
                 self.num_layers = len(self.conv_layers)
                 break
-            pool_size = trial.suggest_categorical(pool_key, valid_pool_sizes)
             next_feature_length = _conv1d_output_length(
                 feature_length, kernel_size, stride, padding
             )
