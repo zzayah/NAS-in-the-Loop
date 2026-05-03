@@ -1,0 +1,221 @@
+[I 2026-04-23 15:02:46,559] A new study created in memory with name: no-name-020aeeaa-c140-41d4-b2d1-3d53923385f0
+[rank: 0] Seed set to 42
+[rank: 0] Seed set to 42
+[rank: 0] Seed set to 42
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+SLURM auto-requeueing enabled. Setting signal handlers.
+SLURM auto-requeueing enabled. Setting signal handlers.
+SLURM auto-requeueing enabled. Setting signal handlers.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+[I 2026-04-23 15:06:02,777] Trial 0 finished with value: 0.1458 and parameters: {'left_wall_dist_num_layers': 3, 'left_wall_dist_activation': 'relu', 'left_wall_dist_max_flattened': 4288, 'left_wall_dist_fc_hidden': 64, 'left_wall_dist_pool_size_l0': 2, 'track_width_num_layers': 2, 'track_width_activation': 'relu', 'track_width_max_flattened': 1072, 'track_width_fc_hidden': 64, 'track_width_pool_size_l0': 8, 'track_width_out_channels_l0': 8, 'track_width_pool_size_l1': 8, 'track_width_out_channels_l1': 39, 'heading_error_num_layers': 4, 'heading_error_activation': 'elu', 'heading_error_max_flattened': 1072, 'heading_error_fc_hidden': 64, 'heading_error_pool_size_l0': 2}. Best is trial 0 with value: 0.1458.
+[rank: 0] Seed set to 42
+[rank: 0] Seed set to 42
+[rank: 0] Seed set to 42
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+SLURM auto-requeueing enabled. Setting signal handlers.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+SLURM auto-requeueing enabled. Setting signal handlers.
+SLURM auto-requeueing enabled. Setting signal handlers.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+[I 2026-04-23 15:08:58,793] Trial 1 finished with value: 0.17 and parameters: {'left_wall_dist_num_layers': 4, 'left_wall_dist_activation': 'elu', 'left_wall_dist_max_flattened': 4288, 'left_wall_dist_fc_hidden': 32, 'left_wall_dist_pool_size_l0': 4, 'left_wall_dist_out_channels_l0': 12, 'left_wall_dist_pool_size_l1': 4, 'left_wall_dist_out_channels_l1': 9, 'left_wall_dist_pool_size_l2': 2, 'left_wall_dist_out_channels_l2': 114, 'left_wall_dist_pool_size_l3': 2, 'left_wall_dist_out_channels_l3': 25, 'track_width_num_layers': 4, 'track_width_activation': 'relu', 'track_width_max_flattened': 1072, 'track_width_fc_hidden': 128, 'track_width_pool_size_l0': 2, 'heading_error_num_layers': 4, 'heading_error_activation': 'elu', 'heading_error_max_flattened': 4288, 'heading_error_fc_hidden': 128, 'heading_error_pool_size_l0': 2}. Best is trial 0 with value: 0.1458.
+[rank: 0] Seed set to 42
+[rank: 0] Seed set to 42
+[rank: 0] Seed set to 42
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+SLURM auto-requeueing enabled. Setting signal handlers.
+SLURM auto-requeueing enabled. Setting signal handlers.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+SLURM auto-requeueing enabled. Setting signal handlers.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+[I 2026-04-23 15:12:23,038] Trial 2 finished with value: 0.1106 and parameters: {'left_wall_dist_num_layers': 4, 'left_wall_dist_activation': 'elu', 'left_wall_dist_max_flattened': 4288, 'left_wall_dist_fc_hidden': 32, 'left_wall_dist_pool_size_l0': 2, 'track_width_num_layers': 4, 'track_width_activation': 'elu', 'track_width_max_flattened': 2144, 'track_width_fc_hidden': 64, 'track_width_pool_size_l0': 2, 'heading_error_num_layers': 1, 'heading_error_activation': 'elu', 'heading_error_max_flattened': 4288, 'heading_error_fc_hidden': 32, 'heading_error_pool_size_l0': 8, 'heading_error_out_channels_l0': 16}. Best is trial 2 with value: 0.1106.
+[rank: 0] Seed set to 42
+[rank: 0] Seed set to 42
+[rank: 0] Seed set to 42
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+SLURM auto-requeueing enabled. Setting signal handlers.
+SLURM auto-requeueing enabled. Setting signal handlers.
+SLURM auto-requeueing enabled. Setting signal handlers.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+[I 2026-04-23 15:14:50,725] Trial 3 finished with value: 0.1478 and parameters: {'left_wall_dist_num_layers': 2, 'left_wall_dist_activation': 'elu', 'left_wall_dist_max_flattened': 4288, 'left_wall_dist_fc_hidden': 64, 'left_wall_dist_pool_size_l0': 8, 'left_wall_dist_out_channels_l0': 22, 'left_wall_dist_pool_size_l1': 8, 'left_wall_dist_out_channels_l1': 29, 'track_width_num_layers': 1, 'track_width_activation': 'elu', 'track_width_max_flattened': 4288, 'track_width_fc_hidden': 32, 'track_width_pool_size_l0': 8, 'track_width_out_channels_l0': 23, 'heading_error_num_layers': 4, 'heading_error_activation': 'relu', 'heading_error_max_flattened': 4288, 'heading_error_fc_hidden': 128, 'heading_error_pool_size_l0': 2}. Best is trial 2 with value: 0.1106.
+[rank: 0] Seed set to 42
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[rank: 0] Seed set to 42
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[rank: 0] Seed set to 42
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+SLURM auto-requeueing enabled. Setting signal handlers.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+SLURM auto-requeueing enabled. Setting signal handlers.
+SLURM auto-requeueing enabled. Setting signal handlers.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+[I 2026-04-23 15:16:54,952] Trial 4 finished with value: 0.1365 and parameters: {'left_wall_dist_num_layers': 1, 'left_wall_dist_activation': 'relu', 'left_wall_dist_max_flattened': 2144, 'left_wall_dist_fc_hidden': 128, 'left_wall_dist_pool_size_l0': 2, 'track_width_num_layers': 5, 'track_width_activation': 'elu', 'track_width_max_flattened': 4288, 'track_width_fc_hidden': 128, 'track_width_pool_size_l0': 2, 'heading_error_num_layers': 1, 'heading_error_activation': 'elu', 'heading_error_max_flattened': 1072, 'heading_error_fc_hidden': 32, 'heading_error_pool_size_l0': 8, 'heading_error_out_channels_l0': 8}. Best is trial 2 with value: 0.1106.
+[rank: 0] Seed set to 42
+[rank: 0] Seed set to 42
+[rank: 0] Seed set to 42
+GPU available: True (cuda), used: True
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+TPU available: False, using: 0 TPU cores
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+SLURM auto-requeueing enabled. Setting signal handlers.
+SLURM auto-requeueing enabled. Setting signal handlers.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+SLURM auto-requeueing enabled. Setting signal handlers.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+[I 2026-04-23 15:18:51,855] Trial 5 finished with value: 0.1186 and parameters: {'left_wall_dist_num_layers': 1, 'left_wall_dist_activation': 'elu', 'left_wall_dist_max_flattened': 1072, 'left_wall_dist_fc_hidden': 32, 'left_wall_dist_pool_size_l0': 4, 'track_width_num_layers': 5, 'track_width_activation': 'elu', 'track_width_max_flattened': 1072, 'track_width_fc_hidden': 64, 'track_width_pool_size_l0': 2, 'heading_error_num_layers': 5, 'heading_error_activation': 'elu', 'heading_error_max_flattened': 1072, 'heading_error_fc_hidden': 128, 'heading_error_pool_size_l0': 2}. Best is trial 2 with value: 0.1106.
+[rank: 0] Seed set to 42
+[rank: 0] Seed set to 42
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[rank: 0] Seed set to 42
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+SLURM auto-requeueing enabled. Setting signal handlers.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+SLURM auto-requeueing enabled. Setting signal handlers.
+SLURM auto-requeueing enabled. Setting signal handlers.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+[I 2026-04-23 15:21:05,013] Trial 6 finished with value: 0.1438 and parameters: {'left_wall_dist_num_layers': 2, 'left_wall_dist_activation': 'elu', 'left_wall_dist_max_flattened': 2144, 'left_wall_dist_fc_hidden': 128, 'left_wall_dist_pool_size_l0': 8, 'left_wall_dist_out_channels_l0': 16, 'left_wall_dist_pool_size_l1': 8, 'left_wall_dist_out_channels_l1': 39, 'track_width_num_layers': 4, 'track_width_activation': 'relu', 'track_width_max_flattened': 1072, 'track_width_fc_hidden': 64, 'track_width_pool_size_l0': 4, 'heading_error_num_layers': 3, 'heading_error_activation': 'elu', 'heading_error_max_flattened': 1072, 'heading_error_fc_hidden': 32, 'heading_error_pool_size_l0': 2}. Best is trial 2 with value: 0.1106.
+[rank: 0] Seed set to 42
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[rank: 0] Seed set to 42
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+[rank: 0] Seed set to 42
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+SLURM auto-requeueing enabled. Setting signal handlers.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+SLURM auto-requeueing enabled. Setting signal handlers.
+SLURM auto-requeueing enabled. Setting signal handlers.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+[I 2026-04-23 15:23:23,806] Trial 7 finished with value: 0.1188 and parameters: {'left_wall_dist_num_layers': 3, 'left_wall_dist_activation': 'relu', 'left_wall_dist_max_flattened': 2144, 'left_wall_dist_fc_hidden': 32, 'left_wall_dist_pool_size_l0': 8, 'left_wall_dist_out_channels_l0': 8, 'left_wall_dist_pool_size_l1': 2, 'left_wall_dist_out_channels_l1': 10, 'left_wall_dist_pool_size_l2': 2, 'left_wall_dist_out_channels_l2': 12, 'track_width_num_layers': 1, 'track_width_activation': 'elu', 'track_width_max_flattened': 2144, 'track_width_fc_hidden': 32, 'track_width_pool_size_l0': 8, 'track_width_out_channels_l0': 9, 'heading_error_num_layers': 1, 'heading_error_activation': 'elu', 'heading_error_max_flattened': 2144, 'heading_error_fc_hidden': 128, 'heading_error_pool_size_l0': 4}. Best is trial 2 with value: 0.1106.
+[rank: 0] Seed set to 42
+[rank: 0] Seed set to 42
+[rank: 0] Seed set to 42
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+SLURM auto-requeueing enabled. Setting signal handlers.
+SLURM auto-requeueing enabled. Setting signal handlers.
+SLURM auto-requeueing enabled. Setting signal handlers.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+[I 2026-04-23 15:25:48,816] Trial 8 finished with value: 0.1261 and parameters: {'left_wall_dist_num_layers': 5, 'left_wall_dist_activation': 'relu', 'left_wall_dist_max_flattened': 1072, 'left_wall_dist_fc_hidden': 32, 'left_wall_dist_pool_size_l0': 4, 'track_width_num_layers': 4, 'track_width_activation': 'relu', 'track_width_max_flattened': 4288, 'track_width_fc_hidden': 64, 'track_width_pool_size_l0': 4, 'track_width_out_channels_l0': 8, 'track_width_pool_size_l1': 2, 'track_width_out_channels_l1': 13, 'track_width_pool_size_l2': 2, 'track_width_out_channels_l2': 11, 'track_width_pool_size_l3': 8, 'track_width_out_channels_l3': 16, 'heading_error_num_layers': 1, 'heading_error_activation': 'elu', 'heading_error_max_flattened': 1072, 'heading_error_fc_hidden': 64, 'heading_error_pool_size_l0': 8, 'heading_error_out_channels_l0': 8}. Best is trial 2 with value: 0.1106.
+[rank: 0] Seed set to 42
+[rank: 0] Seed set to 42
+[rank: 0] Seed set to 42
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+SLURM auto-requeueing enabled. Setting signal handlers.
+SLURM auto-requeueing enabled. Setting signal handlers.
+SLURM auto-requeueing enabled. Setting signal handlers.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+`Trainer.fit` stopped: `max_epochs=30` reached.
+[2026-04-23T15:27:06.595] error: *** JOB 45381899 ON g141603 CANCELLED AT 2026-04-23T15:27:06 DUE to SIGNAL Terminated ***

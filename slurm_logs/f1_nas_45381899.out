@@ -1,0 +1,1005 @@
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=1080, out_features=64, bias=True)
+  (2): ReLU()
+  (3): Linear(in_features=64, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 69.2 K │ train │ 138 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=1080, out_features=64, bias=True)
+  (2): ELU(alpha=1.0)
+  (3): Linear(in_features=64, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 69.2 K │ train │ 138 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 69.2 K                                                        
+Non-trainable params: 0                                                         
+Total params: 69.2 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 6                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 138 K                                                              
+Trainable params: 69.2 K                                                        
+Non-trainable params: 0                                                         
+Total params: 69.2 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 6                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 138 K                                                              
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 8, kernel_size=(3,), stride=(1,))
+  (1): ReLU()
+  (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  (3): Conv1d(8, 39, kernel_size=(3,), stride=(1,))
+  (4): ReLU()
+  (5): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  (6): Flatten(start_dim=1, end_dim=-1)
+  (7): Linear(in_features=624, out_features=64, bias=True)
+  (8): ReLU()
+  (9): Linear(in_features=64, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 41.1 K │ train │ 378 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 41.1 K                                                        
+Non-trainable params: 0                                                         
+Total params: 41.1 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 12                                                       
+Modules in eval mode: 0                                                         
+Total FLOPs: 378 K                                                              
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       96.67it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.001 val/loss:  
+                                                               0.001            
+                                                               train/loss_epoch:
+                                                               0.001            
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00000/left_wall_dist/models/left_wall_dist_arch8.pt
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       95.50it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.005 val/loss:  
+                                                               0.004            
+                                                               train/loss_epoch:
+                                                               0.005            
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00000/heading_error/models/heading_error_arch8.pt
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       70.43it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.004 val/loss:  
+                                                               0.004            
+                                                               train/loss_epoch:
+                                                               0.004            
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00000/track_width/models/track_width_arch8.pt
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=1080, out_features=128, bias=True)
+  (2): ReLU()
+  (3): Linear(in_features=128, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │  138 K │ train │ 276 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 138 K                                                         
+Non-trainable params: 0                                                         
+Total params: 138 K                                                             
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 6                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 276 K                                                              
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=1080, out_features=128, bias=True)
+  (2): ELU(alpha=1.0)
+  (3): Linear(in_features=128, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │  138 K │ train │ 276 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 138 K                                                         
+Non-trainable params: 0                                                         
+Total params: 138 K                                                             
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 6                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 276 K                                                              
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 12, kernel_size=(3,), stride=(1,))
+  (1): ELU(alpha=1.0)
+  (2): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+  (3): Conv1d(12, 9, kernel_size=(3,), stride=(1,))
+  (4): ELU(alpha=1.0)
+  (5): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+  (6): Conv1d(9, 114, kernel_size=(3,), stride=(1,))
+  (7): ELU(alpha=1.0)
+  (8): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (9): Conv1d(114, 25, kernel_size=(3,), stride=(1,))
+  (10): ELU(alpha=1.0)
+  (11): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (12): Flatten(start_dim=1, end_dim=-1)
+  (13): Linear(in_features=375, out_features=32, bias=True)
+  (14): ELU(alpha=1.0)
+  (15): Linear(in_features=32, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 24.2 K │ train │ 1.2 M │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 24.2 K                                                        
+Non-trainable params: 0                                                         
+Total params: 24.2 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 18                                                       
+Modules in eval mode: 0                                                         
+Total FLOPs: 1.2 M                                                              
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       87.35it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.004 val/loss:  
+                                                               0.003            
+                                                               train/loss_epoch:
+                                                               0.004            
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00001/heading_error/models/heading_error_arch8.pt
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       83.32it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.001 val/loss:  
+                                                               0.002            
+                                                               train/loss_epoch:
+                                                               0.002            
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00001/track_width/models/track_width_arch8.pt
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       75.67it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.001 val/loss:  
+                                                               0.001            
+                                                               train/loss_epoch:
+                                                               0.001            
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00001/left_wall_dist/models/left_wall_dist_arch8.pt
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=1080, out_features=32, bias=True)
+  (2): ELU(alpha=1.0)
+  (3): Linear(in_features=32, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃  FLOPs ┃  In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 34.6 K │ train │ 69.2 K │    [1, 1, │    [1, 1] │
+│   │           │            │        │       │        │     1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │      0 │         ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴────────┴───────────┴───────────┘
+Trainable params: 34.6 K                                                        
+Non-trainable params: 0                                                         
+Total params: 34.6 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 6                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 69.2 K                                                             
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 16, kernel_size=(3,), stride=(1,))
+  (1): ELU(alpha=1.0)
+  (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  (3): Flatten(start_dim=1, end_dim=-1)
+  (4): Linear(in_features=2144, out_features=32, bias=True)
+  (5): ELU(alpha=1.0)
+  (6): Linear(in_features=32, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 68.7 K │ train │ 240 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 68.7 K                                                        
+Non-trainable params: 0                                                         
+Total params: 68.7 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 9                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 240 K                                                              
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=1080, out_features=64, bias=True)
+  (2): ELU(alpha=1.0)
+  (3): Linear(in_features=64, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 69.2 K │ train │ 138 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 69.2 K                                                        
+Non-trainable params: 0                                                         
+Total params: 69.2 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 6                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 138 K                                                              
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       90.42it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.002 val/loss:  
+                                                               0.006            
+                                                               train/loss_epoch:
+                                                               0.005            
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       85.49it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.001 val/loss:  
+                                                               0.002            
+                                                               train/loss_epoch:
+                                                               0.002            
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00002/track_width/models/track_width_arch8.pt
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00002/left_wall_dist/models/left_wall_dist_arch8.pt
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       99.82it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.002 val/loss:  
+                                                               0.002            
+                                                               train/loss_epoch:
+                                                               0.003            
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00002/heading_error/models/heading_error_arch8.pt
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 23, kernel_size=(3,), stride=(1,))
+  (1): ELU(alpha=1.0)
+  (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  (3): Flatten(start_dim=1, end_dim=-1)
+  (4): Linear(in_features=3082, out_features=32, bias=True)
+  (5): ELU(alpha=1.0)
+  (6): Linear(in_features=32, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 98.8 K │ train │ 346 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 98.8 K                                                        
+Non-trainable params: 0                                                         
+Total params: 98.8 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 9                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 346 K                                                              
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 22, kernel_size=(3,), stride=(1,))
+  (1): ELU(alpha=1.0)
+  (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  (3): Conv1d(22, 29, kernel_size=(3,), stride=(1,))
+  (4): ELU(alpha=1.0)
+  (5): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  (6): Flatten(start_dim=1, end_dim=-1)
+  (7): Linear(in_features=464, out_features=64, bias=True)
+  (8): ELU(alpha=1.0)
+  (9): Linear(in_features=64, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 31.9 K │ train │ 707 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 31.9 K                                                        
+Non-trainable params: 0                                                         
+Total params: 31.9 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 12                                                       
+Modules in eval mode: 0                                                         
+Total FLOPs: 707 K                                                              
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=1080, out_features=128, bias=True)
+  (2): ReLU()
+  (3): Linear(in_features=128, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │  138 K │ train │ 276 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 138 K                                                         
+Non-trainable params: 0                                                         
+Total params: 138 K                                                             
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 6                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 276 K                                                              
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       89.54it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.001 val/loss:  
+                                                               0.001            
+                                                               train/loss_epoch:
+                                                               0.002            
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00003/heading_error/models/heading_error_arch8.pt
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       84.96it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.002 val/loss:  
+                                                               0.005            
+                                                               train/loss_epoch:
+                                                               0.003            
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00003/track_width/models/track_width_arch8.pt
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       85.42it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.001 val/loss:  
+                                                               0.001            
+                                                               train/loss_epoch:
+                                                               0.002            
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00003/left_wall_dist/models/left_wall_dist_arch8.pt
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=1080, out_features=128, bias=True)
+  (2): ReLU()
+  (3): Linear(in_features=128, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │  138 K │ train │ 276 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 138 K                                                         
+Non-trainable params: 0                                                         
+Total params: 138 K                                                             
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 6                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 276 K                                                              
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 8, kernel_size=(3,), stride=(1,))
+  (1): ELU(alpha=1.0)
+  (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  (3): Flatten(start_dim=1, end_dim=-1)
+  (4): Linear(in_features=1072, out_features=32, bias=True)
+  (5): ELU(alpha=1.0)
+  (6): Linear(in_features=32, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 34.4 K │ train │ 120 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 34.4 K                                                        
+Non-trainable params: 0                                                         
+Total params: 34.4 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 9                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 120 K                                                              
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=1080, out_features=128, bias=True)
+  (2): ELU(alpha=1.0)
+  (3): Linear(in_features=128, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │  138 K │ train │ 276 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 138 K                                                         
+Non-trainable params: 0                                                         
+Total params: 138 K                                                             
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 6                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 276 K                                                              
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       86.66it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.001 val/loss:  
+                                                               0.001            
+                                                               train/loss_epoch:
+                                                               0.001            
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00004/left_wall_dist/models/left_wall_dist_arch8.pt
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       86.65it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.003 val/loss:  
+                                                               0.004            
+                                                               train/loss_epoch:
+                                                               0.004            
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00004/track_width/models/track_width_arch8.pt
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       98.50it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.002 val/loss:  
+                                                               0.002            
+                                                               train/loss_epoch:
+                                                               0.003            
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00004/heading_error/models/heading_error_arch8.pt
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=1080, out_features=64, bias=True)
+  (2): ELU(alpha=1.0)
+  (3): Linear(in_features=64, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 69.2 K │ train │ 138 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=1080, out_features=32, bias=True)
+  (2): ELU(alpha=1.0)
+  (3): Linear(in_features=32, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃  FLOPs ┃  In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 34.6 K │ train │ 69.2 K │    [1, 1, │    [1, 1] │
+│   │           │            │        │       │        │     1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │      0 │         ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴────────┴───────────┴───────────┘
+Trainable params: 69.2 K                                                        
+Non-trainable params: 0                                                         
+Total params: 69.2 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 6                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 138 K                                                              
+Trainable params: 34.6 K                                                        
+Non-trainable params: 0                                                         
+Total params: 34.6 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 6                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 69.2 K                                                             
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=1080, out_features=128, bias=True)
+  (2): ELU(alpha=1.0)
+  (3): Linear(in_features=128, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │  138 K │ train │ 276 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 138 K                                                         
+Non-trainable params: 0                                                         
+Total params: 138 K                                                             
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 6                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 276 K                                                              
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       93.12it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.002 val/loss:  
+                                                               0.006            
+                                                               train/loss_epoch:
+                                                               0.005            
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00005/track_width/models/track_width_arch8.pt
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       91.40it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.001 val/loss:  
+                                                               0.002            
+                                                               train/loss_epoch:
+                                                               0.002            
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00005/left_wall_dist/models/left_wall_dist_arch8.pt
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       98.80it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.004 val/loss:  
+                                                               0.003            
+                                                               train/loss_epoch:
+                                                               0.004            
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00005/heading_error/models/heading_error_arch8.pt
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=1080, out_features=32, bias=True)
+  (2): ELU(alpha=1.0)
+  (3): Linear(in_features=32, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃  FLOPs ┃  In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 34.6 K │ train │ 69.2 K │    [1, 1, │    [1, 1] │
+│   │           │            │        │       │        │     1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │      0 │         ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴────────┴───────────┴───────────┘
+Trainable params: 34.6 K                                                        
+Non-trainable params: 0                                                         
+Total params: 34.6 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 6                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 69.2 K                                                             
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 16, kernel_size=(3,), stride=(1,))
+  (1): ELU(alpha=1.0)
+  (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  (3): Conv1d(16, 39, kernel_size=(3,), stride=(1,))
+  (4): ELU(alpha=1.0)
+  (5): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  (6): Flatten(start_dim=1, end_dim=-1)
+  (7): Linear(in_features=624, out_features=128, bias=True)
+  (8): ELU(alpha=1.0)
+  (9): Linear(in_features=128, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 82.1 K │ train │ 757 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 82.1 K                                                        
+Non-trainable params: 0                                                         
+Total params: 82.1 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 12                                                       
+Modules in eval mode: 0                                                         
+Total FLOPs: 757 K                                                              
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=1080, out_features=64, bias=True)
+  (2): ReLU()
+  (3): Linear(in_features=64, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 69.2 K │ train │ 138 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 69.2 K                                                        
+Non-trainable params: 0                                                         
+Total params: 69.2 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 6                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 138 K                                                              
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       94.69it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.003 val/loss:  
+                                                               0.004            
+                                                               train/loss_epoch:
+                                                               0.005            
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00006/heading_error/models/heading_error_arch8.pt
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       91.79it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.001 val/loss:  
+                                                               0.003            
+                                                               train/loss_epoch:
+                                                               0.003            
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00006/track_width/models/track_width_arch8.pt
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       99.29it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.003 val/loss:  
+                                                               0.002            
+                                                               train/loss_epoch:
+                                                               0.001            
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00006/left_wall_dist/models/left_wall_dist_arch8.pt
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=1080, out_features=128, bias=True)
+  (2): ELU(alpha=1.0)
+  (3): Linear(in_features=128, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │  138 K │ train │ 276 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 138 K                                                         
+Non-trainable params: 0                                                         
+Total params: 138 K                                                             
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 6                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 276 K                                                              
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 9, kernel_size=(3,), stride=(1,))
+  (1): ELU(alpha=1.0)
+  (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  (3): Flatten(start_dim=1, end_dim=-1)
+  (4): Linear(in_features=1206, out_features=32, bias=True)
+  (5): ELU(alpha=1.0)
+  (6): Linear(in_features=32, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 38.7 K │ train │ 135 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 38.7 K                                                        
+Non-trainable params: 0                                                         
+Total params: 38.7 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 9                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 135 K                                                              
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 8, kernel_size=(3,), stride=(1,))
+  (1): ReLU()
+  (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  (3): Conv1d(8, 10, kernel_size=(3,), stride=(1,))
+  (4): ReLU()
+  (5): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (6): Conv1d(10, 12, kernel_size=(3,), stride=(1,))
+  (7): ReLU()
+  (8): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (9): Flatten(start_dim=1, end_dim=-1)
+  (10): Linear(in_features=384, out_features=32, bias=True)
+  (11): ReLU()
+  (12): Linear(in_features=32, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 13.0 K │ train │ 185 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 13.0 K                                                        
+Non-trainable params: 0                                                         
+Total params: 13.0 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 15                                                       
+Modules in eval mode: 0                                                         
+Total FLOPs: 185 K                                                              
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       85.16it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.004 val/loss:  
+                                                               0.003            
+                                                               train/loss_epoch:
+                                                               0.004            
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00007/heading_error/models/heading_error_arch8.pt
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       87.94it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.015 val/loss:  
+                                                               0.008            
+                                                               train/loss_epoch:
+                                                               0.007            
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00007/track_width/models/track_width_arch8.pt
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       88.96it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.002 val/loss:  
+                                                               0.001            
+                                                               train/loss_epoch:
+                                                               0.002            
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00007/left_wall_dist/models/left_wall_dist_arch8.pt
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=1080, out_features=32, bias=True)
+  (2): ReLU()
+  (3): Linear(in_features=32, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃  FLOPs ┃  In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 34.6 K │ train │ 69.2 K │    [1, 1, │    [1, 1] │
+│   │           │            │        │       │        │     1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │      0 │         ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴────────┴───────────┴───────────┘
+Trainable params: 34.6 K                                                        
+Non-trainable params: 0                                                         
+Total params: 34.6 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 6                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 69.2 K                                                             
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 8, kernel_size=(3,), stride=(1,))
+  (1): ELU(alpha=1.0)
+  (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  (3): Flatten(start_dim=1, end_dim=-1)
+  (4): Linear(in_features=1072, out_features=64, bias=True)
+  (5): ELU(alpha=1.0)
+  (6): Linear(in_features=64, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 68.8 K │ train │ 189 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 68.8 K                                                        
+Non-trainable params: 0                                                         
+Total params: 68.8 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 9                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 189 K                                                              
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 8, kernel_size=(3,), stride=(1,))
+  (1): ReLU()
+  (2): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+  (3): Conv1d(8, 13, kernel_size=(3,), stride=(1,))
+  (4): ReLU()
+  (5): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (6): Conv1d(13, 11, kernel_size=(3,), stride=(1,))
+  (7): ReLU()
+  (8): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (9): Conv1d(11, 16, kernel_size=(3,), stride=(1,))
+  (10): ReLU()
+  (11): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  (12): Flatten(start_dim=1, end_dim=-1)
+  (13): Linear(in_features=112, out_features=64, bias=True)
+  (14): ReLU()
+  (15): Linear(in_features=64, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │  8.6 K │ train │ 411 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 8.6 K                                                         
+Non-trainable params: 0                                                         
+Total params: 8.6 K                                                             
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 18                                                       
+Modules in eval mode: 0                                                         
+Total FLOPs: 411 K                                                              
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       86.96it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.001 val/loss:  
+                                                               0.001            
+                                                               train/loss_epoch:
+                                                               0.001            
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00008/left_wall_dist/models/left_wall_dist_arch8.pt
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       94.68it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.003 val/loss:  
+                                                               0.003            
+                                                               train/loss_epoch:
+                                                               0.004            
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00008/heading_error/models/heading_error_arch8.pt
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       82.60it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.011 val/loss:  
+                                                               0.015            
+                                                               train/loss_epoch:
+                                                               0.012            
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00008/track_width/models/track_width_arch8.pt
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=1080, out_features=32, bias=True)
+  (2): ELU(alpha=1.0)
+  (3): Linear(in_features=32, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃  FLOPs ┃  In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 34.6 K │ train │ 69.2 K │    [1, 1, │    [1, 1] │
+│   │           │            │        │       │        │     1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │      0 │         ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴────────┴───────────┴───────────┘
+Trainable params: 34.6 K                                                        
+Non-trainable params: 0                                                         
+Total params: 34.6 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 6                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 69.2 K                                                             
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Flatten(start_dim=1, end_dim=-1)
+  (1): Linear(in_features=1080, out_features=128, bias=True)
+  (2): ELU(alpha=1.0)
+  (3): Linear(in_features=128, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │  138 K │ train │ 276 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 138 K                                                         
+Non-trainable params: 0                                                         
+Total params: 138 K                                                             
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 6                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 276 K                                                              
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 13, kernel_size=(3,), stride=(1,))
+  (1): ELU(alpha=1.0)
+  (2): MaxPool1d(kernel_size=8, stride=8, padding=0, dilation=1, ceil_mode=False)
+  (3): Conv1d(13, 14, kernel_size=(3,), stride=(1,))
+  (4): ELU(alpha=1.0)
+  (5): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (6): Conv1d(14, 19, kernel_size=(3,), stride=(1,))
+  (7): ELU(alpha=1.0)
+  (8): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+  (9): Flatten(start_dim=1, end_dim=-1)
+  (10): Linear(in_features=304, out_features=128, bias=True)
+  (11): ELU(alpha=1.0)
+  (12): Linear(in_features=128, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 40.6 K │ train │ 408 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 40.6 K                                                        
+Non-trainable params: 0                                                         
+Total params: 40.6 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 15                                                       
+Modules in eval mode: 0                                                         
+Total FLOPs: 408 K                                                              
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       92.50it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.004 val/loss:  
+                                                               0.003            
+                                                               train/loss_epoch:
+                                                               0.004            
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00009/heading_error/models/heading_error_arch8.pt
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       88.79it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.001 val/loss:  
+                                                               0.002            
+                                                               train/loss_epoch:
+                                                               0.002            
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00009/left_wall_dist/models/left_wall_dist_arch8.pt
+Epoch 29/29 ━━━━━━━━━━━━━━━━ 124/124 0:00:01 •       92.96it/s v_num: 0.000     
+                                     0:00:00                   train/loss_step: 
+                                                               0.003 val/loss:  
+                                                               0.006            
+                                                               train/loss_epoch:
+                                                               0.005            
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/trial_artifacts/20260423T190246_1595994_e63a06_trial00009/track_width/models/track_width_arch8.pt
