@@ -328,7 +328,7 @@ def objective(
     track_configs = [(track.map_path, track.waypoints_path) for track in evaluation_tracks]
 
     try:
-        average_rmse, track_rmses = test_cnn_arch(
+        average_rmse, track_rmses, average_metrics, track_metrics = test_cnn_arch(
             left_wall_dist_filepath=str(LATEST_MODEL_PATHS["left_wall_dist"]),
             track_width_filepath=str(LATEST_MODEL_PATHS["track_width"]),
             heading_error_filepath=str(LATEST_MODEL_PATHS["heading_error"]),
@@ -345,6 +345,8 @@ def objective(
         trained_runs=trained_runs,
         average_rmse=average_rmse,
         track_rmses=track_rmses,
+        average_metrics=average_metrics,
+        track_metrics=track_metrics,
         evaluation_tracks=evaluation_tracks,
     )
     return average_rmse
@@ -355,6 +357,8 @@ def _log_trial_result(
     trained_runs: list[tuple[dict[str, any], Path]],
     average_rmse: float,
     track_rmses: list[float],
+    average_metrics: dict[str, float],
+    track_metrics: list[dict[str, float]],
     evaluation_tracks: Sequence[EvaluationTrack],
 ) -> None:
     """
@@ -399,10 +403,25 @@ def _log_trial_result(
             }
         )
 
+    per_track_metrics: list[dict[str, any]] = []
+    for track, metrics in zip(evaluation_tracks, track_metrics):
+        per_track_metrics.append(
+            {
+                "track": track.name,
+                "map_path": track.map_path,
+                "waypoints_path": track.waypoints_path,
+                **metrics,
+            }
+        )
+
     entry = {
         "timestamp": datetime.utcnow().isoformat(timespec="seconds") + "Z",
         "trial_number": trial.number,
         "rmse": rmse_entries,
+        "metrics": {
+            "average": average_metrics,
+            "per_track": per_track_metrics,
+        },
         "params": trial.params,
         "targets": target_summaries,
     }

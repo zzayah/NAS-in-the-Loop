@@ -66,7 +66,12 @@ def export_trial_configs(
     for target in targets:
         target_col = target["target_col"]
         model_block = _model_block_from_summary(target)
-        cfg = _build_training_config(model_block, target_col, dataset_path)
+        cfg = _build_training_config(
+            model_block,
+            target_col,
+            dataset_path,
+            artifact_root=output_dir / target_col,
+        )
         if max_epochs is not None:
             cfg["training"]["max_epochs"] = int(max_epochs)
         if early_stopping_patience is not None:

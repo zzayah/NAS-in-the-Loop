@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import shutil
 import sys
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Iterable
 
@@ -27,7 +28,10 @@ LEGACY_MODEL_DIRS = [
 ]
 
 # Configuration (edit as needed)
-TRIALS_FILE = "nas/dnn-output/nas_trials_20260416T005955_2659812_289bad.jsonl" # e.g. "nas/dnn-output/nas_trials_20260411T184604.jsonl"
+TRIALS_FILES = [
+    "nas/dnn-output/nas_trials_20260423T231219_419070_b1a43f.jsonl",
+    "nas/dnn-output/nas_trials_20260423T232949_993524_74c582.jsonl"
+]
 DATASET_PATH = "nas/datasets/combined_all.npz"
 OUTPUT_DIR: str | None = None
 MODE = "train"  # "train" or "test"
@@ -51,6 +55,27 @@ def _resolve_trials_file(arg: str | None) -> str | None:
     if not path.exists():
         raise FileNotFoundError(f"Trials file {path} does not exist.")
     return str(path)
+
+
+def _resolve_trials_files(args: Iterable[str] | str | None) -> list[str]:
+    if args is None:
+        return []
+    if isinstance(args, str):
+        resolved = _resolve_trials_file(args)
+        return [] if resolved is None else [resolved]
+    resolved_files: list[str] = []
+    for arg in args:
+        resolved = _resolve_trials_file(arg)
+        if resolved is not None:
+            resolved_files.append(resolved)
+    return resolved_files
+
+
+def _default_output_dir(trials_file: str | None) -> Path:
+    if trials_file is None:
+        raise ValueError("trials_file must be resolved before deriving output_dir.")
+    trial_id = Path(trials_file).stem.rsplit("_", 1)[-1]
+    return (REPO_ROOT / "nas/dnn-output/test-best-runs" / trial_id).resolve()
 
 
 def _target_name(config_path: Path) -> str:
@@ -194,7 +219,7 @@ def _evaluate_models(model_paths: list[Path]) -> float | None:
         print(f"[warn] missing checkpoints for: {', '.join(missing)}")
         return None
     track_configs = [(t.map_path, t.waypoints_path) for t in TRAIN_EVAL_TRACKS]
-    avg_rmse, _ = test_cnn_arch(
+    avg_rmse, _, _, _ = test_cnn_arch(
         left_wall_dist_filepath=str(lookup["left_wall_dist"]),
         track_width_filepath=str(lookup["track_width"]),
         heading_error_filepath=str(lookup["heading_error"]),
@@ -204,14 +229,20 @@ def _evaluate_models(model_paths: list[Path]) -> float | None:
     return avg_rmse
 
 
-def main() -> None:
+def _run_trials_file(trials_file: str) -> None:
     if MODE not in {"train", "test"}:
         raise ValueError("MODE must be 'train' or 'test'")
-    trials_file = _resolve_trials_file(TRIALS_FILE)
+    output_dir = (
+        (Path(OUTPUT_DIR).expanduser().resolve() / Path(trials_file).stem.rsplit("_", 1)[-1])
+        if OUTPUT_DIR is not None
+        else _default_output_dir(trials_file)
+    )
+    print(f"[run] trials_file={trials_file}")
+    print(f"[run] output_dir={output_dir}")
     best_trial, config_paths = orchestrate_best_trial(
         trials_path=trials_file,
         dataset_path=DATASET_PATH,
-        output_dir=OUTPUT_DIR,
+        output_dir=output_dir,
         max_epochs=MAX_EPOCHS,
         early_stopping_patience=EARLY_STOPPING,
     )
@@ -243,6 +274,19 @@ def main() -> None:
 
     if not SKIP_EVAL:
         _evaluate_models(model_paths)
+
+
+def main() -> None:
+    if MODE not in {"train", "test"}:
+        raise ValueError("MODE must be 'train' or 'test'")
+    trials_files = _resolve_trials_files(TRIALS_FILES)
+    if not trials_files:
+        raise ValueError("TRIALS_FILES must contain at least one trials file.")
+
+    with ThreadPoolExecutor(max_workers=len(trials_files)) as executor:
+        futures = [executor.submit(_run_trials_file, trials_file) for trials_file in trials_files]
+        for future in futures:
+            future.result()
 
 
 if __name__ == "__main__":

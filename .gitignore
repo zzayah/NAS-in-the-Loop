@@ -7,6 +7,7 @@ nas/dnn-output/trial_artifacts
 data/models/lightning_logs/
 nas/compare-map/compare_20260415T181329_sepang_ckpt/
 nas/dnn-output/best_configs/nas_trials_20260415T001238_47186_15d6f3_sepang_ckpt/
+nas/dnn-output/test-best-runs
 
 ## https://github.com/github/gitignore/blob/main/Global/macOS.gitignore
 # General
