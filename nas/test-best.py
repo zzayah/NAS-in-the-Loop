@@ -29,8 +29,9 @@ LEGACY_MODEL_DIRS = [
 
 # Configuration (edit as needed)
 TRIALS_FILES = [
-    "nas/dnn-output/nas_trials_20260423T231219_419070_b1a43f.jsonl",
-    "nas/dnn-output/nas_trials_20260423T232949_993524_74c582.jsonl"
+    "nas/dnn-output/nas_trials_20260504T024406_360276_f926b9.jsonl",
+    "nas/dnn-output/nas_trials_20260504T024406_360279_be986b.jsonl",
+    "nas/dnn-output/nas_trials_20260504T024406_360280_193215.jsonl"
 ]
 DATASET_PATH = "nas/datasets/combined_all.npz"
 OUTPUT_DIR: str | None = None
