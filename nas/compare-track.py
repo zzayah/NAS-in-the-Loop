@@ -3,8 +3,8 @@ from __future__ import annotations
 
 import json
 import sys
+import uuid
 from dataclasses import dataclass
-from datetime import UTC, datetime
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -25,9 +25,9 @@ from f110_scripts.sim import reactive_planners as sim  # noqa: E402
 # ----------
 
 # Input filepaths to .pt files
-ARCH_8_LEFT_WALL_DIST_PT = "nas/dnn-output/best_configs/nas_trials_20260415T234908_3561018_508402_budapest/left_wall_dist_arch8_trial70.pt"
-ARCH_8_HEADING_ERROR_PT = "nas/dnn-output/best_configs/nas_trials_20260415T234908_3561018_508402_budapest/heading_error_arch8_trial70.pt"
-ARCH_8_TRACK_WIDTH_PT = "nas/dnn-output/best_configs/nas_trials_20260415T234908_3561018_508402_budapest/track_width_arch8_trial70.pt"
+ARCH_8_LEFT_WALL_DIST_PT = "nas/dnn-output/test-best-runs/74c582/left_wall_dist_arch8_trial65.pt"
+ARCH_8_HEADING_ERROR_PT = "nas/dnn-output/test-best-runs/74c582/heading_error_arch8_trial65.pt"
+ARCH_8_TRACK_WIDTH_PT = "nas/dnn-output/test-best-runs/74c582/track_width_arch8_trial65.pt"
 
 DEFAULT_MAP = None # "data/maps/F1/Nuerburgring/Nuerburgring_map"
 DEFAULT_MAP_EXT = ".png"
@@ -301,7 +301,7 @@ def _prepare_run_directory(
 ) -> tuple[Path, str]:
     base_dir = Path(output_dir).expanduser().resolve()
     base_dir.mkdir(parents=True, exist_ok=True)
-    identifier = run_id or datetime.now(UTC).strftime("compare_%Y%m%dT%H%M%S")
+    identifier = run_id or uuid.uuid4().hex[:6]
 
     run_dir = base_dir / identifier
     suffix = 1

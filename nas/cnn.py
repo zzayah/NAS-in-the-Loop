@@ -128,10 +128,20 @@ class DynamicCNN:
                 return length
             return max(1, (length - pool) // pool + 1)
 
-        self.num_layers = trial.suggest_int(_key("num_layers"), 1, 5)
+        self.num_layers = trial.suggest_categorical(_key("num_layers"), [1, 2, 3])
         self.activation = trial.suggest_categorical(_key("activation"), ["elu", "relu"])
-        max_flattened = trial.suggest_categorical(_key("max_flattened"), [1072, 2144, 4288])
-        fc_hidden = trial.suggest_categorical(_key("fc_hidden"), [32, 64, 128])
+        first_layer_channels = [1, 4, 8, 16]
+        later_layer_channels = [4, 8, 16, 24, 32]
+        fc_layer_options = {
+            "fc32": [32],
+            "fc64": [64],
+            "fc128": [128],
+            "fc64_32": [64, 32],
+            "fc128_64": [128, 64],
+        }
+        self.fc_layers = fc_layer_options[
+            trial.suggest_categorical(_key("fc_layers"), list(fc_layer_options))
+        ]
         self.conv_layers: list[dict[str, int]] = []
 
         in_channels = 1  # ensures 1×1080 LiDAR input is accepted
@@ -143,7 +153,7 @@ class DynamicCNN:
 
         for idx in range(self.num_layers):
             pool_key = _key(f"pool_size_l{idx}")
-            pool_size = trial.suggest_categorical(pool_key, [2, 4, 8])
+            pool_size = trial.suggest_categorical(pool_key, [2, 3, 4])
             if pool_size > feature_length:
                 self.num_layers = len(self.conv_layers)
                 break
@@ -151,13 +161,12 @@ class DynamicCNN:
                 feature_length, kernel_size, stride, padding
             )
             next_feature_length = _pool1d_output_length(next_feature_length, pool_size)
-            max_out_channels = min(256, max_flattened // next_feature_length)
-            if max_out_channels < 8:
-                self.num_layers = len(self.conv_layers)
-                break
-
-            out_key = _key(f"out_channels_l{idx}")
-            out_channels = trial.suggest_int(out_key, 8, max_out_channels, log=True)
+            if idx == 0:
+                out_channels = trial.suggest_categorical(_key(f"out_channels_l{idx}"), first_layer_channels)
+            else:
+                out_channels = trial.suggest_categorical(_key(f"out_channels_l{idx}"), later_layer_channels)
+                if out_channels < curr_channels:
+                    raise optuna.TrialPruned("Conv channel counts must be non-decreasing.")
 
             self.conv_layers.append(
                 {
@@ -176,6 +185,9 @@ class DynamicCNN:
                 break
             curr_channels = out_channels
 
+        if feature_length * curr_channels < 256:
+            raise optuna.TrialPruned("Flattened representation too small.")
+
         self.model_block = {
             "arch_id": 8,
             "dynamic": {
@@ -183,7 +195,7 @@ class DynamicCNN:
                 "input_length": 1080,
                 "activation": self.activation,
                 "conv_layers": self.conv_layers,
-                "fc_layers": [fc_hidden],
+                "fc_layers": self.fc_layers,
             },
         }
 
@@ -285,6 +297,7 @@ def objective(
     """
     del n_epoch, seed, _unused_loader  # unused
 
+    optimizer = trial.suggest_categorical("optimizer", ["adam", "adamw"])
     model_blocks = {}
     for target in target_cols:
         architecture = DynamicCNN(trial, prefix=target)
@@ -306,6 +319,8 @@ def objective(
                 artifact_root=target_artifact_root,
             )
         )
+        cfgs[-1]["training"]["optimizer"] = optimizer
+        cfgs[-1]["training"]["auto_lr_find"] = True
 
     trained_runs: list[tuple[dict[str, any], Path]] = []
     # TODO add specific partition of resources once the specific resource constraints (running on a gpu/cpu) are known
