@@ -320,7 +320,6 @@ def objective(
             )
         )
         cfgs[-1]["training"]["optimizer"] = optimizer
-        cfgs[-1]["training"]["auto_lr_find"] = True
 
     trained_runs: list[tuple[dict[str, any], Path]] = []
     # TODO add specific partition of resources once the specific resource constraints (running on a gpu/cpu) are known
