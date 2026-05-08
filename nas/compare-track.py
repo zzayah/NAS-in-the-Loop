@@ -98,12 +98,19 @@ SELECTED_TRACKS = {
 }
 TRACK_METRIC_KEYS: tuple[str, ...] = (
     "crosstrack_rmse_m",
+    "crosstrack_mean_m",
     "crosstrack_std_m",
     "crosstrack_max_m",
     "heading_error_rmse_deg",
+    "heading_error_max_deg",
+    "wall_min_distance_m",
+    "steering_rate_mean_rad_s",
+    "steering_rate_max_rad_s",
+    "steering_rate_std_rad_s",
     "collision",
     "laps_completed",
     "speed_mean_m_s",
+    "speed_std_m_s",
 )
 
 

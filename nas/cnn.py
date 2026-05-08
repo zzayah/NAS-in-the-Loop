@@ -41,13 +41,33 @@ class EvaluationTrack(Enum):
         "data/maps/F1/Austin/Austin_map",
         "data/maps/F1/Austin/Austin_centerline.tsv",
     )
+    BRANDS_HATCH = (
+        "data/maps/F1/BrandsHatch/BrandsHatch_map",
+        "data/maps/F1/BrandsHatch/BrandsHatch_centerline.tsv",
+    )
     SAKHIR = (
         "data/maps/F1/Sakhir/Sakhir_map",
         "data/maps/F1/Sakhir/Sakhir_centerline.tsv",
     )
+    IMS = (
+        "data/maps/F1/IMS/IMS_map",
+        "data/maps/F1/IMS/IMS_centerline.tsv",
+    )
     MELBOURNE = (
         "data/maps/F1/Melbourne/Melbourne_map",
         "data/maps/F1/Melbourne/Melbourne_centerline.tsv",
+    )
+    MOSCOW_RACEWAY = (
+        "data/maps/F1/MoscowRaceway/MoscowRaceway_map",
+        "data/maps/F1/MoscowRaceway/MoscowRaceway_centerline.tsv",
+    )
+    OSCHERSLEBEN = (
+        "data/maps/F1/Oschersleben/Oschersleben_map",
+        "data/maps/F1/Oschersleben/Oschersleben_centerline.tsv",
+    )
+    SAO_PAULO = (
+        "data/maps/F1/SaoPaulo/SaoPaulo_map",
+        "data/maps/F1/SaoPaulo/SaoPaulo_centerline.tsv",
     )
     CATALUNYA = (
         "data/maps/F1/Catalunya/Catalunya_map",
