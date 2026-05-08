@@ -25,10 +25,9 @@ from f110_scripts.sim import reactive_planners as sim  # noqa: E402
 # ----------
 
 # Input filepaths to .pt files
-ARCH_8_LEFT_WALL_DIST_PT = "nas/dnn-output/test-best-runs/74c582/left_wall_dist_arch8_trial65.pt"
-ARCH_8_HEADING_ERROR_PT = "nas/dnn-output/test-best-runs/74c582/heading_error_arch8_trial65.pt"
-ARCH_8_TRACK_WIDTH_PT = "nas/dnn-output/test-best-runs/74c582/track_width_arch8_trial65.pt"
-
+ARCH_8_LEFT_WALL_DIST_PT = "nas/dnn-output/test-best-runs/193215/left_wall_dist_arch8_trial105.pt"
+ARCH_8_HEADING_ERROR_PT = "nas/dnn-output/test-best-runs/193215/heading_error_arch8_trial105.pt"
+ARCH_8_TRACK_WIDTH_PT = "nas/dnn-output/test-best-runs/193215/track_width_arch8_trial105.pt"
 DEFAULT_MAP = None # "data/maps/F1/Nuerburgring/Nuerburgring_map"
 DEFAULT_MAP_EXT = ".png"
 DEFAULT_WAYPOINTS = None # "data/maps/F1/Nuerburgring/Nuerburgring_centerline.tsv"
@@ -97,6 +96,15 @@ SELECTED_TRACKS = {
     "mexicocity",
     "budapest"
 }
+TRACK_METRIC_KEYS: tuple[str, ...] = (
+    "crosstrack_rmse_m",
+    "crosstrack_std_m",
+    "crosstrack_max_m",
+    "heading_error_rmse_deg",
+    "collision",
+    "laps_completed",
+    "speed_mean_m_s",
+)
 
 
 @dataclass
@@ -208,7 +216,7 @@ def _simulate_run(
     env.close()
     return trace, metrics
 
-
+# This is where to add trace observations, scans, etc. (obs["scans"]) if possible
 def _write_trace_npz(
     map_slug: str,
     run_identifier: str,
@@ -255,6 +263,13 @@ def _slugify(value: str) -> str:
 def _normalize_map_name(map_path: str) -> str:
     stem = Path(map_path).stem
     return stem[:-4] if stem.endswith("_map") else stem
+
+
+def _extract_track_metrics(metrics: dict[str, object]) -> dict[str, float | None]:
+    return {
+        key: float(metrics[key]) if metrics.get(key) is not None else None
+        for key in TRACK_METRIC_KEYS
+    }
 
 
 def _is_selected_map(map_spec: MapSpec) -> bool:
@@ -355,8 +370,8 @@ def _run_map_comparison(
     for run in runs:
         trace, metrics = _simulate_run(args, run, waypoints, map_spec)
         traces.append((run, trace))
-        rmse = metrics.get("crosstrack_rmse_m")
-        rmse_value = float(rmse) if rmse is not None else None
+        track_metrics = _extract_track_metrics(metrics)
+        rmse_value = track_metrics["crosstrack_rmse_m"]
         rmse_txt = f"{rmse_value:.4f} m" if rmse_value is not None else "n/a"
         print(
             f"{map_spec.name}: {run.label} lap RMSE={rmse_txt}  steps={len(trace.positions)}"
@@ -368,6 +383,7 @@ def _run_map_comparison(
                 "track": run.track,
                 "heading": run.heading,
                 "rmse": rmse_value,
+                **track_metrics,
             }
         )
 
@@ -467,7 +483,7 @@ def main() -> None:
             for rec in records:
                 json.dump(rec, fh)
                 fh.write("\n")
-        print(f"Wrote RMSE summaries to {metrics_path}")
+        print(f"Wrote metric summaries to {metrics_path}")
     else:
         print("No comparison plots were generated.")
 

@@ -133,6 +133,7 @@ class DynamicCNN:
         first_layer_channels = [1, 4, 8, 16]
         later_layer_channels = [4, 8, 16, 24, 32]
         fc_layer_options = {
+            "fc16": [16],
             "fc32": [32],
             "fc64": [64],
             "fc128": [128],

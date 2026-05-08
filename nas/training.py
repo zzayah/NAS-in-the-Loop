@@ -131,13 +131,17 @@ def _resolve_trials_path(path_arg: str | Path | None) -> Path:
     return candidates[-1]
 
 
-def _metadata_from_config(config_path: Path) -> tuple[str, int]:
-    """Extract target column + arch ID from a YAML config path."""
+def _metadata_from_config(config_path: Path) -> tuple[str, int, Path]:
+    """Extract target column, arch ID, and configured model directory."""
     with config_path.open("r", encoding="utf-8") as fh:
         cfg = yaml.safe_load(fh)
     target_col = cfg["data"]["target_col"]
     arch_id = cfg["model"]["arch_id"]
-    return target_col, arch_id
+    model_dir_raw = cfg.get("artifacts", {}).get("model_dir")
+    if not model_dir_raw:
+        raise ValueError(f"Config {config_path} is missing artifacts.model_dir.")
+    model_dir = Path(model_dir_raw)
+    return target_col, arch_id, model_dir
 
 
 def _run_training_command(config_path: Path) -> Path:
@@ -158,8 +162,8 @@ def _run_training_command(config_path: Path) -> Path:
         )
         raise
 
-    target_col, arch_id = _metadata_from_config(config_path)
-    model_path = Path("data/models") / f"{target_col}_arch{arch_id}.pt"
+    target_col, arch_id, model_dir = _metadata_from_config(config_path)
+    model_path = model_dir / f"{target_col}_arch{arch_id}.pt"
     print(f"[train] saved {model_path}", flush=True)
     return model_path
 

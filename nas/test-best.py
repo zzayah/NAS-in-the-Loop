@@ -7,7 +7,6 @@ from __future__ import annotations
 
 import shutil
 import sys
-from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Iterable
 
@@ -22,15 +21,10 @@ from nas.cnn import TRAIN_EVAL_TRACKS
 from nas.testing import test_cnn_arch
 from nas.training import orchestrate_best_trial, train_from_configs
 
-LEGACY_MODEL_DIRS = [
-    (REPO_ROOT / "nas/models").resolve(),
-    (REPO_ROOT / "data/models").resolve(),
-]
-
 # Configuration (edit as needed)
 TRIALS_FILES = [
     "nas/dnn-output/nas_trials_20260504T024406_360276_f926b9.jsonl",
-    "nas/dnn-output/nas_trials_20260504T024406_360279_be986b.jsonl",
+    # "nas/dnn-output/nas_trials_20260504T024406_360279_be986b.jsonl",
     "nas/dnn-output/nas_trials_20260504T024406_360280_193215.jsonl"
 ]
 DATASET_PATH = "nas/datasets/combined_all.npz"
@@ -180,11 +174,6 @@ def _locate_model_from_summary(summary: dict | None) -> Path | None:
     candidate = Path(summary["model_path"])
     if candidate.exists():
         return candidate
-    fallback = f"{summary['target_col']}_arch{summary['arch_id']}.pt"
-    for directory in LEGACY_MODEL_DIRS:
-        alt = directory / fallback
-        if alt.exists():
-            return alt
     return None
 
 
@@ -284,10 +273,8 @@ def main() -> None:
     if not trials_files:
         raise ValueError("TRIALS_FILES must contain at least one trials file.")
 
-    with ThreadPoolExecutor(max_workers=len(trials_files)) as executor:
-        futures = [executor.submit(_run_trials_file, trials_file) for trials_file in trials_files]
-        for future in futures:
-            future.result()
+    for trials_file in trials_files:
+        _run_trials_file(trials_file)
 
 
 if __name__ == "__main__":
