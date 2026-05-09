@@ -25,13 +25,27 @@ from f110_scripts.sim import reactive_planners as sim  # noqa: E402
 # ----------
 
 # Input filepaths to .pt files
-ARCH_8_LEFT_WALL_DIST_PT = "nas/dnn-output/test-best-runs/193215/left_wall_dist_arch8_trial105.pt"
-ARCH_8_HEADING_ERROR_PT = "nas/dnn-output/test-best-runs/193215/heading_error_arch8_trial105.pt"
-ARCH_8_TRACK_WIDTH_PT = "nas/dnn-output/test-best-runs/193215/track_width_arch8_trial105.pt"
+ARCH_8_CHECKPOINT_TRIPLES = [
+    (
+        "nas/dnn-output/test-best-runs/193215/left_wall_dist_arch8_trial105.pt",
+        "nas/dnn-output/test-best-runs/193215/track_width_arch8_trial105.pt",
+        "nas/dnn-output/test-best-runs/193215/heading_error_arch8_trial105.pt",
+    ),
+    (
+        "nas/dnn-output/test-best-runs/be986b/left_wall_dist_arch8_trial24.pt",
+        "nas/dnn-output/test-best-runs/be986b/track_width_arch8_trial24.pt",
+        "nas/dnn-output/test-best-runs/be986b/heading_error_arch8_trial24.pt",
+    ),
+    (
+        "nas/dnn-output/test-best-runs/f926b9/left_wall_dist_arch8_trial36.pt",
+        "nas/dnn-output/test-best-runs/f926b9/track_width_arch8_trial36.pt",
+        "nas/dnn-output/test-best-runs/f926b9/heading_error_arch8_trial36.pt",
+    ),
+]
 DEFAULT_MAP = None # "data/maps/F1/Nuerburgring/Nuerburgring_map"
 DEFAULT_MAP_EXT = ".png"
 DEFAULT_WAYPOINTS = None # "data/maps/F1/Nuerburgring/Nuerburgring_centerline.tsv"
-DEFAULT_RUNS = [
+BASELINE_RUNS = [
     (
         "arch1",
         "data/models/left_wall_dist_arch1.pt",
@@ -74,14 +88,9 @@ DEFAULT_RUNS = [
         "data/models/track_width_arch7.pt",
         "data/models/heading_error_arch7.pt",
     ),
-    (
-        "arch8",
-        ARCH_8_LEFT_WALL_DIST_PT,
-        ARCH_8_TRACK_WIDTH_PT,
-        ARCH_8_HEADING_ERROR_PT,
-    ),
 ]
-DEFAULT_OUTPUT_DIR = Path(__file__).with_name("compare-map")
+
+DEFAULT_OUTPUT_DIR = Path(__file__).with_name("compare-map-nm")
 DEFAULT_MAP_ROOT = "data/maps"
 DEFAULT_RUN_ID = None
 DEFAULT_ALL_MAPS = True
@@ -94,7 +103,6 @@ SELECTED_TRACKS = {
     "nuerburgring",
     "monza",
     "mexicocity",
-    "budapest"
 }
 TRACK_METRIC_KEYS: tuple[str, ...] = (
     "crosstrack_rmse_m",
@@ -152,6 +160,18 @@ class CompareArgs:
 
 
 ARGS = CompareArgs()
+
+
+def _label_for_checkpoint_triple(
+    left_path: str,
+    track_path: str,
+    heading_path: str,
+) -> str:
+    common_parts = set(Path(left_path).parts) & set(Path(track_path).parts) & set(Path(heading_path).parts)
+    for part in reversed(Path(left_path).parts):
+        if part in common_parts and part not in {"", ".", "nas", "dnn-output", "test-best-runs"}:
+            return _slugify(part)
+    return _slugify(Path(left_path).stem)
 
 
 def _load_map_background(map_path: str, map_ext: str) -> tuple[np.ndarray, tuple[float, float, float, float]]:
@@ -247,9 +267,7 @@ def _write_trace_npz(
     return npz_path
 
 
-def _build_runs(run_args: list[tuple[str, str, str, str]] | None) -> list[ModelRun]:
-    if not run_args:
-        run_args = DEFAULT_RUNS
+def _build_runs(run_args: list[tuple[str, str, str, str]]) -> list[ModelRun]:
     runs: list[ModelRun] = []
     for label, left, track, heading in run_args:
         runs.append(
@@ -261,6 +279,25 @@ def _build_runs(run_args: list[tuple[str, str, str, str]] | None) -> list[ModelR
             )
         )
     return runs
+
+
+def _build_runs_for_checkpoint_triple(
+    checkpoint_triple: tuple[str, str, str],
+) -> tuple[str, list[ModelRun]]:
+    left, track, heading = checkpoint_triple
+    label = _label_for_checkpoint_triple(left, track, heading)
+    runs = _build_runs(
+        [
+            *BASELINE_RUNS,
+            (
+                label,
+                left,
+                track,
+                heading,
+            ),
+        ]
+    )
+    return label, runs
 
 
 def _slugify(value: str) -> str:
@@ -471,11 +508,13 @@ def _run_map_comparison(
     }
 
 
-def main() -> None:
-    args = ARGS
-    runs = _build_runs(args.run)
-    map_specs = _build_map_list(args)
-    run_dir, run_identifier = _prepare_run_directory(args.output_dir, args.run_id)
+def _run_comparison_batch(
+    args: CompareArgs,
+    runs: list[ModelRun],
+    map_specs: list[MapSpec],
+    run_id: str | None,
+) -> None:
+    run_dir, run_identifier = _prepare_run_directory(args.output_dir, run_id)
     safe_run_id = _slugify(run_identifier)
 
     records: list[dict] = []
@@ -493,6 +532,24 @@ def main() -> None:
         print(f"Wrote metric summaries to {metrics_path}")
     else:
         print("No comparison plots were generated.")
+
+
+def main() -> None:
+    args = ARGS
+    map_specs = _build_map_list(args)
+
+    if args.run:
+        runs = _build_runs(args.run)
+        _run_comparison_batch(args, runs, map_specs, args.run_id)
+        return
+
+    if not ARCH_8_CHECKPOINT_TRIPLES:
+        raise ValueError("ARCH_8_CHECKPOINT_TRIPLES must contain at least one checkpoint triple.")
+
+    for checkpoint_triple in ARCH_8_CHECKPOINT_TRIPLES:
+        label, runs = _build_runs_for_checkpoint_triple(checkpoint_triple)
+        print(f"[batch] running {label}")
+        _run_comparison_batch(args, runs, map_specs, label)
 
 
 if __name__ == "__main__":
