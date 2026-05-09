@@ -23,9 +23,19 @@ from nas.training import orchestrate_best_trial, train_from_configs
 
 # Configuration (edit as needed)
 TRIALS_FILES = [
-    "nas/dnn-output/nas_trials_20260504T024406_360276_f926b9.jsonl",
-    # "nas/dnn-output/nas_trials_20260504T024406_360279_be986b.jsonl",
-    "nas/dnn-output/nas_trials_20260504T024406_360280_193215.jsonl"
+    "nas/dnn-output/nas_trials_20260508T172706_1828022_a8b20f.jsonl",
+    "nas/dnn-output/nas_trials_20260508T172706_1828023_3d2630.jsonl",
+    "nas/dnn-output/nas_trials_20260508T172706_1828025_f847ab.jsonl",
+    "nas/dnn-output/nas_trials_20260508T184238_1357002_017f7c.jsonl",
+    "nas/dnn-output/nas_trials_20260508T193527_1776610_4ec05d.jsonl",
+    "nas/dnn-output/nas_trials_20260508T193845_2985264_dc559d.jsonl",
+    "nas/dnn-output/nas_trials_20260508T203158_3307492_60de23.jsonl",
+    "nas/dnn-output/nas_trials_20260508T203833_1888159_1b391f.jsonl",
+    "nas/dnn-output/nas_trials_20260508T210412_3311456_e6278a.jsonl",
+    "nas/dnn-output/nas_trials_20260508T212320_1900172_3cd867.jsonl",
+    "nas/dnn-output/nas_trials_20260508T213142_3317205_782a1c.jsonl",
+    "nas/dnn-output/nas_trials_20260508T213240_1902398_08e72b.jsonl",
+    "nas/dnn-output/nas_trials_20260508T220850_3400979_d24a66.jsonl",
 ]
 DATASET_PATH = "nas/datasets/combined_all.npz"
 OUTPUT_DIR: str | None = None
