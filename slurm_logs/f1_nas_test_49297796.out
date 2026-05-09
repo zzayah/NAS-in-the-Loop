@@ -1,0 +1,898 @@
+[run] trials_file=/nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/nas_trials_20260508T172706_1828022_a8b20f.jsonl
+[run] output_dir=/nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/a8b20f
+[trial] #116 avg_rmse=0.0852
+[mode] retraining configs...
+[train] running /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/a8b20f/left_wall_dist_arch8_trial116.yaml
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 1, kernel_size=(3,), stride=(1,))
+  (1): ELU(alpha=1.0)
+  (2): MaxPool1d(kernel_size=3, stride=3, padding=0, dilation=1, ceil_mode=False)
+  (3): Flatten(start_dim=1, end_dim=-1)
+  (4): Linear(in_features=359, out_features=64, bias=True)
+  (5): ELU(alpha=1.0)
+  (6): Linear(in_features=64, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃  FLOPs ┃  In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 23.1 K │ train │ 52.5 K │    [1, 1, │    [1, 1] │
+│   │           │            │        │       │        │     1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │      0 │         ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴────────┴───────────┴───────────┘
+Trainable params: 23.1 K                                                        
+Non-trainable params: 0                                                         
+Total params: 23.1 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 9                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 52.5 K                                                             
+Epoch 699/699 ━━━━━━━━━━━━━━━ 124/124 0:00:01 •       107.94it/s v_num: 0.000   
+                                      0:00:00                    train/loss_ste…
+                                                                 0.000 val/loss:
+                                                                 0.000          
+                                                                 train/loss_epo…
+                                                                 0.000          
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/a8b20f/left_wall_dist/models/left_wall_dist_arch8.pt
+[train] saved /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/a8b20f/left_wall_dist/models/left_wall_dist_arch8.pt
+[train] running /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/a8b20f/track_width_arch8_trial116.yaml
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 8, kernel_size=(3,), stride=(1,))
+  (1): ReLU()
+  (2): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+  (3): Conv1d(8, 32, kernel_size=(3,), stride=(1,))
+  (4): ReLU()
+  (5): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+  (6): Conv1d(32, 32, kernel_size=(3,), stride=(1,))
+  (7): ReLU()
+  (8): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (9): Flatten(start_dim=1, end_dim=-1)
+  (10): Linear(in_features=1024, out_features=64, bias=True)
+  (11): ReLU()
+  (12): Linear(in_features=64, out_features=32, bias=True)
+  (13): ReLU()
+  (14): Linear(in_features=32, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 71.6 K │ train │ 990 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 71.6 K                                                        
+Non-trainable params: 0                                                         
+Total params: 71.6 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 17                                                       
+Modules in eval mode: 0                                                         
+Total FLOPs: 990 K                                                              
+Epoch 331/699 ━━━━━━━━━━━━━━━ 124/124 0:00:01 •       91.33it/s v_num: 0.000    
+                                      0:00:00                   train/loss_step:
+                                                                0.000 val/loss: 
+                                                                0.001           
+                                                                train/loss_epoc…
+                                                                0.001           
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/a8b20f/track_width/models/track_width_arch8.pt
+[train] saved /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/a8b20f/track_width/models/track_width_arch8.pt
+[train] running /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/a8b20f/heading_error_arch8_trial116.yaml
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 1, kernel_size=(3,), stride=(1,))
+  (1): ELU(alpha=1.0)
+  (2): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+  (3): Conv1d(1, 16, kernel_size=(3,), stride=(1,))
+  (4): ELU(alpha=1.0)
+  (5): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+  (6): Flatten(start_dim=1, end_dim=-1)
+  (7): Linear(in_features=1056, out_features=128, bias=True)
+  (8): ELU(alpha=1.0)
+  (9): Linear(in_features=128, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │  135 K │ train │ 302 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 135 K                                                         
+Non-trainable params: 0                                                         
+Total params: 135 K                                                             
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 12                                                       
+Modules in eval mode: 0                                                         
+Total FLOPs: 302 K                                                              
+Epoch 456/699 ━━━━━━━━━━━━━━━ 124/124 0:00:01 •       99.15it/s v_num: 0.000    
+                                      0:00:00                   train/loss_step:
+                                                                0.001 val/loss: 
+                                                                0.001           
+                                                                train/loss_epoc…
+                                                                0.001           
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/a8b20f/heading_error/models/heading_error_arch8.pt
+[train] saved /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/a8b20f/heading_error/models/heading_error_arch8.pt
+[config] /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/a8b20f/left_wall_dist_arch8_trial116.yaml
+[model]  /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/a8b20f/left_wall_dist_arch8_trial116.pt
+[config] /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/a8b20f/track_width_arch8_trial116.yaml
+[model]  /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/a8b20f/track_width_arch8_trial116.pt
+[config] /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/a8b20f/heading_error_arch8_trial116.yaml
+[model]  /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/a8b20f/heading_error_arch8_trial116.pt
+[data/maps/F1/Melbourne/Melbourne_map] Cross-Track RMSE: 0.1225 m
+Average Cross-Track RMSE (1 tracks): 0.1225 m
+[rmse] average across 1 tracks: 0.1225
+[run] trials_file=/nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/nas_trials_20260508T172706_1828023_3d2630.jsonl
+[run] output_dir=/nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/3d2630
+[trial] #52 avg_rmse=0.1135
+[mode] retraining configs...
+[train] running /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/3d2630/left_wall_dist_arch8_trial52.yaml
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 1, kernel_size=(3,), stride=(1,))
+  (1): ReLU()
+  (2): MaxPool1d(kernel_size=3, stride=3, padding=0, dilation=1, ceil_mode=False)
+  (3): Conv1d(1, 24, kernel_size=(3,), stride=(1,))
+  (4): ReLU()
+  (5): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+  (6): Conv1d(24, 24, kernel_size=(3,), stride=(1,))
+  (7): ReLU()
+  (8): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+  (9): Flatten(start_dim=1, end_dim=-1)
+  (10): Linear(in_features=504, out_features=128, bias=True)
+  (11): ReLU()
+  (12): Linear(in_features=128, out_features=64, bias=True)
+  (13): ReLU()
+  (14): Linear(in_features=64, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 74.8 K │ train │ 504 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 74.8 K                                                        
+Non-trainable params: 0                                                         
+Total params: 74.8 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 17                                                       
+Modules in eval mode: 0                                                         
+Total FLOPs: 504 K                                                              
+Epoch 384/699 ━━━━━━━━━━━━━━━ 124/124 0:00:01 •       91.12it/s v_num: 0.000    
+                                      0:00:00                   train/loss_step:
+                                                                0.000 val/loss: 
+                                                                0.000           
+                                                                train/loss_epoc…
+                                                                0.000           
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/3d2630/left_wall_dist/models/left_wall_dist_arch8.pt
+[train] saved /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/3d2630/left_wall_dist/models/left_wall_dist_arch8.pt
+[train] running /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/3d2630/track_width_arch8_trial52.yaml
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 8, kernel_size=(3,), stride=(1,))
+  (1): ReLU()
+  (2): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (3): Flatten(start_dim=1, end_dim=-1)
+  (4): Linear(in_features=4312, out_features=64, bias=True)
+  (5): ReLU()
+  (6): Linear(in_features=64, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │  276 K │ train │ 603 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 276 K                                                         
+Non-trainable params: 0                                                         
+Total params: 276 K                                                             
+Total estimated model params size (MB): 1                                       
+Modules in train mode: 9                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 603 K                                                              
+Epoch 699/699 ━━━━━━━━━━━━━━━ 124/124 0:00:01 •       98.81it/s v_num: 0.000    
+                                      0:00:00                   train/loss_step:
+                                                                0.001 val/loss: 
+                                                                0.002           
+                                                                train/loss_epoc…
+                                                                0.001           
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/3d2630/track_width/models/track_width_arch8.pt
+[train] saved /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/3d2630/track_width/models/track_width_arch8.pt
+[train] running /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/3d2630/heading_error_arch8_trial52.yaml
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 4, kernel_size=(3,), stride=(1,))
+  (1): ReLU()
+  (2): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (3): Conv1d(4, 4, kernel_size=(3,), stride=(1,))
+  (4): ReLU()
+  (5): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (6): Conv1d(4, 4, kernel_size=(3,), stride=(1,))
+  (7): ReLU()
+  (8): MaxPool1d(kernel_size=3, stride=3, padding=0, dilation=1, ceil_mode=False)
+  (9): Flatten(start_dim=1, end_dim=-1)
+  (10): Linear(in_features=352, out_features=32, bias=True)
+  (11): ReLU()
+  (12): Linear(in_features=32, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 11.4 K │ train │ 125 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 11.4 K                                                        
+Non-trainable params: 0                                                         
+Total params: 11.4 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 15                                                       
+Modules in eval mode: 0                                                         
+Total FLOPs: 125 K                                                              
+Epoch 502/699 ━━━━━━━━━━━━━━━ 124/124 0:00:01 •       95.39it/s v_num: 0.000    
+                                      0:00:00                   train/loss_step:
+                                                                0.000 val/loss: 
+                                                                0.001           
+                                                                train/loss_epoc…
+                                                                0.001           
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/3d2630/heading_error/models/heading_error_arch8.pt
+[train] saved /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/3d2630/heading_error/models/heading_error_arch8.pt
+[config] /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/3d2630/left_wall_dist_arch8_trial52.yaml
+[model]  /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/3d2630/left_wall_dist_arch8_trial52.pt
+[config] /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/3d2630/track_width_arch8_trial52.yaml
+[model]  /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/3d2630/track_width_arch8_trial52.pt
+[config] /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/3d2630/heading_error_arch8_trial52.yaml
+[model]  /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/3d2630/heading_error_arch8_trial52.pt
+[data/maps/F1/Melbourne/Melbourne_map] Cross-Track RMSE: 0.1593 m
+Average Cross-Track RMSE (1 tracks): 0.1593 m
+[rmse] average across 1 tracks: 0.1593
+[run] trials_file=/nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/nas_trials_20260508T172706_1828025_f847ab.jsonl
+[run] output_dir=/nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/f847ab
+[trial] #16 avg_rmse=0.0835
+[mode] retraining configs...
+[train] running /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/f847ab/left_wall_dist_arch8_trial16.yaml
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 16, kernel_size=(3,), stride=(1,))
+  (1): ELU(alpha=1.0)
+  (2): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (3): Flatten(start_dim=1, end_dim=-1)
+  (4): Linear(in_features=8624, out_features=64, bias=True)
+  (5): ELU(alpha=1.0)
+  (6): Linear(in_features=64, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │  552 K │ train │ 1.2 M │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 552 K                                                         
+Non-trainable params: 0                                                         
+Total params: 552 K                                                             
+Total estimated model params size (MB): 2                                       
+Modules in train mode: 9                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 1.2 M                                                              
+Epoch 472/699 ━━━━━━━━━━━━━━━ 124/124 0:00:01 •       88.77it/s v_num: 0.000    
+                                      0:00:00                   train/loss_step:
+                                                                0.000 val/loss: 
+                                                                0.000           
+                                                                train/loss_epoc…
+                                                                0.000           
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/f847ab/left_wall_dist/models/left_wall_dist_arch8.pt
+[train] saved /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/f847ab/left_wall_dist/models/left_wall_dist_arch8.pt
+[train] running /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/f847ab/track_width_arch8_trial16.yaml
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 1, kernel_size=(3,), stride=(1,))
+  (1): ReLU()
+  (2): MaxPool1d(kernel_size=3, stride=3, padding=0, dilation=1, ceil_mode=False)
+  (3): Flatten(start_dim=1, end_dim=-1)
+  (4): Linear(in_features=359, out_features=128, bias=True)
+  (5): ReLU()
+  (6): Linear(in_features=128, out_features=64, bias=True)
+  (7): ReLU()
+  (8): Linear(in_features=64, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 54.4 K │ train │ 114 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 54.4 K                                                        
+Non-trainable params: 0                                                         
+Total params: 54.4 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 11                                                       
+Modules in eval mode: 0                                                         
+Total FLOPs: 114 K                                                              
+Epoch 427/699 ━━━━━━━━━━━━━━━ 124/124 0:00:01 •       95.30it/s v_num: 0.000    
+                                      0:00:00                   train/loss_step:
+                                                                0.001 val/loss: 
+                                                                0.002           
+                                                                train/loss_epoc…
+                                                                0.001           
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/f847ab/track_width/models/track_width_arch8.pt
+[train] saved /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/f847ab/track_width/models/track_width_arch8.pt
+[train] running /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/f847ab/heading_error_arch8_trial16.yaml
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 1, kernel_size=(3,), stride=(1,))
+  (1): ELU(alpha=1.0)
+  (2): MaxPool1d(kernel_size=3, stride=3, padding=0, dilation=1, ceil_mode=False)
+  (3): Conv1d(1, 32, kernel_size=(3,), stride=(1,))
+  (4): ELU(alpha=1.0)
+  (5): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+  (6): Conv1d(32, 32, kernel_size=(3,), stride=(1,))
+  (7): ELU(alpha=1.0)
+  (8): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (9): Flatten(start_dim=1, end_dim=-1)
+  (10): Linear(in_features=1376, out_features=32, bias=True)
+  (11): ELU(alpha=1.0)
+  (12): Linear(in_features=32, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 47.3 K │ train │ 697 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 47.3 K                                                        
+Non-trainable params: 0                                                         
+Total params: 47.3 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 15                                                       
+Modules in eval mode: 0                                                         
+Total FLOPs: 697 K                                                              
+Epoch 521/699 ━━━━━━━━━━━━━━━ 124/124 0:00:01 •       93.16it/s v_num: 0.000    
+                                      0:00:00                   train/loss_step:
+                                                                0.001 val/loss: 
+                                                                0.001           
+                                                                train/loss_epoc…
+                                                                0.001           
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/f847ab/heading_error/models/heading_error_arch8.pt
+[train] saved /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/f847ab/heading_error/models/heading_error_arch8.pt
+[config] /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/f847ab/left_wall_dist_arch8_trial16.yaml
+[model]  /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/f847ab/left_wall_dist_arch8_trial16.pt
+[config] /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/f847ab/track_width_arch8_trial16.yaml
+[model]  /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/f847ab/track_width_arch8_trial16.pt
+[config] /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/f847ab/heading_error_arch8_trial16.yaml
+[model]  /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/f847ab/heading_error_arch8_trial16.pt
+[data/maps/F1/Melbourne/Melbourne_map] Cross-Track RMSE: 0.1559 m
+Average Cross-Track RMSE (1 tracks): 0.1559 m
+[rmse] average across 1 tracks: 0.1559
+[run] trials_file=/nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/nas_trials_20260508T184238_1357002_017f7c.jsonl
+[run] output_dir=/nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/017f7c
+[trial] #106 avg_rmse=0.0921
+[mode] retraining configs...
+[train] running /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/017f7c/left_wall_dist_arch8_trial106.yaml
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 1, kernel_size=(3,), stride=(1,))
+  (1): ReLU()
+  (2): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+  (3): Conv1d(1, 4, kernel_size=(3,), stride=(1,))
+  (4): ReLU()
+  (5): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+  (6): Flatten(start_dim=1, end_dim=-1)
+  (7): Linear(in_features=264, out_features=64, bias=True)
+  (8): ReLU()
+  (9): Linear(in_features=64, out_features=32, bias=True)
+  (10): ReLU()
+  (11): Linear(in_features=32, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃  FLOPs ┃  In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 19.1 K │ train │ 50.8 K │    [1, 1, │    [1, 1] │
+│   │           │            │        │       │        │     1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │      0 │         ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴────────┴───────────┴───────────┘
+Trainable params: 19.1 K                                                        
+Non-trainable params: 0                                                         
+Total params: 19.1 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 14                                                       
+Modules in eval mode: 0                                                         
+Total FLOPs: 50.8 K                                                             
+Epoch 699/699 ━━━━━━━━━━━━━━━ 124/124 0:00:01 •       95.56it/s v_num: 0.000    
+                                      0:00:00                   train/loss_step:
+                                                                0.000 val/loss: 
+                                                                0.000           
+                                                                train/loss_epoc…
+                                                                0.000           
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/017f7c/left_wall_dist/models/left_wall_dist_arch8.pt
+[train] saved /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/017f7c/left_wall_dist/models/left_wall_dist_arch8.pt
+[train] running /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/017f7c/track_width_arch8_trial106.yaml
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 1, kernel_size=(3,), stride=(1,))
+  (1): ELU(alpha=1.0)
+  (2): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+  (3): Flatten(start_dim=1, end_dim=-1)
+  (4): Linear(in_features=269, out_features=64, bias=True)
+  (5): ELU(alpha=1.0)
+  (6): Linear(in_features=64, out_features=32, bias=True)
+  (7): ELU(alpha=1.0)
+  (8): Linear(in_features=32, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃  FLOPs ┃  In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 19.4 K │ train │ 45.1 K │    [1, 1, │    [1, 1] │
+│   │           │            │        │       │        │     1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │      0 │         ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴────────┴───────────┴───────────┘
+Trainable params: 19.4 K                                                        
+Non-trainable params: 0                                                         
+Total params: 19.4 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 11                                                       
+Modules in eval mode: 0                                                         
+Total FLOPs: 45.1 K                                                             
+Epoch 699/699 ━━━━━━━━━━━━━━━ 124/124 0:00:01 •       103.06it/s v_num: 0.000   
+                                      0:00:00                    train/loss_ste…
+                                                                 0.000 val/loss:
+                                                                 0.001          
+                                                                 train/loss_epo…
+                                                                 0.001          
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/017f7c/track_width/models/track_width_arch8.pt
+[train] saved /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/017f7c/track_width/models/track_width_arch8.pt
+[train] running /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/017f7c/heading_error_arch8_trial106.yaml
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 1, kernel_size=(3,), stride=(1,))
+  (1): ReLU()
+  (2): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+  (3): Conv1d(1, 32, kernel_size=(3,), stride=(1,))
+  (4): ReLU()
+  (5): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+  (6): Flatten(start_dim=1, end_dim=-1)
+  (7): Linear(in_features=2112, out_features=64, bias=True)
+  (8): ReLU()
+  (9): Linear(in_features=64, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │  135 K │ train │ 328 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 135 K                                                         
+Non-trainable params: 0                                                         
+Total params: 135 K                                                             
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 12                                                       
+Modules in eval mode: 0                                                         
+Total FLOPs: 328 K                                                              
+Epoch 699/699 ━━━━━━━━━━━━━━━ 124/124 0:00:01 •       100.97it/s v_num: 0.000   
+                                      0:00:00                    train/loss_ste…
+                                                                 0.000 val/loss:
+                                                                 0.001          
+                                                                 train/loss_epo…
+                                                                 0.001          
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/017f7c/heading_error/models/heading_error_arch8.pt
+[train] saved /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/017f7c/heading_error/models/heading_error_arch8.pt
+[config] /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/017f7c/left_wall_dist_arch8_trial106.yaml
+[model]  /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/017f7c/left_wall_dist_arch8_trial106.pt
+[config] /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/017f7c/track_width_arch8_trial106.yaml
+[model]  /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/017f7c/track_width_arch8_trial106.pt
+[config] /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/017f7c/heading_error_arch8_trial106.yaml
+[model]  /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/017f7c/heading_error_arch8_trial106.pt
+[data/maps/F1/Melbourne/Melbourne_map] Cross-Track RMSE: 0.1160 m
+Average Cross-Track RMSE (1 tracks): 0.1160 m
+[rmse] average across 1 tracks: 0.1160
+[run] trials_file=/nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/nas_trials_20260508T193527_1776610_4ec05d.jsonl
+[run] output_dir=/nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/4ec05d
+[trial] #87 avg_rmse=0.0247
+[mode] retraining configs...
+[train] running /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/4ec05d/left_wall_dist_arch8_trial87.yaml
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 16, kernel_size=(3,), stride=(1,))
+  (1): ReLU()
+  (2): MaxPool1d(kernel_size=3, stride=3, padding=0, dilation=1, ceil_mode=False)
+  (3): Conv1d(16, 24, kernel_size=(3,), stride=(1,))
+  (4): ReLU()
+  (5): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (6): Flatten(start_dim=1, end_dim=-1)
+  (7): Linear(in_features=4272, out_features=64, bias=True)
+  (8): ReLU()
+  (9): Linear(in_features=64, out_features=32, bias=True)
+  (10): ReLU()
+  (11): Linear(in_features=32, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │  276 K │ train │ 1.5 M │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 276 K                                                         
+Non-trainable params: 0                                                         
+Total params: 276 K                                                             
+Total estimated model params size (MB): 1                                       
+Modules in train mode: 14                                                       
+Modules in eval mode: 0                                                         
+Total FLOPs: 1.5 M                                                              
+Epoch 461/699 ━━━━━━━━━━━━━━━ 124/124 0:00:01 •       93.68it/s v_num: 0.000    
+                                      0:00:00                   train/loss_step:
+                                                                0.000 val/loss: 
+                                                                0.000           
+                                                                train/loss_epoc…
+                                                                0.000           
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/4ec05d/left_wall_dist/models/left_wall_dist_arch8.pt
+[train] saved /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/4ec05d/left_wall_dist/models/left_wall_dist_arch8.pt
+[train] running /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/4ec05d/track_width_arch8_trial87.yaml
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 8, kernel_size=(3,), stride=(1,))
+  (1): ReLU()
+  (2): MaxPool1d(kernel_size=3, stride=3, padding=0, dilation=1, ceil_mode=False)
+  (3): Conv1d(8, 8, kernel_size=(3,), stride=(1,))
+  (4): ReLU()
+  (5): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (6): Conv1d(8, 24, kernel_size=(3,), stride=(1,))
+  (7): ReLU()
+  (8): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (9): Flatten(start_dim=1, end_dim=-1)
+  (10): Linear(in_features=2112, out_features=64, bias=True)
+  (11): ReLU()
+  (12): Linear(in_features=64, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │  136 K │ train │ 662 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 136 K                                                         
+Non-trainable params: 0                                                         
+Total params: 136 K                                                             
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 15                                                       
+Modules in eval mode: 0                                                         
+Total FLOPs: 662 K                                                              
+Epoch 278/699 ━━━━━━━━━━━━━━━ 124/124 0:00:01 •       94.84it/s v_num: 0.000    
+                                      0:00:00                   train/loss_step:
+                                                                0.000 val/loss: 
+                                                                0.001           
+                                                                train/loss_epoc…
+                                                                0.000           
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/4ec05d/track_width/models/track_width_arch8.pt
+[train] saved /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/4ec05d/track_width/models/track_width_arch8.pt
+[train] running /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/4ec05d/heading_error_arch8_trial87.yaml
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 1, kernel_size=(3,), stride=(1,))
+  (1): ELU(alpha=1.0)
+  (2): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+  (3): Flatten(start_dim=1, end_dim=-1)
+  (4): Linear(in_features=269, out_features=16, bias=True)
+  (5): ELU(alpha=1.0)
+  (6): Linear(in_features=16, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃  FLOPs ┃  In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │  4.3 K │ train │ 15.1 K │    [1, 1, │    [1, 1] │
+│   │           │            │        │       │        │     1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │      0 │         ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴────────┴───────────┴───────────┘
+Trainable params: 4.3 K                                                         
+Non-trainable params: 0                                                         
+Total params: 4.3 K                                                             
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 9                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 15.1 K                                                             
+Epoch 608/699 ━━━━━━━━━━━━━━━ 124/124 0:00:01 •       102.17it/s v_num: 0.000   
+                                      0:00:00                    train/loss_ste…
+                                                                 0.001 val/loss:
+                                                                 0.001          
+                                                                 train/loss_epo…
+                                                                 0.001          
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/4ec05d/heading_error/models/heading_error_arch8.pt
+[train] saved /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/4ec05d/heading_error/models/heading_error_arch8.pt
+[config] /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/4ec05d/left_wall_dist_arch8_trial87.yaml
+[model]  /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/4ec05d/left_wall_dist_arch8_trial87.pt
+[config] /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/4ec05d/track_width_arch8_trial87.yaml
+[model]  /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/4ec05d/track_width_arch8_trial87.pt
+[config] /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/4ec05d/heading_error_arch8_trial87.yaml
+[model]  /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/4ec05d/heading_error_arch8_trial87.pt
+[data/maps/F1/Melbourne/Melbourne_map] Cross-Track RMSE: 0.1120 m
+Average Cross-Track RMSE (1 tracks): 0.1120 m
+[rmse] average across 1 tracks: 0.1120
+[run] trials_file=/nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/nas_trials_20260508T193845_2985264_dc559d.jsonl
+[run] output_dir=/nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/dc559d
+[trial] #78 avg_rmse=0.0973
+[mode] retraining configs...
+[train] running /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/dc559d/left_wall_dist_arch8_trial78.yaml
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 1, kernel_size=(3,), stride=(1,))
+  (1): ReLU()
+  (2): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (3): Conv1d(1, 4, kernel_size=(3,), stride=(1,))
+  (4): ReLU()
+  (5): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (6): Flatten(start_dim=1, end_dim=-1)
+  (7): Linear(in_features=1072, out_features=32, bias=True)
+  (8): ReLU()
+  (9): Linear(in_features=32, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃  FLOPs ┃  In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 34.4 K │ train │ 88.0 K │    [1, 1, │    [1, 1] │
+│   │           │            │        │       │        │     1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │      0 │         ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴────────┴───────────┴───────────┘
+Trainable params: 34.4 K                                                        
+Non-trainable params: 0                                                         
+Total params: 34.4 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 12                                                       
+Modules in eval mode: 0                                                         
+Total FLOPs: 88.0 K                                                             
+Epoch 699/699 ━━━━━━━━━━━━━━━ 124/124 0:00:01 •       101.67it/s v_num: 0.000   
+                                      0:00:00                    train/loss_ste…
+                                                                 0.000 val/loss:
+                                                                 0.000          
+                                                                 train/loss_epo…
+                                                                 0.000          
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/dc559d/left_wall_dist/models/left_wall_dist_arch8.pt
+[train] saved /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/dc559d/left_wall_dist/models/left_wall_dist_arch8.pt
+[train] running /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/dc559d/track_width_arch8_trial78.yaml
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 16, kernel_size=(3,), stride=(1,))
+  (1): ELU(alpha=1.0)
+  (2): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+  (3): Conv1d(16, 32, kernel_size=(3,), stride=(1,))
+  (4): ELU(alpha=1.0)
+  (5): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (6): Flatten(start_dim=1, end_dim=-1)
+  (7): Linear(in_features=4256, out_features=32, bias=True)
+  (8): ELU(alpha=1.0)
+  (9): Linear(in_features=32, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │  137 K │ train │ 1.2 M │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 137 K                                                         
+Non-trainable params: 0                                                         
+Total params: 137 K                                                             
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 12                                                       
+Modules in eval mode: 0                                                         
+Total FLOPs: 1.2 M                                                              
+Epoch 326/699 ━━━━━━━━━━━━━━━ 124/124 0:00:01 •       101.19it/s v_num: 0.000   
+                                      0:00:00                    train/loss_ste…
+                                                                 0.000 val/loss:
+                                                                 0.001          
+                                                                 train/loss_epo…
+                                                                 0.001          
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/dc559d/track_width/models/track_width_arch8.pt
+[train] saved /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/dc559d/track_width/models/track_width_arch8.pt
+[train] running /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/dc559d/heading_error_arch8_trial78.yaml
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 1, kernel_size=(3,), stride=(1,))
+  (1): ELU(alpha=1.0)
+  (2): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+  (3): Flatten(start_dim=1, end_dim=-1)
+  (4): Linear(in_features=269, out_features=16, bias=True)
+  (5): ELU(alpha=1.0)
+  (6): Linear(in_features=16, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃  FLOPs ┃  In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │  4.3 K │ train │ 15.1 K │    [1, 1, │    [1, 1] │
+│   │           │            │        │       │        │     1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │      0 │         ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴────────┴───────────┴───────────┘
+Trainable params: 4.3 K                                                         
+Non-trainable params: 0                                                         
+Total params: 4.3 K                                                             
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 9                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 15.1 K                                                             
+Epoch 608/699 ━━━━━━━━━━━━━━━ 124/124 0:00:01 •       106.46it/s v_num: 0.000   
+                                      0:00:00                    train/loss_ste…
+                                                                 0.001 val/loss:
+                                                                 0.001          
+                                                                 train/loss_epo…
+                                                                 0.001          
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/dc559d/heading_error/models/heading_error_arch8.pt
+[train] saved /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/dc559d/heading_error/models/heading_error_arch8.pt
+[config] /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/dc559d/left_wall_dist_arch8_trial78.yaml
+[model]  /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/dc559d/left_wall_dist_arch8_trial78.pt
+[config] /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/dc559d/track_width_arch8_trial78.yaml
+[model]  /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/dc559d/track_width_arch8_trial78.pt
+[config] /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/dc559d/heading_error_arch8_trial78.yaml
+[model]  /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/dc559d/heading_error_arch8_trial78.pt
+[data/maps/F1/Melbourne/Melbourne_map] Cross-Track RMSE: 0.1242 m
+Average Cross-Track RMSE (1 tracks): 0.1242 m
+[rmse] average across 1 tracks: 0.1242
+[run] trials_file=/nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/nas_trials_20260508T203158_3307492_60de23.jsonl
+[run] output_dir=/nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/60de23
+[trial] #106 avg_rmse=0.0921
+[mode] retraining configs...
+[train] running /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/60de23/left_wall_dist_arch8_trial106.yaml
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 4, kernel_size=(3,), stride=(1,))
+  (1): ReLU()
+  (2): MaxPool1d(kernel_size=3, stride=3, padding=0, dilation=1, ceil_mode=False)
+  (3): Flatten(start_dim=1, end_dim=-1)
+  (4): Linear(in_features=1436, out_features=64, bias=True)
+  (5): ReLU()
+  (6): Linear(in_features=64, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │ 92.0 K │ train │ 209 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 92.0 K                                                        
+Non-trainable params: 0                                                         
+Total params: 92.0 K                                                            
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 9                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 209 K                                                              
+Epoch 521/699 ━━━━━━━━━━━━━━━ 124/124 0:00:01 •       95.57it/s v_num: 0.000    
+                                      0:00:00                   train/loss_step:
+                                                                0.000 val/loss: 
+                                                                0.000           
+                                                                train/loss_epoc…
+                                                                0.000           
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/60de23/left_wall_dist/models/left_wall_dist_arch8.pt
+[train] saved /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/60de23/left_wall_dist/models/left_wall_dist_arch8.pt
+[train] running /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/60de23/track_width_arch8_trial106.yaml
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 8, kernel_size=(3,), stride=(1,))
+  (1): ReLU()
+  (2): MaxPool1d(kernel_size=3, stride=3, padding=0, dilation=1, ceil_mode=False)
+  (3): Flatten(start_dim=1, end_dim=-1)
+  (4): Linear(in_features=2872, out_features=128, bias=True)
+  (5): ReLU()
+  (6): Linear(in_features=128, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │  367 K │ train │ 787 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 367 K                                                         
+Non-trainable params: 0                                                         
+Total params: 367 K                                                             
+Total estimated model params size (MB): 1                                       
+Modules in train mode: 9                                                        
+Modules in eval mode: 0                                                         
+Total FLOPs: 787 K                                                              
+Epoch 294/699 ━━━━━━━━━━━━━━━ 124/124 0:00:01 •       106.58it/s v_num: 0.000   
+                                      0:00:00                    train/loss_ste…
+                                                                 0.000 val/loss:
+                                                                 0.000          
+                                                                 train/loss_epo…
+                                                                 0.000          
+Saved model to /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/60de23/track_width/models/track_width_arch8.pt
+[train] saved /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/60de23/track_width/models/track_width_arch8.pt
+[train] running /nas/longleaf/home/zayah/f1tenth_ng_zc/nas/dnn-output/test-best-runs/60de23/heading_error_arch8_trial106.yaml
+
+--- Starting training for Architecture 8 ---
+
+[Model Init] arch_id=8
+Sequential(
+  (0): Conv1d(1, 1, kernel_size=(3,), stride=(1,))
+  (1): ELU(alpha=1.0)
+  (2): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+  (3): Conv1d(1, 4, kernel_size=(3,), stride=(1,))
+  (4): ELU(alpha=1.0)
+  (5): MaxPool1d(kernel_size=4, stride=4, padding=0, dilation=1, ceil_mode=False)
+  (6): Conv1d(4, 24, kernel_size=(3,), stride=(1,))
+  (7): ELU(alpha=1.0)
+  (8): MaxPool1d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  (9): Flatten(start_dim=1, end_dim=-1)
+  (10): Linear(in_features=768, out_features=128, bias=True)
+  (11): ELU(alpha=1.0)
+  (12): Linear(in_features=128, out_features=64, bias=True)
+  (13): ELU(alpha=1.0)
+  (14): Linear(in_features=64, out_features=1, bias=True)
+)
+┏━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃   ┃ Name      ┃ Type       ┃ Params ┃ Mode  ┃ FLOPs ┃   In sizes ┃ Out sizes ┃
+┡━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ 0 │ model     │ Sequential │  107 K │ train │ 262 K │     [1, 1, │    [1, 1] │
+│   │           │            │        │       │       │      1080] │           │
+│ 1 │ criterion │ MSELoss    │      0 │ train │     0 │          ? │         ? │
+└───┴───────────┴────────────┴────────┴───────┴───────┴────────────┴───────────┘
+Trainable params: 107 K                                                         
+Non-trainable params: 0                                                         
+Total params: 107 K                                                             
+Total estimated model params size (MB): 0                                       
+Modules in train mode: 17                                                       
+Modules in eval mode: 0                                                         
+Total FLOPs: 262 K                                                              
