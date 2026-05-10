@@ -22,29 +22,116 @@ from f110_planning.utils.waypoint_utils import load_waypoints  # noqa: E402
 from f110_planning.visualization.svg_trace import SimTrace  # noqa: E402
 from f110_scripts.sim import reactive_planners as sim  # noqa: E402
 
-# ----------
+#
+# ---------- INPUT ----------
+#
 
 # Input filepaths to .pt files
 ARCH_8_CHECKPOINT_TRIPLES = [
     (
-        "nas/dnn-output/test-best-runs-150/193215/left_wall_dist_arch8_trial105.pt",
-        "nas/dnn-output/test-best-runs-150/193215/track_width_arch8_trial105.pt",
-        "nas/dnn-output/test-best-runs-150/193215/heading_error_arch8_trial105.pt",
+        "nas/dnn-output/test-best-runs-150/017f7c/left_wall_dist_arch8_trial106.pt",
+        "nas/dnn-output/test-best-runs-150/017f7c/track_width_arch8_trial106.pt",
+        "nas/dnn-output/test-best-runs-150/017f7c/heading_error_arch8_trial106.pt",
     ),
     (
-        "nas/dnn-output/test-best-runs-150/be986b/left_wall_dist_arch8_trial24.pt",
-        "nas/dnn-output/test-best-runs-150/be986b/track_width_arch8_trial24.pt",
-        "nas/dnn-output/test-best-runs-150/be986b/heading_error_arch8_trial24.pt",
+        "nas/dnn-output/test-best-runs-150/08e72b/left_wall_dist_arch8_trial95.pt",
+        "nas/dnn-output/test-best-runs-150/08e72b/track_width_arch8_trial95.pt",
+        "nas/dnn-output/test-best-runs-150/08e72b/heading_error_arch8_trial95.pt",
     ),
     (
-        "nas/dnn-output/test-best-runs-150/f926b9/left_wall_dist_arch8_trial36.pt",
-        "nas/dnn-output/test-best-runs-150/f926b9/track_width_arch8_trial36.pt",
-        "nas/dnn-output/test-best-runs-150/f926b9/heading_error_arch8_trial36.pt",
+        "nas/dnn-output/test-best-runs-150/1b391f/left_wall_dist_arch8_trial115.pt",
+        "nas/dnn-output/test-best-runs-150/1b391f/track_width_arch8_trial115.pt",
+        "nas/dnn-output/test-best-runs-150/1b391f/heading_error_arch8_trial115.pt",
+    ),
+    (
+        "nas/dnn-output/test-best-runs-150/3cd867/left_wall_dist_arch8_trial51.pt",
+        "nas/dnn-output/test-best-runs-150/3cd867/track_width_arch8_trial51.pt",
+        "nas/dnn-output/test-best-runs-150/3cd867/heading_error_arch8_trial51.pt",
+    ),
+    (
+        "nas/dnn-output/test-best-runs-150/3d2630/left_wall_dist_arch8_trial52.pt",
+        "nas/dnn-output/test-best-runs-150/3d2630/track_width_arch8_trial52.pt",
+        "nas/dnn-output/test-best-runs-150/3d2630/heading_error_arch8_trial52.pt",
+    ),
+    (
+        "nas/dnn-output/test-best-runs-150/4ec05d/left_wall_dist_arch8_trial87.pt",
+        "nas/dnn-output/test-best-runs-150/4ec05d/track_width_arch8_trial87.pt",
+        "nas/dnn-output/test-best-runs-150/4ec05d/heading_error_arch8_trial87.pt",
+    ),
+    (
+        "nas/dnn-output/test-best-runs-150/60de23/left_wall_dist_arch8_trial106.pt",
+        "nas/dnn-output/test-best-runs-150/60de23/track_width_arch8_trial106.pt",
+        "nas/dnn-output/test-best-runs-150/60de23/heading_error_arch8_trial106.pt",
+    ),
+    (
+        "nas/dnn-output/test-best-runs-150/782a1c/left_wall_dist_arch8_trial111.pt",
+        "nas/dnn-output/test-best-runs-150/782a1c/track_width_arch8_trial111.pt",
+        "nas/dnn-output/test-best-runs-150/782a1c/heading_error_arch8_trial111.pt",
+    ),
+    (
+        "nas/dnn-output/test-best-runs-150/a8b20f/left_wall_dist_arch8_trial116.pt",
+        "nas/dnn-output/test-best-runs-150/a8b20f/track_width_arch8_trial116.pt",
+        "nas/dnn-output/test-best-runs-150/a8b20f/heading_error_arch8_trial116.pt",
+    ),
+    (
+        "nas/dnn-output/test-best-runs-150/d24a66/left_wall_dist_arch8_trial108.pt",
+        "nas/dnn-output/test-best-runs-150/d24a66/track_width_arch8_trial108.pt",
+        "nas/dnn-output/test-best-runs-150/d24a66/heading_error_arch8_trial108.pt",
+    ),
+    (
+        "nas/dnn-output/test-best-runs-150/dc559d/left_wall_dist_arch8_trial78.pt",
+        "nas/dnn-output/test-best-runs-150/dc559d/track_width_arch8_trial78.pt",
+        "nas/dnn-output/test-best-runs-150/dc559d/heading_error_arch8_trial78.pt",
+    ),
+    (
+        "nas/dnn-output/test-best-runs-150/e6278a/left_wall_dist_arch8_trial92.pt",
+        "nas/dnn-output/test-best-runs-150/e6278a/track_width_arch8_trial92.pt",
+        "nas/dnn-output/test-best-runs-150/e6278a/heading_error_arch8_trial92.pt",
+    ),
+    (
+        "nas/dnn-output/test-best-runs-150/f847ab/left_wall_dist_arch8_trial16.pt",
+        "nas/dnn-output/test-best-runs-150/f847ab/track_width_arch8_trial16.pt",
+        "nas/dnn-output/test-best-runs-150/f847ab/heading_error_arch8_trial16.pt",
     ),
 ]
 DEFAULT_MAP = None # "data/maps/F1/Nuerburgring/Nuerburgring_map"
 DEFAULT_MAP_EXT = ".png"
 DEFAULT_WAYPOINTS = None # "data/maps/F1/Nuerburgring/Nuerburgring_centerline.tsv"
+DEFAULT_OUTPUT_DIR = Path(__file__).with_name("compare-map-150")
+DEFAULT_MAP_ROOT = "data/maps"
+DEFAULT_RUN_ID = None
+DEFAULT_ALL_MAPS = True
+
+#
+# ---------- END INPUT ----------
+#
+
+# Only run comparisons on this curated set when all_maps is True.
+SELECTED_TRACKS = {
+    "shanghai",
+    "silverstone",
+    "sochi",
+    "spa",
+    "nuerburgring",
+    "monza",
+    "mexicocity",
+}
+TRACK_METRIC_KEYS: tuple[str, ...] = (
+    "crosstrack_rmse_m",
+    "crosstrack_mean_m",
+    "crosstrack_std_m",
+    "crosstrack_max_m",
+    "heading_error_rmse_deg",
+    "heading_error_max_deg",
+    "wall_min_distance_m",
+    "steering_rate_mean_rad_s",
+    "steering_rate_max_rad_s",
+    "steering_rate_std_rad_s",
+    "collision",
+    "laps_completed",
+    "speed_mean_m_s",
+    "speed_std_m_s",
+)
 BASELINE_RUNS = [
     (
         "arch1",
@@ -89,37 +176,6 @@ BASELINE_RUNS = [
         "data/models/heading_error_arch7.pt",
     ),
 ]
-
-DEFAULT_OUTPUT_DIR = Path(__file__).with_name("compare-map-150")
-DEFAULT_MAP_ROOT = "data/maps"
-DEFAULT_RUN_ID = None
-DEFAULT_ALL_MAPS = True
-# Only run comparisons on this curated set when all_maps is True.
-SELECTED_TRACKS = {
-    "shanghai",
-    "silverstone",
-    "sochi",
-    "spa",
-    "nuerburgring",
-    "monza",
-    "mexicocity",
-}
-TRACK_METRIC_KEYS: tuple[str, ...] = (
-    "crosstrack_rmse_m",
-    "crosstrack_mean_m",
-    "crosstrack_std_m",
-    "crosstrack_max_m",
-    "heading_error_rmse_deg",
-    "heading_error_max_deg",
-    "wall_min_distance_m",
-    "steering_rate_mean_rad_s",
-    "steering_rate_max_rad_s",
-    "steering_rate_std_rad_s",
-    "collision",
-    "laps_completed",
-    "speed_mean_m_s",
-    "speed_std_m_s",
-)
 
 
 @dataclass

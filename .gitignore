@@ -5,7 +5,7 @@ data/models/checkpoints
 nas/datasets
 nas/dnn-output/trial_artifacts
 data/models/lightning_logs/
-# nas/dnn-output/test-best-runs*/
+nas/dnn-output/test-best-runs*/
 nas/compare-map*/
 
 ## https://github.com/github/gitignore/blob/main/Global/macOS.gitignore
