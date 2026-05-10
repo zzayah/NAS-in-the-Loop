@@ -27,19 +27,19 @@ from f110_scripts.sim import reactive_planners as sim  # noqa: E402
 # Input filepaths to .pt files
 ARCH_8_CHECKPOINT_TRIPLES = [
     (
-        "nas/dnn-output/test-best-runs/193215/left_wall_dist_arch8_trial105.pt",
-        "nas/dnn-output/test-best-runs/193215/track_width_arch8_trial105.pt",
-        "nas/dnn-output/test-best-runs/193215/heading_error_arch8_trial105.pt",
+        "nas/dnn-output/test-best-runs-150/193215/left_wall_dist_arch8_trial105.pt",
+        "nas/dnn-output/test-best-runs-150/193215/track_width_arch8_trial105.pt",
+        "nas/dnn-output/test-best-runs-150/193215/heading_error_arch8_trial105.pt",
     ),
     (
-        "nas/dnn-output/test-best-runs/be986b/left_wall_dist_arch8_trial24.pt",
-        "nas/dnn-output/test-best-runs/be986b/track_width_arch8_trial24.pt",
-        "nas/dnn-output/test-best-runs/be986b/heading_error_arch8_trial24.pt",
+        "nas/dnn-output/test-best-runs-150/be986b/left_wall_dist_arch8_trial24.pt",
+        "nas/dnn-output/test-best-runs-150/be986b/track_width_arch8_trial24.pt",
+        "nas/dnn-output/test-best-runs-150/be986b/heading_error_arch8_trial24.pt",
     ),
     (
-        "nas/dnn-output/test-best-runs/f926b9/left_wall_dist_arch8_trial36.pt",
-        "nas/dnn-output/test-best-runs/f926b9/track_width_arch8_trial36.pt",
-        "nas/dnn-output/test-best-runs/f926b9/heading_error_arch8_trial36.pt",
+        "nas/dnn-output/test-best-runs-150/f926b9/left_wall_dist_arch8_trial36.pt",
+        "nas/dnn-output/test-best-runs-150/f926b9/track_width_arch8_trial36.pt",
+        "nas/dnn-output/test-best-runs-150/f926b9/heading_error_arch8_trial36.pt",
     ),
 ]
 DEFAULT_MAP = None # "data/maps/F1/Nuerburgring/Nuerburgring_map"
@@ -90,7 +90,7 @@ BASELINE_RUNS = [
     ),
 ]
 
-DEFAULT_OUTPUT_DIR = Path(__file__).with_name("compare-map-nm")
+DEFAULT_OUTPUT_DIR = Path(__file__).with_name("compare-map-150")
 DEFAULT_MAP_ROOT = "data/maps"
 DEFAULT_RUN_ID = None
 DEFAULT_ALL_MAPS = True

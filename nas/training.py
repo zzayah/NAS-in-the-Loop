@@ -21,11 +21,6 @@ BASE_DIR = Path(__file__).resolve().parent
 REPO_ROOT = BASE_DIR.parent
 TRAIN_SCRIPT = (REPO_ROOT / "packages/f110_scripts/src/f110_scripts/train/train_nn.py").resolve()
 DEFAULT_DATASET = "nas/datasets/combined_all.npz"
-DEFAULT_CONFIGS = [
-    (REPO_ROOT / "packages/f110_scripts/src/f110_scripts/train/config_heading_8.yaml").resolve(),
-    (REPO_ROOT / "packages/f110_scripts/src/f110_scripts/train/config_left_wall_8.yaml").resolve(),
-    (REPO_ROOT / "packages/f110_scripts/src/f110_scripts/train/config_track_width_8.yaml").resolve(),
-]
 TRIALS_DIR = BASE_DIR / "dnn-output"
 DEFAULT_CONFIG_OUTPUT_ROOT = TRIALS_DIR / "best_configs"
 
@@ -49,7 +44,11 @@ def export_trial_configs(
     output_dir: str | Path,
     dataset_path: str = DEFAULT_DATASET,
     max_epochs: int | None = None,
+    lr: float | None = None,
+    weight_decay: float | None = None,
     early_stopping_patience: int | None = None,
+    lr_patience: int | None = None,
+    optimizer: str | None = None,
 ) -> list[Path]:
     """
     Materialise Lightning YAML configs for each target in a NAS trial entry.
@@ -74,8 +73,16 @@ def export_trial_configs(
         )
         if max_epochs is not None:
             cfg["training"]["max_epochs"] = int(max_epochs)
+        if lr is not None:
+            cfg["training"]["lr"] = float(lr)
+        if weight_decay is not None:
+            cfg["training"]["weight_decay"] = float(weight_decay)
         if early_stopping_patience is not None:
             cfg["training"]["early_stopping_patience"] = int(early_stopping_patience)
+        if lr_patience is not None:
+            cfg["training"]["lr_patience"] = int(lr_patience)
+        if optimizer is not None:
+            cfg["training"]["optimizer"] = optimizer
 
         cfg_name = f"{target_col}_arch{target['arch_id']}_trial{trial_id}.yaml"
         cfg_path = output_dir / cfg_name
@@ -182,12 +189,11 @@ def train_from_configs(config_paths: Sequence[str | Path]) -> list[Path]:
     return trained_models
 
 
-def train_cnn_arch(config_paths: Sequence[str | Path] | None = None) -> list[Path]:
+def train_cnn_arch(config_paths: Sequence[str | Path]) -> list[Path]:
     """
-    Convenience wrapper mirroring the original CLI with optional overrides.
+    Convenience wrapper mirroring the original CLI.
     """
-    configs = config_paths or DEFAULT_CONFIGS
-    return train_from_configs(configs)
+    return train_from_configs(config_paths)
 
 
 def orchestrate_best_trial(
@@ -195,7 +201,11 @@ def orchestrate_best_trial(
     dataset_path: str = DEFAULT_DATASET,
     output_dir: str | Path | None = None,
     max_epochs: int | None = None,
+    lr: float | None = None,
+    weight_decay: float | None = None,
     early_stopping_patience: int | None = None,
+    lr_patience: int | None = None,
+    optimizer: str | None = None,
 ) -> tuple[dict[str, Any], list[Path]]:
     """
     High-level helper to export configs for the top NAS trial.
@@ -214,7 +224,11 @@ def orchestrate_best_trial(
         export_dir,
         dataset_path=dataset_path,
         max_epochs=max_epochs,
+        lr=lr,
+        weight_decay=weight_decay,
         early_stopping_patience=early_stopping_patience,
+        lr_patience=lr_patience,
+        optimizer=optimizer,
     )
     return best_trial, generated_configs
 
