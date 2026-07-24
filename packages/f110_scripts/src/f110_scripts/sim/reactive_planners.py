@@ -365,7 +365,7 @@ def _build_reactive_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--track-width-model",
         type=str,
-        default="data/models/track_width_arch7.pt",
+        default="data/models/track_width_arch6.pt",
         help="Path to self-sufficient TorchScript .pt model for total track width.",
     )
 
@@ -479,7 +479,7 @@ def _build_reactive_parser() -> argparse.ArgumentParser:
     ec.add_argument(
         "--cloud-track-width-model",
         type=str,
-        default="data/models/track_width_arch7.pt",
+        default="data/models/track_width_arch6.pt",
         help="Path to self-sufficient TorchScript .pt cloud track width model.",
     )
     ec.add_argument(

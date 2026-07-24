@@ -12,9 +12,9 @@ from pathlib import Path
 #
 
 # The inputs here are the .pt files from the test-best run (NN architecture and weights).
-LEFT_WALL_MODEL = "accuracy-nas/dnn-output/test-best-150-combinedall-8020/7307d4/left_wall_dist_arch8_trial70.pt"
-TRACK_WIDTH_MODEL = "accuracy-nas/dnn-output/test-best-150-combinedall-8020/7307d4/track_width_arch8_trial108.pt"
-HEADING_ERROR_MODEL = "accuracy-nas/dnn-output/test-best-150-combinedall-8020/7307d4/heading_error_arch8_trial29.pt"
+LEFT_WALL_MODEL = "accuracy-nas/dnn-output/test-best-150-combinedall-8020/7307d4/left_wall_dist_arch7_trial70.pt"
+TRACK_WIDTH_MODEL = "accuracy-nas/dnn-output/test-best-150-combinedall-8020/7307d4/track_width_arch7_trial108.pt"
+HEADING_ERROR_MODEL = "accuracy-nas/dnn-output/test-best-150-combinedall-8020/7307d4/heading_error_arch7_trial29.pt"
 OUTPUT_DIR = "accuracy-nas/compare-map-150-combinedall-8020"
 
 #
@@ -63,7 +63,7 @@ def main() -> None:
     compare.ARGS.run = [
         *compare.BASELINE_RUNS,
         (
-            "arch8",
+            "arch7",
             LEFT_WALL_MODEL,
             TRACK_WIDTH_MODEL,
             HEADING_ERROR_MODEL,

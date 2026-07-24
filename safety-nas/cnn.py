@@ -54,21 +54,9 @@ class EvaluationTrack(Enum):
         "data/maps/F1/Sakhir/Sakhir_map",
         "data/maps/F1/Sakhir/Sakhir_centerline.tsv",
     )
-    IMS = (
-        "data/maps/F1/IMS/IMS_map",
-        "data/maps/F1/IMS/IMS_centerline.tsv",
-    )
     MELBOURNE = (
         "data/maps/F1/Melbourne/Melbourne_map",
         "data/maps/F1/Melbourne/Melbourne_centerline.tsv",
-    )
-    MOSCOW_RACEWAY = (
-        "data/maps/F1/MoscowRaceway/MoscowRaceway_map",
-        "data/maps/F1/MoscowRaceway/MoscowRaceway_centerline.tsv",
-    )
-    OSCHERSLEBEN = (
-        "data/maps/F1/Oschersleben/Oschersleben_map",
-        "data/maps/F1/Oschersleben/Oschersleben_centerline.tsv",
     )
     SAO_PAULO = (
         "data/maps/F1/SaoPaulo/SaoPaulo_map",
@@ -78,21 +66,9 @@ class EvaluationTrack(Enum):
         "data/maps/F1/Catalunya/Catalunya_map",
         "data/maps/F1/Catalunya/Catalunya_centerline.tsv",
     )
-    HOCKENHEIM = (
-        "data/maps/F1/Hockenheim/Hockenheim_map",
-        "data/maps/F1/Hockenheim/Hockenheim_centerline.tsv",
-    )
     BUDAPEST = (
         "data/maps/F1/Budapest/Budapest_map",
         "data/maps/F1/Budapest/Budapest_centerline.tsv",
-    )
-    MONTREAL = (
-        "data/maps/F1/Montreal/Montreal_map",
-        "data/maps/F1/Montreal/Montreal_centerline.tsv",
-    )
-    SPIELBERG = (
-        "data/maps/F1/Spielberg/Spielberg_map",
-        "data/maps/F1/Spielberg/Spielberg_centerline.tsv",
     )
     ZANDVOORT = (
         "data/maps/F1/Zandvoort/Zandvoort_map",
@@ -144,7 +120,7 @@ class DynamicCNN:
     """
 
     def __init__(self, trial: optuna.trial.Trial, prefix: str = "") -> None:
-        """Sample an arch8 CNN from an Optuna trial."""
+        """Sample an arch7 CNN from an Optuna trial."""
         def _key(name: str) -> str:
             """Prefix an Optuna parameter name."""
             return f"{prefix}_{name}" if prefix else name
@@ -221,7 +197,7 @@ class DynamicCNN:
             raise optuna.TrialPruned("Flattened representation too small.")
 
         self.model_block = {
-            "arch_id": 8,
+            "arch_id": 7,
             "dynamic": {
                 "in_channels": 1,
                 "input_length": 1080,
@@ -321,7 +297,7 @@ def objective(
     track_names: Sequence[object] | None = None,
 ) -> float:
     """
-    Train one arch8 triplet and return its track RMSE.
+    Train one arch7 triplet and return its track RMSE.
 
     The same sampled architecture is trained for left_wall_dist, track_width,
     and heading_error before the three checkpoints are evaluated together.
@@ -333,7 +309,7 @@ def objective(
     for target in target_cols:
         architecture = DynamicCNN(trial, prefix=target)
         block = architecture.to_model_block()
-        block["arch_id"] = 8
+        block["arch_id"] = 7
         model_blocks[target] = block
 
     evaluation_tracks = _select_evaluation_tracks(track_names)

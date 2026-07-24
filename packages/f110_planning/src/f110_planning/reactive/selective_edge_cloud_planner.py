@@ -68,7 +68,7 @@ class SelectiveEdgeCloudPlanner(BasePlanner):  # pylint: disable=too-many-instan
     # Empirical MSE constants from DNN evaluation (used for age-dependent alpha computation).
     # Order: [LEFT, TRACK, HEADING]
     # Edge: arch1 (left_wall_dist), arch2 (track_width), arch2 (heading_error)
-    # Cloud: arch5 (left_wall_dist), arch7 (track_width), arch6 (heading_error)
+    # Cloud: arch5 (left_wall_dist), arch6 (track_width and heading_error)
     _SIGMA2_EDGE: tuple[float, ...] = (0.028020, 0.036518, 0.019371)
     _SIGMA2_CLOUD: tuple[float, ...] = (0.000518, 0.001539, 0.001140)
 

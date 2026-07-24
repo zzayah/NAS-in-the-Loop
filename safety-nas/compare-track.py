@@ -27,13 +27,13 @@ from f110_scripts.sim import reactive_planners as sim  # noqa: E402
 #
 
 # Input filepaths to .pt files
-ARCH_8_CHECKPOINT_TRIPLES = [
+ARCH_7_CHECKPOINT_TRIPLES = [
     # Example usage (note: order)
-    (
-        "safety-nas/dnn-output/test-best-runs-150/017f7c/left_wall_dist_arch8_trial106.pt",
-        "safety-nas/dnn-output/test-best-runs-150/017f7c/track_width_arch8_trial106.pt",
-        "safety-nas/dnn-output/test-best-runs-150/017f7c/heading_error_arch8_trial106.pt",
-    ),
+    # (
+    #     "safety-nas/dnn-output/test-best-runs-150/017f7c/left_wall_dist_arch7_trial106.pt",
+    #     "safety-nas/dnn-output/test-best-runs-150/017f7c/track_width_arch7_trial106.pt",
+    #     "safety-nas/dnn-output/test-best-runs-150/017f7c/heading_error_arch7_trial106.pt",
+    # ),
 ]
 DEFAULT_MAP = None # Ex. "data/maps/F1/Nuerburgring/Nuerburgring_map"
 DEFAULT_WAYPOINTS = None # Ex. "data/maps/F1/Nuerburgring/Nuerburgring_centerline.tsv"
@@ -52,7 +52,6 @@ DEFAULT_ALL_MAPS = True
 
 # Only run comparisons on this curated set when all_maps is True.
 SELECTED_TRACKS = {
-    "shanghai",
     "silverstone",
     "sochi",
     "spa",
@@ -112,12 +111,6 @@ BASELINE_RUNS = [
         "data/models/left_wall_dist_arch6.pt",
         "data/models/track_width_arch6.pt",
         "data/models/heading_error_arch6.pt",
-    ),
-    (
-        "arch7",
-        "data/models/left_wall_dist_arch7.pt",
-        "data/models/track_width_arch7.pt",
-        "data/models/heading_error_arch7.pt",
     ),
 ]
 
@@ -294,7 +287,7 @@ def _build_runs(run_args: list[tuple[str, str, str, str]]) -> list[ModelRun]:
 def _build_runs_for_checkpoint_triple(
     checkpoint_triple: tuple[str, str, str],
 ) -> tuple[str, list[ModelRun]]:
-    """Create baseline runs plus one arch8 run."""
+    """Create baseline runs plus one arch7 run."""
     left, track, heading = checkpoint_triple
     label = _label_for_checkpoint_triple(left, track, heading)
     runs = _build_runs(
@@ -564,10 +557,10 @@ def main() -> None:
         _run_comparison_batch(args, runs, map_specs, args.run_id)
         return
 
-    if not ARCH_8_CHECKPOINT_TRIPLES:
-        raise ValueError("ARCH_8_CHECKPOINT_TRIPLES must contain at least one checkpoint triple.")
+    if not ARCH_7_CHECKPOINT_TRIPLES:
+        raise ValueError("ARCH_7_CHECKPOINT_TRIPLES must contain at least one checkpoint triple.")
 
-    for checkpoint_triple in ARCH_8_CHECKPOINT_TRIPLES:
+    for checkpoint_triple in ARCH_7_CHECKPOINT_TRIPLES:
         label, runs = _build_runs_for_checkpoint_triple(checkpoint_triple)
         print(f"[batch] running {label}")
         _run_comparison_batch(args, runs, map_specs, label)

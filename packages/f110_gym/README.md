@@ -33,7 +33,7 @@ import f110_gym
 
 # Create the environment
 env = gym.make('f110-v0', 
-               map='data/maps/F1/Oschersleben/Oschersleben_map', 
+               map='data/maps/F1/Austin/Austin_map', 
                render_mode='human', 
                num_agents=1)
 
@@ -48,5 +48,4 @@ while not done:
     done = terminated or truncated
     env.render()
 ```
-
 

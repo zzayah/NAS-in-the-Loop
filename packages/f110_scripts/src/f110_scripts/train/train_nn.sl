@@ -39,10 +39,6 @@ CONFIGS=(
     "packages/f110_scripts/src/f110_scripts/train/config_left_wall_5.yaml"
     "packages/f110_scripts/src/f110_scripts/train/config_track_width_5.yaml"
     # arch 6  (indices 15-17)
-    "packages/f110_scripts/src/f110_scripts/train/config_heading_6.yaml"
-    "packages/f110_scripts/src/f110_scripts/train/config_left_wall_6.yaml"
-    "packages/f110_scripts/src/f110_scripts/train/config_track_width_6.yaml"
-    # arch 7  (indices 18-20)
     "packages/f110_scripts/src/f110_scripts/train/config_heading_7.yaml"
     "packages/f110_scripts/src/f110_scripts/train/config_left_wall_7.yaml"
     "packages/f110_scripts/src/f110_scripts/train/config_track_width_7.yaml"

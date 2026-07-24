@@ -12,7 +12,7 @@ import f110_gym  # pylint: disable=unused-import
 def test_observation_space():
     """Test observation space structure and types."""
     env = gym.make(
-        "f110-v0", map="data/maps/F1/Oschersleben/Oschersleben_map", num_agents=1
+        "f110-v0", map="data/maps/F1/Austin/Austin_map", num_agents=1
     )
     obs, _ = env.reset()
 
@@ -34,7 +34,7 @@ def test_observation_space():
 def test_action_space():
     """Test action space limits and shapes."""
     env = gym.make(
-        "f110-v0", map="data/maps/F1/Oschersleben/Oschersleben_map", num_agents=2
+        "f110-v0", map="data/maps/F1/Austin/Austin_map", num_agents=2
     )
     assert env.action_space.shape == (2, 2)
     # Bounds defined by default_params in f110_env.py
@@ -46,7 +46,7 @@ def test_action_space():
 def test_step():
     """Test a single environment step and basic physics."""
     env = gym.make(
-        "f110-v0", map="data/maps/F1/Oschersleben/Oschersleben_map", num_agents=1
+        "f110-v0", map="data/maps/F1/Austin/Austin_map", num_agents=1
     )
     obs, _ = env.reset(options={"poses": np.array([[0.0, 0.0, 0.0]])})
 
@@ -97,14 +97,14 @@ def test_lap_times_update_beyond_two_laps() -> None:
 def test_collision_detection():
     """Test that moving into a wall triggers collision."""
     env = gym.make(
-        "f110-v0", map="data/maps/F1/Oschersleben/Oschersleben_map", num_agents=1
+        "f110-v0", map="data/maps/F1/Austin/Austin_map", num_agents=1
     )
     # Reset to a known safe spot then drive into a wall
     env.reset(options={"poses": np.array([[0.0, 0.0, 0.0]])})
 
     # Drive fast into the side wall
     # We should eventually hit something
-    # Oschersleben is a closed track, driving in one direction will hit a wall.
+    # Austin is a closed track, driving in one direction will hit a wall.
     action = np.array([[0.0, 7.0]])
     collided = False
     for _ in range(100):  # 1 second of simulation
@@ -122,21 +122,21 @@ def test_collision_detection():
 def test_lidar_values():
     """Test that LiDAR scans return reasonable values."""
     env = gym.make(
-        "f110-v0", map="data/maps/F1/Oschersleben/Oschersleben_map", num_agents=1
+        "f110-v0", map="data/maps/F1/Austin/Austin_map", num_agents=1
     )
     obs, _ = env.reset(options={"poses": np.array([[0.0, 0.0, 0.0]])})
     scan = obs["scans"][0]
 
     assert scan.shape == (1080,)
     assert np.all(scan >= 0.0)
-    assert np.any(scan < 30.0)  # Should hit something eventually in Oschersleben
+    assert np.any(scan < 30.0)  # Should hit something eventually in Austin
     env.close()
 
 
 def test_multi_agent_observations() -> None:
     """Multi-agent env should expose per-agent arrays with correct shapes."""
     env = gym.make(
-        "f110-v0", map="data/maps/F1/Oschersleben/Oschersleben_map", num_agents=2
+        "f110-v0", map="data/maps/F1/Austin/Austin_map", num_agents=2
     )
     obs, _ = env.reset()
     assert obs["scans"].shape == (2, 1080)
@@ -149,7 +149,7 @@ def test_multi_agent_observations() -> None:
 def test_observation_space_contains_reset_obs() -> None:
     """The observation returned by reset() must satisfy the declared observation space."""
     env = gym.make(
-        "f110-v0", map="data/maps/F1/Oschersleben/Oschersleben_map", num_agents=1
+        "f110-v0", map="data/maps/F1/Austin/Austin_map", num_agents=1
     )
     obs, _ = env.reset()
     assert env.observation_space.contains(obs)
@@ -159,7 +159,7 @@ def test_observation_space_contains_reset_obs() -> None:
 def test_reset_restores_initial_state() -> None:
     """After several steps, a reset() to the original pose should fully restore state."""
     env = gym.make(
-        "f110-v0", map="data/maps/F1/Oschersleben/Oschersleben_map", num_agents=1
+        "f110-v0", map="data/maps/F1/Austin/Austin_map", num_agents=1
     )
     start_pose = np.array([[0.0, 0.0, 0.0]])
     obs1, _ = env.reset(options={"poses": start_pose})
@@ -181,7 +181,7 @@ def test_max_laps_termination() -> None:
     """Episode terminates when toggle_list reaches the required lap count."""
     env = gym.make(
         "f110-v0",
-        map="data/maps/F1/Oschersleben/Oschersleben_map",
+        map="data/maps/F1/Austin/Austin_map",
         num_agents=1,
         max_laps=1,
     )

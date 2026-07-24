@@ -11,7 +11,7 @@ def _make_env():
     wpts = np.array([[0.0, 0.0], [1.0, 0.0]])
     env = gym.make(
         "f110_gym:f110-cloud-scheduler-v0",
-        map="data/maps/F1/Oschersleben/Oschersleben_map",
+        map="data/maps/F1/Austin/Austin_map",
         waypoints=wpts,
         num_agents=1,
         cloud_latency=2,

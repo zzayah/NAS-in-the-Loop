@@ -13,7 +13,7 @@ from f110_planning.utils import get_vehicle_state, load_waypoints, nearest_point
 def test_load_waypoints() -> None:
     """Test loading waypoints from a TSV file."""
     # Test loading a real file if it exists
-    path = "data/maps/F1/Oschersleben/Oschersleben_centerline.tsv"
+    path = "data/maps/F1/Austin/Austin_centerline.tsv"
     if os.path.exists(path):
         waypoints = load_waypoints(path)
         assert waypoints.ndim == 2

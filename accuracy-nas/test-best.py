@@ -50,7 +50,7 @@ TRAINING_PROFILES = {
         "optimizer": "adam",
     },
     3: {
-        "label": "arch6-7",
+        "label": "arch6",
         "max_epochs": 700,
         "lr": 5e-5,
         "weight_decay": 1e-4,
@@ -73,7 +73,7 @@ TARGET_FILES = {
 }
 
 # Adjust output_dir depending on training profile
-TRAINING_PROFILE = 0    # 0: arch1-2, 1: arch3-4, 2: arch5, 3: arch6-7
+TRAINING_PROFILE = 0    # 0: arch1-2, 1: arch3-4, 2: arch5, 3: arch6
 TRAIN_PATH = "data/accuracy-nas/datasets/combined_all.npz"
 OUTPUT_DIR = "data/accuracy-nas/dnn-output/test-best-150-tp0"
 SKIP_EVAL = False

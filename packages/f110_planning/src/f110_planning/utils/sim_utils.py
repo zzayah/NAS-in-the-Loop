@@ -10,9 +10,9 @@ from f110_gym.envs.base_classes import Integrator
 import numpy as np
 
 # Default map and waypoint configuration
-DEFAULT_MAP = "data/maps/F1/Oschersleben/Oschersleben_map"
+DEFAULT_MAP = "data/maps/F1/Austin/Austin_map"
 DEFAULT_MAP_EXT = ".png"
-DEFAULT_WAYPOINTS = "data/maps/F1/Oschersleben/Oschersleben_centerline.tsv"
+DEFAULT_WAYPOINTS = "data/maps/F1/Austin/Austin_centerline.tsv"
 
 # Default vehicle starting pose
 DEFAULT_START_X = 0.0

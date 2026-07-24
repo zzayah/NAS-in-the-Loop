@@ -127,7 +127,7 @@ When complete, configure the parameters and run `accuracy-nas/compare-track.py` 
 
 When both Safety-NAS and Accuracy-NAS are done running, we may now visualize our results together. Note: the visualization DOES allow a single input if you would like to do visualization of only Safety-NAS or Accuracy-NAS.
 
-To do this, modify the paths at the top of `vis.ipynb` or `shanghai-removed.vis.ipynb` to point to compare-map metrics.jsonl results (see `data/accuracy-nas/compare-map-tp0/metrics.jsonl` for an example) and run all cells.
+To do this, modify the paths at the top of `vis.ipynb` or `final-analysis-vis.ipynb` to point to compare-map metrics.jsonl results (see `data/accuracy-nas/compare-map-tp0/metrics.jsonl` for an example) and run all cells.
 
 ## Attribution
 

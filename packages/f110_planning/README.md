@@ -70,7 +70,7 @@ You can use the built-in utility to load waypoints from a CSV or TSV file:
 from f110_planning.utils import load_waypoints
 
 # Load waypoints
-waypoints = load_waypoints('data/maps/F1/Oschersleben/Oschersleben_centerline.tsv')
+waypoints = load_waypoints('data/maps/F1/Austin/Austin_centerline.tsv')
 ```
 
 ### Using a Planner (Pure Pursuit)

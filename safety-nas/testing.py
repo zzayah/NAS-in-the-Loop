@@ -124,14 +124,10 @@ def test_cnn_arch(
 # Example usage
 # if __name__ == "__main__":
 #     test_cnn_arch(
-#         "safety-nas/dnn-output/test-best-runs-150/1b391f/left_wall_dist_arch8_trial115.pt",
-#         "safety-nas/dnn-output/test-best-runs-150/1b391f/track_width_arch8_trial115.pt",
-#         "safety-nas/dnn-output/test-best-runs-150/1b391f/heading_error_arch8_trial115.pt",
+#         "safety-nas/dnn-output/test-best-runs-150/1b391f/left_wall_dist_arch7_trial115.pt",
+#         "safety-nas/dnn-output/test-best-runs-150/1b391f/track_width_arch7_trial115.pt",
+#         "safety-nas/dnn-output/test-best-runs-150/1b391f/heading_error_arch7_trial115.pt",
 #         [
-#             (
-#                 "data/maps/F1/Shanghai/Shanghai_map",
-#                 "data/maps/F1/Shanghai/Shanghai_centerline.tsv",
-#             ),
 #             (
 #                 "data/maps/F1/Silverstone/Silverstone_map",
 #                 "data/maps/F1/Silverstone/Silverstone_centerline.tsv",

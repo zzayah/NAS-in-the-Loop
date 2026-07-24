@@ -9,8 +9,8 @@ for easy experimentation.
 Usage example (single map, single CPU)::
 
     python train_rl.py \\
-        --map data/maps/F1/Oschersleben/Oschersleben_map \\
-        --waypoints data/maps/F1/Oschersleben/Oschersleben_centerline.tsv \\
+        --map data/maps/F1/Austin/Austin_map \\
+        --waypoints data/maps/F1/Austin/Austin_centerline.tsv \\
         --agent ppo --reward cte --top-k 1 \\
         --alpha-left 0.9996583552 --alpha-track 0.9982270658 --alpha-heading 0.9965485302 \
         --timesteps 5000000
@@ -18,9 +18,9 @@ Usage example (single map, single CPU)::
 Multi-map + multi-CPU (e.g. Slurm node with 32 cores and a GPU)::
 
     python train_rl.py \\
-        --map  data/maps/F1/Oschersleben/Oschersleben_map \\
+        --map  data/maps/F1/Austin/Austin_map \\
                data/maps/F1/Monza/Monza_map \\
-        --waypoints data/maps/F1/Oschersleben/Oschersleben_centerline.tsv \\
+        --waypoints data/maps/F1/Austin/Austin_centerline.tsv \\
                    data/maps/F1/Monza/Monza_centerline.tsv \\
         --n-envs 16 --device auto \\
         --timesteps 10000000 --n-steps 4096 --batch-size 512
@@ -194,7 +194,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--map", type=str, nargs="+",
         metavar="MAP",
-        default=["data/maps/F1/Oschersleben/Oschersleben_map"],
+        default=["data/maps/F1/Austin/Austin_map"],
         help=(
             "Map YAML path(s) without extension.  Provide multiple values to "
             "train across several tracks (environments are distributed "
@@ -204,7 +204,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--waypoints", type=str, nargs="+",
         metavar="WAYPOINTS",
-        default=["data/maps/F1/Oschersleben/Oschersleben_centerline.tsv"],
+        default=["data/maps/F1/Austin/Austin_centerline.tsv"],
         help="Waypoint TSV file(s) matching each --map entry.",
     )
     parser.add_argument(
@@ -283,7 +283,7 @@ def parse_args() -> argparse.Namespace:
     )
     models.add_argument(
         "--cloud-track-width-model", type=str,
-        default="data/models/track_width_arch7.pt",
+        default="data/models/track_width_arch6.pt",
     )
     models.add_argument(
         "--cloud-heading-model", type=str,

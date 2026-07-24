@@ -50,7 +50,7 @@ TRAINING_PROFILES = {
         "optimizer": "adam",
     },
     3: {
-        "label": "arch6-7",
+        "label": "arch6",
         "max_epochs": 700,
         "lr": 5e-5,
         "weight_decay": 1e-4,
@@ -66,12 +66,10 @@ TRAINING_PROFILES = {
 
 # Configuration (edit as needed)
 TRIALS_FILES = [
-    # "safety-nas/dnn-output/all-nas-runs/nas_trials_20260508T172706_1828022_a8b20f.jsonl",
-    # "safety-nas/dnn-output/all-nas-runs/nas_trials_20260508T172706_1828023_3d2630.jsonl",
 ]
 
 # Update output_dir according to the training profile
-TRAINING_PROFILE = 0  # 0: arch1-2, 1: arch3-4, 2: arch5, 3: arch6-7
+TRAINING_PROFILE = 0  # 0: arch1-2, 1: arch3-4, 2: arch5, 3: arch6
 DATASET_PATH = "safety-nas/datasets/combined_all.npz"
 OUTPUT_DIR: str | None = "safety-nas/test-best-runs-tp0"
 

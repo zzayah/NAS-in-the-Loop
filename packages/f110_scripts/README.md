@@ -62,7 +62,6 @@ The Slurm array covers 21 configs (3 features × 7 architectures, indices 0–20
 | 9–11     | arch 4 |
 | 12–14    | arch 5 |
 | 15–17    | arch 6 |
-| 18–20    | arch 7 |
 
 Use the interactive launcher to submit the full array:
 
