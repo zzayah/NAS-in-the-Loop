@@ -28,6 +28,7 @@ SESSION_ID = os.getenv("F1_SESSION_ID") or f"{datetime.utcnow():%Y%m%dT%H%M%S}_{
 LOG_PATH = OUTPUT_DIR / f"nas_trials_{SESSION_ID}.jsonl"
 DEFAULT_TARGET_COLS = ("left_wall_dist", "track_width", "heading_error")
 LATEST_MODEL_PATHS = {target: None for target in DEFAULT_TARGET_COLS}
+EXACT_DUPLICATE_CONFIRMATIONS = 3
 
 
 def configure_run(output_dir: str | Path, session_id: str) -> None:
@@ -62,9 +63,21 @@ class EvaluationTrack(Enum):
         "data/maps/F1/Sakhir/Sakhir_map",
         "data/maps/F1/Sakhir/Sakhir_centerline.tsv",
     )
+    IMS = (
+        "data/maps/F1/IMS/IMS_map",
+        "data/maps/F1/IMS/IMS_centerline.tsv",
+    )
     MELBOURNE = (
         "data/maps/F1/Melbourne/Melbourne_map",
         "data/maps/F1/Melbourne/Melbourne_centerline.tsv",
+    )
+    MOSCOW_RACEWAY = (
+        "data/maps/F1/MoscowRaceway/MoscowRaceway_map",
+        "data/maps/F1/MoscowRaceway/MoscowRaceway_centerline.tsv",
+    )
+    OSCHERSLEBEN = (
+        "data/maps/F1/Oschersleben/Oschersleben_map",
+        "data/maps/F1/Oschersleben/Oschersleben_centerline.tsv",
     )
     SAO_PAULO = (
         "data/maps/F1/SaoPaulo/SaoPaulo_map",
@@ -74,9 +87,21 @@ class EvaluationTrack(Enum):
         "data/maps/F1/Catalunya/Catalunya_map",
         "data/maps/F1/Catalunya/Catalunya_centerline.tsv",
     )
+    HOCKENHEIM = (
+        "data/maps/F1/Hockenheim/Hockenheim_map",
+        "data/maps/F1/Hockenheim/Hockenheim_centerline.tsv",
+    )
     BUDAPEST = (
         "data/maps/F1/Budapest/Budapest_map",
         "data/maps/F1/Budapest/Budapest_centerline.tsv",
+    )
+    MONTREAL = (
+        "data/maps/F1/Montreal/Montreal_map",
+        "data/maps/F1/Montreal/Montreal_centerline.tsv",
+    )
+    SPIELBERG = (
+        "data/maps/F1/Spielberg/Spielberg_map",
+        "data/maps/F1/Spielberg/Spielberg_centerline.tsv",
     )
     ZANDVOORT = (
         "data/maps/F1/Zandvoort/Zandvoort_map",
@@ -320,6 +345,24 @@ def objective(
         block["arch_id"] = 7
         model_blocks[target] = block
 
+    cached_entry = _find_confirmed_exact_duplicate(trial.params)
+    if cached_entry is not None:
+        source_trial = int(cached_entry["trial_number"])
+        confirmation_trials = list(cached_entry["cache_confirmation_trials"])
+        print(
+            f"[cache] trial {trial.number} exactly matches confirmed trials "
+            f"{confirmation_trials}; reusing trial {source_trial} results"
+        )
+        trial.set_user_attr("cached_from_trial", source_trial)
+        trial.set_user_attr("cache_confirmation_trials", confirmation_trials)
+        _log_cached_trial_result(
+            trial=trial,
+            source_entry=cached_entry,
+            source_trial=source_trial,
+            confirmation_trials=confirmation_trials,
+        )
+        return float(cached_entry["rmse"][0]["value"])
+
     # if any(
     #     previous.number != trial.number
     #     and previous.state in (optuna.trial.TrialState.COMPLETE, optuna.trial.TrialState.RUNNING)
@@ -472,6 +515,80 @@ def _log_trial_result(
         "targets": target_summaries,
     }
 
+    _append_trial_entry(entry)
+
+
+def _canonical_json(value: object) -> str:
+    """Serialize JSON-compatible data for strict, tolerance-free equality."""
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
+
+
+def _find_confirmed_exact_duplicate(params: dict[str, object]) -> dict[str, any] | None:
+    """Find three real runs with exactly matching parameters and results."""
+    if not LOG_PATH.exists():
+        return None
+
+    params_key = _canonical_json(params)
+    matching: list[dict[str, any]] = []
+    with LOG_PATH.open("r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            entry = json.loads(line)
+            # Cached trials are outputs, not independent confirmations.
+            if "cached_from_trial" in entry:
+                continue
+            if _canonical_json(entry.get("params", {})) == params_key:
+                matching.append(entry)
+
+    if len(matching) < EXACT_DUPLICATE_CONFIRMATIONS:
+        return None
+
+    result_groups: dict[str, list[dict[str, any]]] = {}
+    for entry in matching:
+        result_key = _canonical_json(
+            {"rmse": entry.get("rmse"), "metrics": entry.get("metrics")}
+        )
+        result_groups.setdefault(result_key, []).append(entry)
+
+    confirmed = next(
+        (
+            entries
+            for entries in result_groups.values()
+            if len(entries) >= EXACT_DUPLICATE_CONFIRMATIONS
+        ),
+        None,
+    )
+    if confirmed is None:
+        return None
+
+    source = deepcopy(confirmed[0])
+    source["cache_confirmation_trials"] = [
+        int(entry["trial_number"])
+        for entry in confirmed[:EXACT_DUPLICATE_CONFIRMATIONS]
+    ]
+    return source
+
+
+def _log_cached_trial_result(
+    trial: optuna.trial.Trial,
+    source_entry: dict[str, any],
+    source_trial: int,
+    confirmation_trials: list[int],
+) -> None:
+    """Log an exact cached result while retaining its source artifacts."""
+    entry = deepcopy(source_entry)
+    entry["timestamp"] = datetime.utcnow().isoformat(timespec="seconds") + "Z"
+    entry["trial_number"] = trial.number
+    entry["params"] = dict(trial.params)
+    entry["cached_from_trial"] = source_trial
+    entry["cache_confirmation_trials"] = confirmation_trials
+    _append_trial_entry(entry)
+
+
+def _append_trial_entry(entry: dict[str, any]) -> None:
+    """Append one JSON object to the configured NAS trial log."""
     with LOG_PATH.open("a", encoding="utf-8") as f:
         f.write(json.dumps(entry))
         f.write("\n")

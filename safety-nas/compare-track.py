@@ -160,6 +160,7 @@ class CompareArgs:
     run: list[tuple[str, str, str, str]] | None = None
     save_plot: bool = False
     save_trace_npz: bool = True
+    training_track: str | None = None
 
 
 ARGS = CompareArgs()
@@ -293,7 +294,9 @@ def _build_runs_for_checkpoint_triple(
 ) -> tuple[str, list[ModelRun]]:
     """Create baseline runs plus one arch7 run."""
     left, track, heading = checkpoint_triple
-    label = _label_for_checkpoint_triple(left, track, heading)
+    run_identifier = _label_for_checkpoint_triple(left, track, heading)
+    training_track = _slugify(ARGS.training_track.lower().replace("-", "_")) if ARGS.training_track else None
+    label = f"arch7_{training_track}" if training_track else "arch7"
     runs = _build_runs(
         [
             *BASELINE_RUNS,
@@ -305,7 +308,7 @@ def _build_runs_for_checkpoint_triple(
             ),
         ]
     )
-    return label, runs
+    return run_identifier, runs
 
 
 def _slugify(value: str) -> str:
@@ -579,9 +582,11 @@ if __name__ == "__main__":
         metavar=("LEFT", "TRACK", "HEADING"),
     )
     parser.add_argument("--output-dir", required=True)
+    parser.add_argument("--training-track")
     args = parser.parse_args()
     ARCH_7_CHECKPOINT_TRIPLES = [
         tuple(paths) for paths in args.checkpoint_triple
     ]
     ARGS.output_dir = args.output_dir
+    ARGS.training_track = args.training_track
     main()

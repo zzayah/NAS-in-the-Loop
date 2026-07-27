@@ -5,10 +5,8 @@ import optuna
 import cnn
 from cnn import EvaluationTrack
 
-SEED = 0
 N_TRIALS = 120
 DATASET_PATH = "safety-nas/datasets/combined_all.npz"
-
 
 def main(
     track: str,
@@ -19,8 +17,8 @@ def main(
     cnn.configure_run(output_dir, session_id)
     track_names = [EvaluationTrack[track.strip().upper()]]
 
-    # sampler = optuna.samplers.TPESampler(seed=SEED)
     study = optuna.create_study(direction="minimize")
+
     study.optimize(
         lambda t: cnn.objective(
             t,
