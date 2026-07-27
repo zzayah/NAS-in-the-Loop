@@ -24,11 +24,19 @@ from testing import test_cnn_arch
 
 # sending output to ./dnn-output
 OUTPUT_DIR = BASE_DIR / "dnn-output"
-OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 SESSION_ID = os.getenv("F1_SESSION_ID") or f"{datetime.utcnow():%Y%m%dT%H%M%S}_{os.getpid()}_{uuid.uuid4().hex[:6]}"
 LOG_PATH = OUTPUT_DIR / f"nas_trials_{SESSION_ID}.jsonl"
 DEFAULT_TARGET_COLS = ("left_wall_dist", "track_width", "heading_error")
 LATEST_MODEL_PATHS = {target: None for target in DEFAULT_TARGET_COLS}
+
+
+def configure_run(output_dir: str | Path, session_id: str) -> None:
+    """Set the artifact directory and identifier for one search process."""
+    global OUTPUT_DIR, SESSION_ID, LOG_PATH
+    OUTPUT_DIR = Path(output_dir)
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    SESSION_ID = session_id
+    LOG_PATH = OUTPUT_DIR / f"nas_trials_{SESSION_ID}.jsonl"
 
 
 class EvaluationTrack(Enum):
@@ -291,7 +299,7 @@ def objective(
     trial: optuna.trial.Trial,
     _unused_loader=None,
     n_epoch: int = 10,
-    seed: int = 41,
+    seed: int = 0,
     target_cols: tuple[str, ...] = DEFAULT_TARGET_COLS,
     dataset_pth: str = "safety-nas/datasets/combined_all.npz",
     track_names: Sequence[object] | None = None,
@@ -311,6 +319,14 @@ def objective(
         block = architecture.to_model_block()
         block["arch_id"] = 7
         model_blocks[target] = block
+
+    # if any(
+    #     previous.number != trial.number
+    #     and previous.state in (optuna.trial.TrialState.COMPLETE, optuna.trial.TrialState.RUNNING)
+    #     and previous.params == trial.params
+    #     for previous in trial.study.get_trials(deepcopy=False)
+    # ):
+    #     raise optuna.TrialPruned("Duplicate parameters")
 
     evaluation_tracks = _select_evaluation_tracks(track_names)
     trial_artifact_root = OUTPUT_DIR / "trial_artifacts" / f"{SESSION_ID}_trial{trial.number:05d}"
@@ -360,6 +376,17 @@ def objective(
     finally:
         for target in LATEST_MODEL_PATHS:
             LATEST_MODEL_PATHS[target] = None
+
+    # collided_tracks = [
+    #     track.name
+    #     for track, metrics in zip(evaluation_tracks, track_metrics)
+    #     if metrics["collision"] > 0
+    # ]
+    # if collided_tracks:
+    #     trial.set_user_attr("collision_tracks", collided_tracks)
+    #     raise optuna.TrialPruned(
+    #         f"Collision on: {', '.join(collided_tracks)}"
+    #     )
 
     _log_trial_result(
         trial=trial,

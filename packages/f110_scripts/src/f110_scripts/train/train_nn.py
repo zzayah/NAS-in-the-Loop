@@ -458,7 +458,7 @@ def run_single_training(config: dict[str, Any], arch_id: int) -> None:  # pylint
     # Set matmul precision for better GPU utilisation and to suppress warnings
     torch.set_float32_matmul_precision("high")
 
-    L.seed_everything(42)
+    L.seed_everything(0, workers=True)
 
     training_cfg = config["training"]
     artifacts_cfg = config.get("artifacts", {})
@@ -546,6 +546,7 @@ def run_single_training(config: dict[str, Any], arch_id: int) -> None:  # pylint
         logger=logger,
         callbacks=callbacks,
         profiler=training_cfg.get("profiler", None),
+        deterministic=True,
     )
 
     dm = LidarDataModule(config)

@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 import shutil
 import sys
@@ -74,7 +75,7 @@ TARGET_FILES = {
 
 # Adjust output_dir depending on training profile
 TRAINING_PROFILE = 0    # 0: arch1-2, 1: arch3-4, 2: arch5, 3: arch6
-TRAIN_PATH = "data/accuracy-nas/datasets/combined_all.npz"
+TRAIN_PATH = "accuracy-nas/datasets/combined_all.npz"
 OUTPUT_DIR = "data/accuracy-nas/dnn-output/test-best-150-tp0"
 SKIP_EVAL = False
 
@@ -88,7 +89,7 @@ def _trials_file_id(target: str, trials_file: str | Path) -> str:
     prefix = f"standard_trials_{target}_"
     if not stem.startswith(prefix):
         raise ValueError(f"Trials file {trials_file} must be named {prefix}<run>.jsonl.")
-    return stem[len(prefix):].rsplit("_", 1)[-1]
+    return stem[len(prefix):]
 
 
 def _composite_id(target_files: dict[str, str]) -> str:
@@ -161,8 +162,14 @@ def _evaluate_models(model_paths: list[Path]) -> float | None:
     return avg_rmse
 
 
-def main() -> None:
+def main(
+    target_files: dict[str, str],
+    output_dir: str,
+) -> None:
     """Retrain the selected accuracy-NAS models."""
+    global TARGET_FILES, OUTPUT_DIR
+    TARGET_FILES = target_files
+    OUTPUT_DIR = output_dir
     composite_id = _composite_id(TARGET_FILES)
     output_dir = Path(OUTPUT_DIR).expanduser().resolve() / composite_id
     training_profile = _selected_training_profile()
@@ -199,5 +206,18 @@ def main() -> None:
         _evaluate_models(staged_models)
 
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--left-trials", required=True)
+    parser.add_argument("--track-trials", required=True)
+    parser.add_argument("--heading-trials", required=True)
+    parser.add_argument("--output-dir", required=True)
+    args = parser.parse_args()
+    main(
+        target_files={
+            "left_wall_dist": args.left_trials,
+            "track_width": args.track_trials,
+            "heading_error": args.heading_trials,
+        },
+        output_dir=args.output_dir,
+    )

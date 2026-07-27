@@ -1,6 +1,7 @@
 # Repo specific
 accuracy-nas/datasets/train.npz
 accuracy-nas/datasets/test.npz
+data/safety-nas/compare-map-rerun-tp0
 
 ## https://github.com/github/gitignore/blob/main/Global/macOS.gitignore
 # General

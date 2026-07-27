@@ -55,6 +55,12 @@ def export_trial_configs(
     if not targets:
         raise ValueError("trial_entry must contain a non-empty 'targets' list.")
 
+    # An explicit retraining override wins; otherwise preserve the optimizer
+    # selected by NAS instead of falling back to the generic config default.
+    selected_optimizer = optimizer
+    if selected_optimizer is None:
+        selected_optimizer = trial_entry.get("params", {}).get("optimizer")
+
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     exported: list[Path] = []
@@ -79,8 +85,8 @@ def export_trial_configs(
             cfg["training"]["early_stopping_patience"] = int(early_stopping_patience)
         if lr_patience is not None:
             cfg["training"]["lr_patience"] = int(lr_patience)
-        if optimizer is not None:
-            cfg["training"]["optimizer"] = optimizer
+        if selected_optimizer is not None:
+            cfg["training"]["optimizer"] = selected_optimizer
 
         cfg_name = f"{target_col}_arch{target['arch_id']}_trial{trial_id}.yaml"
         cfg_path = output_dir / cfg_name

@@ -22,6 +22,7 @@ DEFAULT_START_THETA = 2.85
 # Default rendering settings
 DEFAULT_RENDER_MODE = "human_fast"
 DEFAULT_RENDER_FPS = 60
+DEFAULT_SEED = 0
 
 
 def add_common_sim_args(
@@ -137,6 +138,8 @@ def setup_env(args: argparse.Namespace, render_mode: Optional[str] = None) -> An
     if actual_render_mode == "None":
         actual_render_mode = None
 
+    seed = DEFAULT_SEED
+    np.random.seed(seed)
     env = gym.make(
         "f110_gym:f110-v0",
         map=args.map,
@@ -147,6 +150,7 @@ def setup_env(args: argparse.Namespace, render_mode: Optional[str] = None) -> An
         render_mode=actual_render_mode,
         render_fps=render_fps,
         max_laps=getattr(args, "max_laps", None),
+        seed=seed,
     )
     return env
 

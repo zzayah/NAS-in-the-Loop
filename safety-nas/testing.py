@@ -1,4 +1,5 @@
 import json
+import os
 import re
 import subprocess
 import sys
@@ -54,7 +55,15 @@ def _run_single_track(
         heading_error_filepath,
     ]
 
-    proc = subprocess.run(cmd, capture_output=True, text=True, check=False)
+    env = os.environ.copy()
+    env.setdefault("PYGLET_HEADLESS", "1")
+    proc = subprocess.run(
+        cmd,
+        capture_output=True,
+        text=True,
+        check=False,
+        env=env,
+    )
 
     match = re.search(r"(\{.*?\})\s*---", proc.stdout, re.DOTALL)
     if not match:

@@ -40,10 +40,17 @@ from evaluation import evaluate_model
 
 TARGETS = ("left_wall_dist", "track_width", "heading_error")
 OUTPUT_DIR = BASE_DIR / "dnn-output"
-OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 SESSION_ID = os.getenv("F1_SESSION_ID") or (
     f"{datetime.utcnow():%Y%m%dT%H%M%S}_{os.getpid()}_{uuid.uuid4().hex[:6]}"
 )
+
+
+def configure_run(output_dir: str | Path, session_id: str) -> None:
+    """Set the artifact directory and identifier for one search process."""
+    global OUTPUT_DIR, SESSION_ID
+    OUTPUT_DIR = Path(output_dir)
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    SESSION_ID = session_id
 
 
 def objective(
@@ -58,6 +65,14 @@ def objective(
 
     optimizer = trial.suggest_categorical("optimizer", ["adam", "adamw"])
     model_block = DynamicCNN(trial).to_model_block()
+    # if any(
+    #     previous.number != trial.number
+    #     and previous.state in (optuna.trial.TrialState.COMPLETE, optuna.trial.TrialState.RUNNING)
+    #     and previous.params == trial.params
+    #     for previous in trial.study.get_trials(deepcopy=False)
+    # ):
+    #     raise optuna.TrialPruned("Duplicate parameters")
+
     trial_root = OUTPUT_DIR / "trial_artifacts" / f"{SESSION_ID}_{target_col}_trial{trial.number:05d}"
     cfg = _build_training_config(
         model_block,

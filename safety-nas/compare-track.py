@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import argparse
 import json
+import os
 import sys
 import uuid
 from dataclasses import dataclass
@@ -12,6 +14,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import yaml
 from PIL import Image
+
+os.environ["PYGLET_HEADLESS"] = "1"
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
@@ -563,8 +567,21 @@ def main() -> None:
     for checkpoint_triple in ARCH_7_CHECKPOINT_TRIPLES:
         label, runs = _build_runs_for_checkpoint_triple(checkpoint_triple)
         print(f"[batch] running {label}")
-        _run_comparison_batch(args, runs, map_specs, label)
+        _run_comparison_batch(args, runs, map_specs, args.run_id or label)
 
-# Example usage (with default parameters)
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--checkpoint-triple",
+        nargs=3,
+        action="append",
+        required=True,
+        metavar=("LEFT", "TRACK", "HEADING"),
+    )
+    parser.add_argument("--output-dir", required=True)
+    args = parser.parse_args()
+    ARCH_7_CHECKPOINT_TRIPLES = [
+        tuple(paths) for paths in args.checkpoint_triple
+    ]
+    ARGS.output_dir = args.output_dir
     main()

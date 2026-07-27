@@ -5,6 +5,7 @@ Retrain or evaluate the best NAS trial and stage the resulting checkpoints.
 
 from __future__ import annotations
 
+import argparse
 import shutil
 import sys
 from pathlib import Path
@@ -29,7 +30,7 @@ TRAINING_PROFILES = {
         "weight_decay": 1e-5,
         "early_stopping_patience": 15,
         "lr_patience": 10,
-        "optimizer": "adam",
+        # "optimizer": "adam",
     },
     1: {
         "label": "arch3-4",
@@ -38,7 +39,7 @@ TRAINING_PROFILES = {
         "weight_decay": 1e-5,
         "early_stopping_patience": 20,
         "lr_patience": 10,
-        "optimizer": "adam",
+        # "optimizer": "adam",
     },
     2: {
         "label": "arch5",
@@ -47,7 +48,7 @@ TRAINING_PROFILES = {
         "weight_decay": 1e-5,
         "early_stopping_patience": 60,
         "lr_patience": 20,
-        "optimizer": "adam",
+        # "optimizer": "adam",
     },
     3: {
         "label": "arch6",
@@ -56,7 +57,7 @@ TRAINING_PROFILES = {
         "weight_decay": 1e-4,
         "early_stopping_patience": 60,
         "lr_patience": 20,
-        "optimizer": "adamw",
+        # "optimizer": "adamw",
     },
 }
 
@@ -123,7 +124,7 @@ def _default_output_dir(trials_file: str | None) -> Path:
     """Derive the default staging directory for a trials file."""
     if trials_file is None:
         raise ValueError("trials_file must be resolved before deriving output_dir.")
-    trial_id = Path(trials_file).stem.rsplit("_", 1)[-1]
+    trial_id = Path(trials_file).stem.removeprefix("nas_trials_")
     return (REPO_ROOT / "safety-nas/dnn-output/test-best-runs" / trial_id).resolve()
 
 
@@ -220,7 +221,10 @@ def _run_trials_file(trials_file: str) -> None:
     if MODE not in {"train", "test"}:
         raise ValueError("MODE must be 'train' or 'test'")
     output_dir = (
-        (Path(OUTPUT_DIR).expanduser().resolve() / Path(trials_file).stem.rsplit("_", 1)[-1])
+        (
+            Path(OUTPUT_DIR).expanduser().resolve()
+            / Path(trials_file).stem.removeprefix("nas_trials_")
+        )
         if OUTPUT_DIR is not None
         else _default_output_dir(trials_file)
     )
@@ -237,7 +241,9 @@ def _run_trials_file(trials_file: str) -> None:
         weight_decay=training_profile["weight_decay"],
         early_stopping_patience=training_profile["early_stopping_patience"],
         lr_patience=training_profile["lr_patience"],
-        optimizer=training_profile["optimizer"],
+        # If omitted from the profile, export_trial_configs inherits the
+        # optimizer selected by the winning NAS trial.
+        optimizer=training_profile.get("optimizer"),
     )
 
     print(
@@ -268,17 +274,29 @@ def _run_trials_file(trials_file: str) -> None:
         _evaluate_models(model_paths)
 
 
-def main() -> None:
+def main(
+    trials_files: Iterable[str] | str,
+    output_dir: str,
+) -> None:
     """Run test-best for every trials file."""
+    global OUTPUT_DIR
+    OUTPUT_DIR = output_dir
     if MODE not in {"train", "test"}:
         raise ValueError("MODE must be 'train' or 'test'")
-    trials_files = _resolve_trials_files(TRIALS_FILES)
-    if not trials_files:
+    resolved_trials = _resolve_trials_files(trials_files)
+    if not resolved_trials:
         raise ValueError("TRIALS_FILES must contain at least one trials file.")
 
-    for trials_file in trials_files:
+    for trials_file in resolved_trials:
         _run_trials_file(trials_file)
 
-# Example usage (with default parameters)
-# if __name__ == "__main__":
-#     main()
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--trials-file", action="append", required=True)
+    parser.add_argument("--output-dir", required=True)
+    args = parser.parse_args()
+    main(
+        trials_files=args.trials_file,
+        output_dir=args.output_dir,
+    )

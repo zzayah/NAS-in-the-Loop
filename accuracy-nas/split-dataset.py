@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 from pathlib import Path
 
 import numpy as np
@@ -14,7 +15,7 @@ import numpy as np
 INPUT_PATH = "accuracy-nas/datasets/combined_all.npz"
 OUTPUT_DIR = "accuracy-nas/datasets"
 TRAIN_RATIO = 0.8
-SEED = 41
+SEED = 0
 
 #
 # ---------- END INPUT ----------
@@ -30,7 +31,7 @@ def split_dataset(
     input_path: str | Path,
     output_dir: str | Path,
     train_ratio: float = 0.8,
-    seed: int = 41,
+    seed: int = 0,
 ) -> dict[str, Path]:
     """Split a lidar dataset into train.npz and test.npz."""
     if train_ratio <= 0 or train_ratio >= 1:
@@ -75,4 +76,16 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--output-dir", required=True)
+    args = parser.parse_args()
+    paths = split_dataset(
+        INPUT_PATH,
+        args.output_dir,
+        train_ratio=TRAIN_RATIO,
+        seed=SEED,
+    )
+    for name, path in paths.items():
+        with np.load(path) as data:
+            count = data[data.files[0]].shape[0]
+        print(f"[{name}] {count} rows -> {path}")

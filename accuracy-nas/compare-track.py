@@ -3,23 +3,10 @@
 
 from __future__ import annotations
 
+import argparse
 import importlib.util
 import sys
 from pathlib import Path
-
-#
-# ---------- INPUT ----------
-#
-
-# The inputs here are the .pt files from the test-best run (NN architecture and weights).
-LEFT_WALL_MODEL = "accuracy-nas/dnn-output/test-best-150-combinedall-8020/7307d4/left_wall_dist_arch7_trial70.pt"
-TRACK_WIDTH_MODEL = "accuracy-nas/dnn-output/test-best-150-combinedall-8020/7307d4/track_width_arch7_trial108.pt"
-HEADING_ERROR_MODEL = "accuracy-nas/dnn-output/test-best-150-combinedall-8020/7307d4/heading_error_arch7_trial29.pt"
-OUTPUT_DIR = "accuracy-nas/compare-map-150-combinedall-8020"
-
-#
-# ---------- END INPUT ----------
-#
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SAFETY_NAS_COMPARE_PATH = REPO_ROOT / "safety-nas" / "compare-track.py"
@@ -37,11 +24,15 @@ def _load_safety_nas_compare():
     return module
 
 
-def _checkpoint_triplet_id() -> str:
+def _checkpoint_triplet_id(
+    left_model: str,
+    track_model: str,
+    heading_model: str,
+) -> str:
     """Get the shared run ID for the three model paths."""
     parents = {
         Path(model_path).expanduser().parent.resolve()
-        for model_path in (LEFT_WALL_MODEL, TRACK_WIDTH_MODEL, HEADING_ERROR_MODEL)
+        for model_path in (left_model, track_model, heading_model)
     }
     if len(parents) != 1:
         raise ValueError(
@@ -57,22 +48,42 @@ def _checkpoint_triplet_id() -> str:
     return composite_id
 
 
-def main() -> None:
+def main(
+    left_model: str,
+    track_model: str,
+    heading_model: str,
+    output_dir: str,
+) -> None:
     """Compare the accuracy-NAS models against the baseline models."""
     compare = _load_safety_nas_compare()
     compare.ARGS.run = [
         *compare.BASELINE_RUNS,
         (
             "arch7",
-            LEFT_WALL_MODEL,
-            TRACK_WIDTH_MODEL,
-            HEADING_ERROR_MODEL,
+            left_model,
+            track_model,
+            heading_model,
         )
     ]
-    compare.ARGS.run_id = _checkpoint_triplet_id()
-    compare.ARGS.output_dir = OUTPUT_DIR
+    compare.ARGS.run_id = _checkpoint_triplet_id(
+        left_model,
+        track_model,
+        heading_model,
+    )
+    compare.ARGS.output_dir = output_dir
     compare.main()
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--left-model", required=True)
+    parser.add_argument("--track-model", required=True)
+    parser.add_argument("--heading-model", required=True)
+    parser.add_argument("--output-dir", required=True)
+    args = parser.parse_args()
+    main(
+        left_model=args.left_model,
+        track_model=args.track_model,
+        heading_model=args.heading_model,
+        output_dir=args.output_dir,
+    )
