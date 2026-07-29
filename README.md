@@ -129,6 +129,33 @@ When both Safety-NAS and Accuracy-NAS are done running, we may now visualize our
 
 To do this, modify the paths at the top of `vis.ipynb` or `final-analysis-vis.ipynb` to point to compare-map metrics.jsonl results (see `data/accuracy-nas/compare-map-tp0/metrics.jsonl` for an example) and run all cells.
 
+## Reproducibility
+
+NAS runs are reproducible when the random seed, dataset, search and training configuration, software environment, and hardware architecture are held constant. Runs on different hardware architectures (for example, ARM and x86) may produce small numerical differences that cause later TPE suggestions to diverge.
+
+The reported NAS experiments used the following hardware and software environment:
+
+| Component | Configuration |
+|---|---|
+| Host | `daxgpupc1` |
+| Operating system | Ubuntu 26.04 LTS (Linux 7.0.0-22-generic) |
+| Architecture | x86-64 |
+| CPU | AMD Ryzen 9 7900X, 12 cores / 24 threads |
+| System memory | 122 GiB |
+| GPU | NVIDIA TITAN RTX |
+| GPU memory | 24 GiB (24,576 MiB) |
+| GPU power limit | 280 W |
+| NVIDIA driver | 595.71.05 |
+| Driver-supported CUDA version | 13.2 |
+| Python | 3.14.4 |
+| PyTorch | 2.13.0+cu130 |
+| PyTorch CUDA runtime | 13.0 |
+| cuDNN version identifier | 92000 |
+| Optuna | 4.9.0 |
+| PyTorch deterministic algorithms | Disabled |
+| cuDNN deterministic mode | Disabled |
+| cuDNN benchmark mode | Disabled |
+
 ## Attribution
 
 Both Neural Architecture Search architectures in this repository were created by Zayah Cortright and built on previous work by Prateek Ganguli and Tingan Zhu. This work was done within and supported by the Design Automation to X Lab, led by Dr. Samarjit Chakraborty, at the University of North Carolina at Chapel Hill Department of Computer Science. All inquiries should be emailed to zayah [at] unc [dot] edu.
