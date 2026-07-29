@@ -47,6 +47,7 @@ def export_trial_configs(
     early_stopping_patience: int | None = None,
     lr_patience: int | None = None,
     optimizer: str | None = None,
+    seed: int = 0,
 ) -> list[Path]:
     """
     Materialise Lightning YAML configs for each target in a NAS trial entry.
@@ -74,6 +75,7 @@ def export_trial_configs(
             target_col,
             dataset_path,
             artifact_root=output_dir / target_col,
+            seed=seed,
         )
         if max_epochs is not None:
             cfg["training"]["max_epochs"] = int(max_epochs)
@@ -210,6 +212,7 @@ def orchestrate_best_trial(
     early_stopping_patience: int | None = None,
     lr_patience: int | None = None,
     optimizer: str | None = None,
+    seed: int = 0,
 ) -> tuple[dict[str, Any], list[Path]]:
     """Export training configs for the best NAS trial."""
     resolved_trials = _resolve_trials_path(trials_path)
@@ -231,6 +234,7 @@ def orchestrate_best_trial(
         early_stopping_patience=early_stopping_patience,
         lr_patience=lr_patience,
         optimizer=optimizer,
+        seed=seed,
     )
     return best_trial, generated_configs
 

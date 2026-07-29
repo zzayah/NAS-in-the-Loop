@@ -4,9 +4,10 @@ from __future__ import annotations
 
 import json
 import os
+import secrets
+import string
 import subprocess
 import sys
-import uuid
 import importlib.util
 from datetime import datetime
 from pathlib import Path
@@ -40,8 +41,8 @@ from evaluation import evaluate_model
 
 TARGETS = ("left_wall_dist", "track_width", "heading_error")
 OUTPUT_DIR = BASE_DIR / "dnn-output"
-SESSION_ID = os.getenv("F1_SESSION_ID") or (
-    f"{datetime.utcnow():%Y%m%dT%H%M%S}_{os.getpid()}_{uuid.uuid4().hex[:6]}"
+SESSION_ID = os.getenv("F1_SESSION_ID") or "".join(
+    secrets.choice(string.ascii_lowercase + string.digits) for _ in range(8)
 )
 
 
@@ -58,6 +59,7 @@ def objective(
     target_col: str,
     train_path: str = "accuracy-nas/datasets/train.npz",
     validation_path: str = "accuracy-nas/datasets/validation.npz",
+    seed: int = 0,
 ) -> float:
     """Train one candidate architecture and return validation RMSE."""
     if target_col not in TARGETS:
@@ -79,6 +81,7 @@ def objective(
         target_col,
         train_path,
         artifact_root=trial_root,
+        seed=seed,
     )
     cfg["training"]["optimizer"] = optimizer
 
@@ -104,6 +107,7 @@ def _log_trial(
     target = cfg["data"]["target_col"]
     entry = {
         "timestamp": datetime.utcnow().isoformat(timespec="seconds") + "Z",
+        "seed": int(cfg["training"]["seed"]),
         "trial_number": trial.number,
         "target_col": target,
         "objective": {
@@ -126,7 +130,7 @@ def _log_trial(
             }
         ],
     }
-    path = OUTPUT_DIR / f"standard_trials_{target}_{SESSION_ID}.jsonl"
+    path = OUTPUT_DIR / f"{target}.jsonl"
     with path.open("a", encoding="utf-8") as handle:
         handle.write(json.dumps(entry))
         handle.write("\n")

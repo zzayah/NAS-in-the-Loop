@@ -1,9 +1,10 @@
 import json
 import os
+import secrets
+import string
 import subprocess
 import sys
 import tempfile
-import uuid
 from concurrent.futures import ThreadPoolExecutor
 from copy import deepcopy
 from datetime import datetime
@@ -24,8 +25,10 @@ from testing import test_cnn_arch
 
 # sending output to ./dnn-output
 OUTPUT_DIR = BASE_DIR / "dnn-output"
-SESSION_ID = os.getenv("F1_SESSION_ID") or f"{datetime.utcnow():%Y%m%dT%H%M%S}_{os.getpid()}_{uuid.uuid4().hex[:6]}"
-LOG_PATH = OUTPUT_DIR / f"nas_trials_{SESSION_ID}.jsonl"
+SESSION_ID = os.getenv("F1_SESSION_ID") or "".join(
+    secrets.choice(string.ascii_lowercase + string.digits) for _ in range(8)
+)
+LOG_PATH = OUTPUT_DIR / f"{SESSION_ID}.jsonl"
 DEFAULT_TARGET_COLS = ("left_wall_dist", "track_width", "heading_error")
 LATEST_MODEL_PATHS = {target: None for target in DEFAULT_TARGET_COLS}
 EXACT_DUPLICATE_CONFIRMATIONS = 3
@@ -37,7 +40,7 @@ def configure_run(output_dir: str | Path, session_id: str) -> None:
     OUTPUT_DIR = Path(output_dir)
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     SESSION_ID = session_id
-    LOG_PATH = OUTPUT_DIR / f"nas_trials_{SESSION_ID}.jsonl"
+    LOG_PATH = OUTPUT_DIR / f"{SESSION_ID}.jsonl"
 
 
 class EvaluationTrack(Enum):
@@ -278,6 +281,7 @@ def _build_training_config(
     target_col: str,
     dataset_pth: str | None = None,
     artifact_root: Path | None = None,
+    seed: int = 0,
 ) -> dict[str, any]:
     """Build the training config for one lidar target."""
     if dataset_pth is None:
@@ -294,6 +298,7 @@ def _build_training_config(
             "prefetch_factor": 2,
         },
         "training": {
+            "seed": int(seed),
             "max_epochs": 30,
             "lr": 5e-5,
             "weight_decay": 1e-4,
@@ -335,7 +340,7 @@ def objective(
     The same sampled architecture is trained for left_wall_dist, track_width,
     and heading_error before the three checkpoints are evaluated together.
     """
-    del n_epoch, seed, _unused_loader  # unused
+    del n_epoch, _unused_loader  # unused
 
     optimizer = trial.suggest_categorical("optimizer", ["adam", "adamw"])
     model_blocks = {}
@@ -383,6 +388,7 @@ def objective(
                 target,
                 dataset_pth,
                 artifact_root=target_artifact_root,
+                seed=seed,
             )
         )
         cfgs[-1]["training"]["optimizer"] = optimizer
@@ -413,6 +419,7 @@ def objective(
             track_width_filepath=str(LATEST_MODEL_PATHS["track_width"]),
             heading_error_filepath=str(LATEST_MODEL_PATHS["heading_error"]),
             track_configs=track_configs,
+            seed=seed,
         )
     except TypeError as exc:
         raise RuntimeError("Missing trained checkpoints before running test_cnn_arch") from exc
@@ -505,6 +512,7 @@ def _log_trial_result(
 
     entry = {
         "timestamp": datetime.utcnow().isoformat(timespec="seconds") + "Z",
+        "seed": int(trained_runs[0][0]["training"]["seed"]),
         "trial_number": trial.number,
         "rmse": rmse_entries,
         "metrics": {

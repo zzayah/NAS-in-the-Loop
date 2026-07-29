@@ -458,9 +458,8 @@ def run_single_training(config: dict[str, Any], arch_id: int) -> None:  # pylint
     # Set matmul precision for better GPU utilisation and to suppress warnings
     torch.set_float32_matmul_precision("high")
 
-    L.seed_everything(0, workers=True)
-
     training_cfg = config["training"]
+    L.seed_everything(int(training_cfg.get("seed", 0)), workers=True)
     artifacts_cfg = config.get("artifacts", {})
     model_dir = Path(artifacts_cfg.get("model_dir", "data/models"))
     checkpoint_root = Path(artifacts_cfg.get("checkpoint_dir", "data/models/checkpoints"))

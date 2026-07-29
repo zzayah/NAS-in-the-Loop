@@ -48,6 +48,12 @@ def add_common_sim_args(
         default=DEFAULT_MAP_EXT,
         help="The image extension used by the map (e.g., .png, .pgm).",
     )
+    parser.add_argument(
+        "--seed",
+        type=int,
+        default=DEFAULT_SEED,
+        help="Random seed for the simulator.",
+    )
 
     if multi_waypoint:
         parser.add_argument(
@@ -138,7 +144,7 @@ def setup_env(args: argparse.Namespace, render_mode: Optional[str] = None) -> An
     if actual_render_mode == "None":
         actual_render_mode = None
 
-    seed = DEFAULT_SEED
+    seed = int(getattr(args, "seed", DEFAULT_SEED))
     np.random.seed(seed)
     env = gym.make(
         "f110_gym:f110-v0",

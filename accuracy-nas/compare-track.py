@@ -53,6 +53,7 @@ def main(
     track_model: str,
     heading_model: str,
     output_dir: str,
+    seed: int,
 ) -> None:
     """Compare the accuracy-NAS models against the baseline models."""
     compare = _load_safety_nas_compare()
@@ -71,6 +72,7 @@ def main(
         heading_model,
     )
     compare.ARGS.output_dir = output_dir
+    compare.ARGS.seed = seed
     compare.main()
 
 
@@ -80,10 +82,12 @@ if __name__ == "__main__":
     parser.add_argument("--track-model", required=True)
     parser.add_argument("--heading-model", required=True)
     parser.add_argument("--output-dir", required=True)
+    parser.add_argument("--seed", type=int, required=True)
     args = parser.parse_args()
     main(
         left_model=args.left_model,
         track_model=args.track_model,
         heading_model=args.heading_model,
         output_dir=args.output_dir,
+        seed=args.seed,
     )

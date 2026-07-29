@@ -161,6 +161,7 @@ class CompareArgs:
     save_plot: bool = False
     save_trace_npz: bool = True
     training_track: str | None = None
+    seed: int = 0
 
 
 ARGS = CompareArgs()
@@ -231,13 +232,14 @@ def _simulate_run(
         max_laps=base_args.laps,
         randomize=False,
         camera_tracking=False,
+        seed=base_args.seed,
     )
     r_mode = None if args.render_mode == "None" else args.render_mode
     env = setup_env(args, r_mode)
     planner = sim._create_planner(args, waypoints)
 
     pose = np.array([list(resolve_start_pose(args))])
-    obs, _ = env.reset(options={"poses": pose})
+    obs, _ = env.reset(seed=base_args.seed, options={"poses": pose})
     trace = SimTrace()
     _, metrics = sim._run_reactive_sim(
         env,
@@ -521,6 +523,7 @@ def _run_map_comparison(
     return {
         "map": map_spec.name,
         "waypoints": map_spec.waypoints,
+        "seed": args.seed,
         "runs": run_summaries,
         "image": image_name,
         "trace_file": trace_path.name if trace_path else None,
@@ -583,10 +586,12 @@ if __name__ == "__main__":
     )
     parser.add_argument("--output-dir", required=True)
     parser.add_argument("--training-track")
+    parser.add_argument("--seed", type=int, required=True)
     args = parser.parse_args()
     ARCH_7_CHECKPOINT_TRIPLES = [
         tuple(paths) for paths in args.checkpoint_triple
     ]
     ARGS.output_dir = args.output_dir
     ARGS.training_track = args.training_track
+    ARGS.seed = args.seed
     main()

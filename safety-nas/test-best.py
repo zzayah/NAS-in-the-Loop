@@ -197,7 +197,7 @@ def _collect_existing_models(
     return staged, missing
 
 
-def _evaluate_models(model_paths: list[Path]) -> float | None:
+def _evaluate_models(model_paths: list[Path], seed: int) -> float | None:
     """Evaluate a staged model triplet on the training tracks."""
     lookup = {_target_name(path): path for path in model_paths}
     required = {"left_wall_dist", "track_width", "heading_error"}
@@ -211,12 +211,13 @@ def _evaluate_models(model_paths: list[Path]) -> float | None:
         track_width_filepath=str(lookup["track_width"]),
         heading_error_filepath=str(lookup["heading_error"]),
         track_configs=track_configs,
+        seed=seed,
     )
     print(f"[rmse] average across {len(track_configs)} tracks: {avg_rmse:.4f}")
     return avg_rmse
 
 
-def _run_trials_file(trials_file: str) -> None:
+def _run_trials_file(trials_file: str, seed: int) -> None:
     """Retrain or stage checkpoints for one trials file."""
     if MODE not in {"train", "test"}:
         raise ValueError("MODE must be 'train' or 'test'")
@@ -244,6 +245,7 @@ def _run_trials_file(trials_file: str) -> None:
         # If omitted from the profile, export_trial_configs inherits the
         # optimizer selected by the winning NAS trial.
         optimizer=training_profile.get("optimizer"),
+        seed=seed,
     )
 
     print(
@@ -271,12 +273,13 @@ def _run_trials_file(trials_file: str) -> None:
         print(f"[model]  {model_path}")
 
     if not SKIP_EVAL:
-        _evaluate_models(model_paths)
+        _evaluate_models(model_paths, seed)
 
 
 def main(
     trials_files: Iterable[str] | str,
     output_dir: str,
+    seed: int = 0,
 ) -> None:
     """Run test-best for every trials file."""
     global OUTPUT_DIR
@@ -288,15 +291,17 @@ def main(
         raise ValueError("TRIALS_FILES must contain at least one trials file.")
 
     for trials_file in resolved_trials:
-        _run_trials_file(trials_file)
+        _run_trials_file(trials_file, seed)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--trials-file", action="append", required=True)
     parser.add_argument("--output-dir", required=True)
+    parser.add_argument("--seed", type=int, required=True)
     args = parser.parse_args()
     main(
         trials_files=args.trials_file,
         output_dir=args.output_dir,
+        seed=args.seed,
     )

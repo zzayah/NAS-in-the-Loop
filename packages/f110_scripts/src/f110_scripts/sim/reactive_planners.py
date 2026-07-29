@@ -736,7 +736,7 @@ def main() -> None:
 
     # Initial reset
     pose = np.array([list(resolve_start_pose(args))])
-    obs, _ = env.reset(seed=0, options={"poses": pose})
+    obs, _ = env.reset(seed=args.seed, options={"poses": pose})
     if r_mode:
         env.render()
 

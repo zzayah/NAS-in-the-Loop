@@ -32,6 +32,7 @@ def _run_single_track(
     left_wall_dist_filepath: str,
     track_width_filepath: str,
     heading_error_filepath: str,
+    seed: int,
 ) -> dict[str, float]:
     """Execute the simulator for a single track and return tracked metrics."""
     cmd = [
@@ -53,6 +54,8 @@ def _run_single_track(
         track_width_filepath,
         "--heading-model",
         heading_error_filepath,
+        "--seed",
+        str(seed),
     ]
 
     env = os.environ.copy()
@@ -92,6 +95,7 @@ def test_cnn_arch(
     track_width_filepath: str,
     heading_error_filepath: str,
     track_configs: Sequence[TrackConfig],
+    seed: int = 0,
 ) -> tuple[float, list[float], dict[str, float], list[dict[str, float]]]:
     """
     Run the CNN checkpoints against multiple tracks and return aggregate metrics.
@@ -113,6 +117,7 @@ def test_cnn_arch(
                         left_wall_dist_filepath,
                         track_width_filepath,
                         heading_error_filepath,
+                        seed,
                     ),
                 )
             )

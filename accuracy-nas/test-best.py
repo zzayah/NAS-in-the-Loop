@@ -142,7 +142,7 @@ def _target_name(path: Path) -> str:
     return path.stem.split("_arch", 1)[0]
 
 
-def _evaluate_models(model_paths: list[Path]) -> float | None:
+def _evaluate_models(model_paths: list[Path], seed: int) -> float | None:
     """Evaluate a staged model triplet on the training tracks."""
     lookup = {_target_name(path): path for path in model_paths}
     required = {"left_wall_dist", "track_width", "heading_error"}
@@ -157,6 +157,7 @@ def _evaluate_models(model_paths: list[Path]) -> float | None:
         track_width_filepath=str(lookup["track_width"]),
         heading_error_filepath=str(lookup["heading_error"]),
         track_configs=track_configs,
+        seed=seed,
     )
     print(f"[rmse] average across {len(track_configs)} tracks: {avg_rmse:.4f}")
     return avg_rmse
@@ -165,12 +166,14 @@ def _evaluate_models(model_paths: list[Path]) -> float | None:
 def main(
     target_files: dict[str, str],
     output_dir: str,
+    run_id: str | None = None,
+    seed: int = 0,
 ) -> None:
     """Retrain the selected accuracy-NAS models."""
     global TARGET_FILES, OUTPUT_DIR
     TARGET_FILES = target_files
     OUTPUT_DIR = output_dir
-    composite_id = _composite_id(TARGET_FILES)
+    composite_id = run_id or _composite_id(TARGET_FILES)
     output_dir = Path(OUTPUT_DIR).expanduser().resolve() / composite_id
     training_profile = _selected_training_profile()
     print(f"[run] composite_id={composite_id}")
@@ -189,6 +192,7 @@ def main(
             early_stopping_patience=training_profile["early_stopping_patience"],
             lr_patience=training_profile["lr_patience"],
             optimizer=training_profile["optimizer"],
+            seed=seed,
         )
         configs.extend(target_configs)
         print(
@@ -203,7 +207,7 @@ def main(
         staged_models.append(staged)
         print(f"[model] {_target_name(staged)} -> {staged}")
     if not SKIP_EVAL:
-        _evaluate_models(staged_models)
+        _evaluate_models(staged_models, seed)
 
 
 if __name__ == "__main__":
@@ -212,6 +216,8 @@ if __name__ == "__main__":
     parser.add_argument("--track-trials", required=True)
     parser.add_argument("--heading-trials", required=True)
     parser.add_argument("--output-dir", required=True)
+    parser.add_argument("--run-id")
+    parser.add_argument("--seed", type=int, required=True)
     args = parser.parse_args()
     main(
         target_files={
@@ -220,4 +226,6 @@ if __name__ == "__main__":
             "heading_error": args.heading_trials,
         },
         output_dir=args.output_dir,
+        run_id=args.run_id,
+        seed=args.seed,
     )

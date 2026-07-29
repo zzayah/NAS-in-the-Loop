@@ -15,7 +15,6 @@ import numpy as np
 INPUT_PATH = "accuracy-nas/datasets/combined_all.npz"
 OUTPUT_DIR = "accuracy-nas/datasets"
 TRAIN_RATIO = 0.8
-SEED = 0
 
 #
 # ---------- END INPUT ----------
@@ -30,8 +29,8 @@ def _write_split(path: Path, arrays: dict[str, np.ndarray], indices: np.ndarray)
 def split_dataset(
     input_path: str | Path,
     output_dir: str | Path,
+    seed: int,
     train_ratio: float = 0.8,
-    seed: int = 0,
 ) -> dict[str, Path]:
     """Split a lidar dataset into train.npz and test.npz."""
     if train_ratio <= 0 or train_ratio >= 1:
@@ -61,13 +60,13 @@ def split_dataset(
     return paths
 
 
-def main() -> None:
+def main(seed: int) -> None:
     """Split the dataset and print row counts."""
     paths = split_dataset(
         INPUT_PATH,
         OUTPUT_DIR,
         train_ratio=TRAIN_RATIO,
-        seed=SEED,
+        seed=seed,
     )
     for name, path in paths.items():
         with np.load(path) as data:
@@ -78,12 +77,13 @@ def main() -> None:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--output-dir", required=True)
+    parser.add_argument("--seed", type=int, required=True)
     args = parser.parse_args()
     paths = split_dataset(
         INPUT_PATH,
         args.output_dir,
         train_ratio=TRAIN_RATIO,
-        seed=SEED,
+        seed=args.seed,
     )
     for name, path in paths.items():
         with np.load(path) as data:
