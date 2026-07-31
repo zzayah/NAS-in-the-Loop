@@ -7,7 +7,7 @@ import argparse
 import sys
 from concurrent.futures import ThreadPoolExecutor
 
-SEED = 0
+SEED = 1
 
 if __name__ == "__main__" and "--print-seed" in sys.argv:
     print(SEED)

@@ -1,7 +1,4 @@
 # Repo specific
-accuracy-nas/datasets/train.npz
-accuracy-nas/datasets/test.npz
-data/safety-nas/compare-map-rerunset1
 trial_artifacts/
 *.npz
 
