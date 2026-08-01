@@ -1,6 +1,10 @@
-# Repo specific
+# NAS-specific
 trial_artifacts/
 *.npz
+
+# Exceptions
+!accuracy-nas/datasets/combined_all.npz
+!safety-nas/datasets/combined_all.npz
 
 ## https://github.com/github/gitignore/blob/main/Global/macOS.gitignore
 # General

@@ -19,13 +19,12 @@ And both workflows train small 1D CNNs that estimate:
 We kindly ask all users of this repository cite the following:
 
 ```bibtex
-@inproceedings{
-  author    = {Zayah Cortright, Prateek Ganguli, Tingan Zhu, and Samarjit Chakraborty},
-  title     = {NAS-in-the-Loop: Trajectory-driven Neural Architecture Search for Safe Autonomous CPS},
-  booktitle = {},
+@inproceedings{cortright2026nas,
+  author    = {Cortright, Zayah and Ganguli, Prateek and Zhu, Tingan and Chakraborty, Samarjit},
+  title     = {{NAS-in-the-Loop}: Trajectory-Driven Neural Architecture Search for Safe Autonomous {CPS}},
+  booktitle = {Proceedings of the 2026 Forum on Specification \& Design Languages (FDL)},
   year      = {2026},
-  publisher = {},
-  doi       = {}
+  publisher = {IEEE}
 }
 ```
 
@@ -74,60 +73,165 @@ Should there be missing imports in this run, the rest of the repository certainl
 
 ## Safety-NAS Workflow
 
-Now that the environment is set up, we may run an Optuna architecture search. The following command uses the CLI in `control-logic.py` to run a safety-guided NAS of 5 trials whose neural network is tested the F1TENTH track "Melbourne."
+Run experiment commands from the repository root. The scripts under
+`safety-nas/run/` now execute the complete experiment pipeline for one training
+track:
+
+1. Read the seed from `safety-nas/control-logic.py`.
+2. Generate an eight-character run ID.
+3. Run the Safety-NAS Optuna search.
+4. Select and retrain the best trial.
+5. Stage the three target checkpoints.
+6. Compare the selected checkpoint triplet with architectures 1--6 on the six
+   evaluation maps.
+
+For example, this runs the complete Austin experiment:
 
 ```bash
-python safety-nas/control-logic.py --track MELBOURNE --n-trials 5
+bash safety-nas/run/austin.sh
 ```
 
-To run the complete set of NAS using SLURM, run `bash run-safety-nas.sl`
-
-The search writes JSONL results to:
+One script is available for each supported training track:
 
 ```text
-safety-nas/dnn-output/nas_trials_*.jsonl
+austin, brands-hatch, budapest, catalunya, hockenheim, ims, melbourne,
+montreal, moscow-raceway, oschersleben, sakhir, sao-paulo, sepang,
+spielberg, yas-marina, zandvoort
 ```
 
-At this point, the NAS should be complete. The training parameters are now complex, so we no longer work with the CLI.
+The track scripts are intentionally split into two sequential batches for
+long-running experiments:
 
-For staged best-trial retraining, edit the constants near the top of
-`safety-nas/test-best.py`, then call `main()` from inside that file.
+```bash
+bash safety-nas/run/run-safety-nas-1.sh
+bash safety-nas/run/run-safety-nas-2.sh
+```
 
-After running `test-best.py`, there should now be fully trained .pt files ready for final evaluation on the testing tracks. Once again, edit the parameters at the top of `safety-nas/compare-track.py`, ensuring pathing is correct, then call `main()` from inside that file.
+The batch scripts are independent, so they may be launched separately on two
+machines or jobs. Within each batch, tracks run one after another.
+
+Each experiment is stored under a seed- and track-specific directory. A run
+with seed `0`, track `austin`, and run ID `<run-id>` has this layout:
+
+```text
+data/safety-nas/safety-nas-seed-0/austin/
+|-- nas/<run-id>.jsonl
+|-- test-best/<run-id>/
+|   |-- left_wall_dist_arch*_trial*.{pt,yaml}
+|   |-- track_width_arch*_trial*.{pt,yaml}
+|   `-- heading_error_arch*_trial*.{pt,yaml}
+`-- compare-map/<run-id>/
+    |-- metrics.jsonl
+    `-- *.npz
+```
+
+The `.npz` files contain saved simulation traces for the comparison maps. The
+comparison currently evaluates Silverstone, Sochi, Spa, Nuerburgring, Monza,
+and Mexico City.
+
+The primary experiment settings are still source constants:
+
+- `SEED`, `N_TRIALS`, and `DATASET_PATH` in `safety-nas/control-logic.py`;
+- `TRAINING_PROFILE`, `MODE`, and `SKIP_EVAL` in `safety-nas/test-best.py`; and
+- the evaluation-map and simulation defaults in `safety-nas/compare-track.py`.
+
+At present, Safety-NAS uses seed `0`, runs 120 Optuna trials per training track,
+and uses training profile `0`. The shell scripts pass all paths and run IDs via
+the CLI; no path editing is required for the standard flow.
+
+To resume individual stages manually, use the same commands as a track script:
+
+```bash
+python safety-nas/control-logic.py \
+  --track AUSTIN \
+  --output-dir data/safety-nas/manual/austin/nas \
+  --session-id <run-id>
+
+python safety-nas/test-best.py \
+  --trials-file data/safety-nas/manual/austin/nas/<run-id>.jsonl \
+  --output-dir data/safety-nas/manual/austin/test-best \
+  --seed 0
+
+python safety-nas/compare-track.py \
+  --checkpoint-triple <left.pt> <track.pt> <heading.pt> \
+  --output-dir data/safety-nas/manual/austin/compare-map \
+  --training-track AUSTIN \
+  --seed 0
+```
 
 ## Accuracy-NAS Workflow
 
-With the safety-guided NAS complete, we now must generate data to compare them to. Accuracy-NAS is a similar NAS framework, but uses validation loss as the feedback component to the NAS.
-
-To get started, we must split the `combined_all.npz` dataset into training and testing partitions. By default, this partition is 80/20, respectively, but this can be edited in the training parameters at the top of the file:
-
-```bash
-python accuracy-nas/split-dataset.py
-```
-
-We may now run the supervised Optuna searches with the following:
+Accuracy-NAS uses validation RMSE instead of simulator feedback. Its wrapper
+runs the complete flow: create a seeded 80/20 dataset split, search all three
+targets in parallel, retrain the best model for each target, and compare the
+resulting triplet with architectures 1--6.
 
 ```bash
-python accuracy-nas/control-logic.py
+bash accuracy-nas/run/run-accuracy-nas.sh
 ```
 
-Note: Because we do not get feedback from specific tracks (and instead from the `combined_all.npz` dataset) we only run accuracy-NAS once.
-
-Results are written as per-target JSONL files:
+At present, the wrapper reads seed `1` from `accuracy-nas/control-logic.py` and
+runs 120 trials for each of the three targets. A generated run ID keeps the
+split, trial logs, checkpoints, and comparison results associated:
 
 ```text
-accuracy-nas/dnn-output/standard_trials_<target>_*.jsonl
+data/accuracy-nas/accuracy-nas-seed-1/
+|-- datasets/<run-id>/{train,test}.npz
+|-- nas/<run-id>/
+|   |-- left_wall_dist.jsonl
+|   |-- track_width.jsonl
+|   `-- heading_error.jsonl
+|-- test-best/<run-id>/
+|   |-- left_wall_dist_arch*_trial*.{pt,yaml}
+|   |-- track_width_arch*_trial*.{pt,yaml}
+|   `-- heading_error_arch*_trial*.{pt,yaml}
+`-- compare-map/<run-id>/
+    |-- metrics.jsonl
+    `-- *.npz
 ```
 
-To fully train the best Neural Network (as selected from accuracy-NAS), modify the parameters at the top of `accuracy-nas/test-best.py`, and run that file.
+The search trains on `train.npz` and uses `test.npz` as its Optuna validation
+set. After selection, `accuracy-nas/test-best.py` retrains using the full
+`accuracy-nas/datasets/combined_all.npz` dataset. The split ratio is controlled
+by `TRAIN_RATIO` in `accuracy-nas/split-dataset.py`; search seed and trial count
+are controlled by `SEED` and `N_TRIALS` in `accuracy-nas/control-logic.py`; and
+final-training behavior is controlled by `TRAINING_PROFILE` and `SKIP_EVAL` in
+`accuracy-nas/test-best.py`.
 
-When complete, configure the parameters and run `accuracy-nas/compare-track.py` to put Accuracy-NAS to the test.
+Accuracy-NAS is normally run once per seed because it is not conditioned on a
+training track. Individual stages can also be invoked through their CLIs:
+
+```bash
+python accuracy-nas/split-dataset.py --output-dir <split-dir> --seed 1
+
+python accuracy-nas/control-logic.py \
+  --train-path <split-dir>/train.npz \
+  --test-path <split-dir>/test.npz \
+  --output-dir <nas-dir> \
+  --session-id <run-id>
+
+python accuracy-nas/test-best.py \
+  --left-trials <nas-dir>/left_wall_dist.jsonl \
+  --track-trials <nas-dir>/track_width.jsonl \
+  --heading-trials <nas-dir>/heading_error.jsonl \
+  --output-dir <test-best-dir> \
+  --run-id <run-id> \
+  --seed 1
+
+python accuracy-nas/compare-track.py \
+  --left-model <left.pt> \
+  --track-model <track.pt> \
+  --heading-model <heading.pt> \
+  --output-dir <compare-map-dir> \
+  --seed 1
+```
 
 ## Visualization
 
-When both Safety-NAS and Accuracy-NAS are done running, we may now visualize our results together. Note: the visualization DOES allow a single input if you would like to do visualization of only Safety-NAS or Accuracy-NAS.
-
-To do this, modify the paths at the top of `vis.ipynb` or `final-analysis-vis.ipynb` to point to compare-map metrics.jsonl results (see `data/accuracy-nas/compare-map-tp0/metrics.jsonl` for an example) and run all cells.
+After Safety-NAS and/or Accuracy-NAS finishes, use
+`visualizations/figures.ipynb` to produce aggregate figures. Point its input
+paths at the desired `compare-map/<run-id>/metrics.jsonl` files and run the
+notebook cells. The notebook can also visualize only one NAS pathway.
 
 ## Reproducibility
 
